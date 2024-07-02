@@ -62,7 +62,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	@Override
-	public Void visitBlock_statement(MajestikParser.Block_statementContext ctx) {
+	public Void visitBlock(MajestikParser.BlockContext ctx) {
 		System.out.println("LOG: - Enter block");
 		Void result = visitChildren(ctx);
 		System.out.println("LOG: - leave block");

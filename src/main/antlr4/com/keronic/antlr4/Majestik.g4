@@ -14,7 +14,8 @@ expression_list
     ;
 
 expression
-    : block_statement
+    : assign
+    | block
     | invoke
     ;
 
@@ -27,7 +28,7 @@ arguments
     | (string COMMA)+ string
     ;
 
-block_statement
+block
     : BLOCK TERMINATOR? expression_list? ENDBLOCK
     ;
 
@@ -35,6 +36,9 @@ invoke
     : name = ID LEFT_RBRACKET argss = arguments RIGHT_RBRACKET
     | name = ID LEFT_RBRACKET RIGHT_RBRACKET
     ;
+
+assign
+    : var = ID ASSIGN string;
 
 fragment A : [aA];
 fragment B : [bB];
@@ -83,3 +87,5 @@ STRING : DOUBLEQUOTE (~[\\"\r\n])*? DOUBLEQUOTE
 
 BLOCK : '_' B L O C K;
 ENDBLOCK : '_' E N D B L O C K;
+
+ASSIGN : '<<';

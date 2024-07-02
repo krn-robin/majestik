@@ -46,10 +46,10 @@ public class MajestikCodeVisitorTest {
 	@Test
 	public void testVisitBlock_statement() {
 		// Test input
-		MajestikParser.Block_statementContext mockContext = mock(MajestikParser.Block_statementContext.class);
+		MajestikParser.BlockContext mockContext = mock(MajestikParser.BlockContext.class);
 
 		// Execute
-		visitor.visitBlock_statement(mockContext);
+		visitor.visitBlock(mockContext);
 
 		// This method primarily logs output, so you might want to check the logs if
 		// necessary
