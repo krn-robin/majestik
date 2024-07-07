@@ -88,8 +88,25 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	@Override
-	public Void visitAssign(MajestikParser.AssignContext ctx) {
-		System.out.format("children %d\n", ctx.children.size());
+	public Void visitVar(MajestikParser.VarContext ctx)
+	{
+		if (ctx.parent instanceof MajestikParser.ArgumentContext) {
+			var varname = ctx.getText();
+			this.cb.aload(this.varList.indexOf(varname));
+		}
 		return visitChildren(ctx);
+	}
+
+	@Override
+	public Void visitAssign(MajestikParser.AssignContext ctx) {
+		var result = visitChildren(ctx);
+
+		var varname = ctx.lhs().var().getText();
+
+		if (!this.varList.contains(varname))
+			this.varList.add(varname);
+
+		this.cb.astore(this.varList.indexOf(varname));
+		return result;
 	}
 }
