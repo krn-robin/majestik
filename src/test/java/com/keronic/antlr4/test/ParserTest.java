@@ -17,11 +17,11 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ListTokenSource;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
 
 public class ParserTest {
 	ANTLRErrorListener errorListener = new BaseErrorListener() {
-
 		@Override
 		public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine,
 				String msg, RecognitionException e) {
@@ -35,27 +35,46 @@ public class ParserTest {
 		return parser;
 	}
 
+	static String toStringTree(RuleContext ctx) {
+		var result = ctx.toStringTree().replaceAll("\\[[\\ 0-9]*\\]\\ ", "");
+		System.out.println(result);
+		return result;
+	}
+
 	@Test
 	public void testInvokeNoArgs() {
 		var parser = this.getParser(Arrays.asList(
-				new CommonToken(MajestikLexer.ID, "proc"),
+				new CommonToken(MajestikLexer.VAR, "proc"),
 				new CommonToken(MajestikLexer.LEFT_RBRACKET, "("),
 				new CommonToken(MajestikLexer.RIGHT_RBRACKET, ")")));
 		var invoke = parser.invoke();
-		System.out.format("%s \n", invoke.toStringTree());
 
-		assertEquals("([] proc ( ))", invoke.toStringTree());
+		assertEquals("(proc ( ))", toStringTree(invoke));
 		assertEquals(null, invoke.argss);
+	}
+
+	@Test
+	public void testInvokeSingleVarArg() {
+		var parser = this.getParser(Arrays.asList(
+				new CommonToken(MajestikLexer.VAR, "proc"),
+				new CommonToken(MajestikLexer.LEFT_RBRACKET, "("),
+				new CommonToken(MajestikLexer.VAR, "arg"),
+				new CommonToken(MajestikLexer.RIGHT_RBRACKET, ")")));
+		var invoke = parser.invoke();
+
+		System.out.println(invoke.toStringTree());
+		assertEquals("(proc ( (((arg))) ))", toStringTree(invoke));
+		assertEquals(1, invoke.argss.children.size());
 	}
 
 	@Test
 	public void testAssignString() {
 		var parser = this.getParser(Arrays.asList(
-				new CommonToken(MajestikLexer.ID, "var"),
+				new CommonToken(MajestikLexer.VAR, "var"),
 				new CommonToken(MajestikLexer.ASSIGN, "<<"),
 				new CommonToken(MajestikLexer.STRING, "\"value\"")));
 		var func = parser.assign();
-		assertEquals("([] var << ([75] \"value\"))", func.toStringTree());
+		assertEquals("(((var)) << ((\"value\")))", toStringTree(func));
 	}
 
 	@Test
@@ -64,6 +83,6 @@ public class ParserTest {
 				new CommonToken(MajestikLexer.BLOCK, "_block"),
 				new CommonToken(MajestikLexer.ENDBLOCK, "_endblock")));
 		var block = parser.block();
-		assertEquals("([] _block _endblock)", block.toStringTree());
+		assertEquals("(_block _endblock)", toStringTree(block));
 	}
 }

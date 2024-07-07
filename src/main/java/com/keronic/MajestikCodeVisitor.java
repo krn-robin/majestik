@@ -6,6 +6,8 @@ import java.lang.constant.ConstantDescs;
 import java.lang.constant.DirectMethodHandleDesc;
 import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.constant.MethodTypeDesc;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikParser;
@@ -30,6 +32,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 			ConstantDescs.CD_Object, ConstantDescs.CD_Object);
 
 	CodeBuilder cb;
+	List<String> varList = new ArrayList<String>();
 
 	/**
 	 * Constructs a new MajestikCodeVisitor that utilizes a provided CodeBuilder.
@@ -82,5 +85,11 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 		this.cb.invokedynamic(DynamicCallSiteDesc.of(BSM_NATURAL_PROC, "()", MTD_ObjectObjectObject));
 
 		return result;
+	}
+
+	@Override
+	public Void visitAssign(MajestikParser.AssignContext ctx) {
+		System.out.format("children %d\n", ctx.children.size());
+		return visitChildren(ctx);
 	}
 }

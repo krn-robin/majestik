@@ -40,7 +40,7 @@ public class LexerTest {
 	public void testAssignString() throws IOException {
 		var tokens = this.getTokensFromText("var << \"value\"");
 		assertEquals(3, tokens.size());
-		assertEquals(MajestikLexer.ID, tokens.get(0).getType());
+		assertEquals(MajestikLexer.VAR, tokens.get(0).getType());
 		assertEquals(MajestikLexer.ASSIGN, tokens.get(1).getType());
 		assertEquals(MajestikLexer.STRING, tokens.get(2).getType());
 	}
@@ -66,4 +66,12 @@ public class LexerTest {
 		assertEquals(1, tokens.size());
 		assertEquals(MajestikLexer.STRING, tokens.get(0).getType());
 	}
+
+	@Test
+	public void testVariable() throws IOException {
+		var tokens = this.getTokensFromText("var");
+		assertEquals(1, tokens.size());
+		assertEquals(MajestikLexer.VAR, tokens.get(0).getType());
+	}
+
 }
