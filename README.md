@@ -14,7 +14,7 @@ Majestik is composed of three core components:
    Currently, the ANTLR4 grammar only understands the literal type `string`; the expression `invoke` and `block` statements, as well as simple assignments (`<<`).  All other tokens are ignored.
 3. Compiler: This component translates the AST into JVM bytecode using the Class-File API.
 
-   Currently ony supports literal type `string`, and `invoke` expressions.
+   Currently, only supports literal type `string`, and `invoke` expressions.
 4. Runtime: provides a standard library with basic functionality to run a Magik program.
 
    As of now, only the `write` variable in the `sw` package has a barebones implementation.
