@@ -11,7 +11,7 @@ Components
 Majestik is composed of three core components:
 1. Lexer/Parser: This component parses the Magik source code and constructs an Abstract Syntax Tree (AST).
 
-   Currently the ANTLR4 grammar only understands the literal type `string`; the expression `invoke` and `block` statements. All other tokens are ignored.
+   Currently the ANTLR4 grammar only understands the literal type `string`; the expression `invoke` and `block` statements, as well as simple assignments (`<<`).  All other tokens are ignored.
 3. Compiler: This component translates the AST into JVM bytecode using the Class-File API.
 
    Currently ony supports literal type `string`, and `invoke` expressions.
@@ -25,7 +25,11 @@ Features
 -------
 In the project's current state, it is possible (and pretty much limited just to) run a Magik "Hello World" example program[^4].
 ```magik
-write("Hello World!")
+_block
+   world << "World!"
+   write("Hello ")
+   write(world)
+_endblock
 ```
 
 
