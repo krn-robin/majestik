@@ -14,7 +14,8 @@ expression_list
     ;
 
 expression
-    : block_statement
+    : assign
+    | block
     | invoke
     ;
 
@@ -22,19 +23,40 @@ string
     : STRING
     ;
 
-arguments
-    : string
-    | (string COMMA)+ string
+var
+    : VAR
     ;
 
-block_statement
+lhs
+    : var
+    ;
+
+rhs
+    : var
+    | string
+    ;
+
+argument
+    : var
+    | string
+    ;
+
+arguments
+    : argument
+    | (argument COMMA)+ argument
+    ;
+
+block
     : BLOCK TERMINATOR? expression_list? ENDBLOCK
     ;
 
 invoke
-    : name = ID LEFT_RBRACKET argss = arguments RIGHT_RBRACKET
-    | name = ID LEFT_RBRACKET RIGHT_RBRACKET
+    : name = VAR LEFT_RBRACKET argss = arguments RIGHT_RBRACKET
+    | name = VAR LEFT_RBRACKET RIGHT_RBRACKET
     ;
+
+assign
+    : lhs ASSIGN rhs;
 
 fragment A : [aA];
 fragment B : [bB];
@@ -73,7 +95,7 @@ COMMA : ',';
 
 SEMICOLON: ';';
 
-ID : [a-zA-Z][a-zA-Z0-9_]*;
+VAR : [a-zA-Z][a-zA-Z0-9_]*;
 
 DOUBLEQUOTE: '"';
 SINGLEQUOTE: '\'';
@@ -83,3 +105,5 @@ STRING : DOUBLEQUOTE (~[\\"\r\n])*? DOUBLEQUOTE
 
 BLOCK : '_' B L O C K;
 ENDBLOCK : '_' E N D B L O C K;
+
+ASSIGN : '<<';

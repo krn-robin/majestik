@@ -6,6 +6,8 @@ import java.lang.constant.ConstantDescs;
 import java.lang.constant.DirectMethodHandleDesc;
 import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.constant.MethodTypeDesc;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikParser;
@@ -30,6 +32,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 			ConstantDescs.CD_Object, ConstantDescs.CD_Object);
 
 	CodeBuilder cb;
+	List<String> varList = new ArrayList<String>();
 
 	/**
 	 * Constructs a new MajestikCodeVisitor that utilizes a provided CodeBuilder.
@@ -62,7 +65,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	@Override
-	public Void visitBlock_statement(MajestikParser.Block_statementContext ctx) {
+	public Void visitBlock(MajestikParser.BlockContext ctx) {
 		System.out.println("LOG: - Enter block");
 		Void result = visitChildren(ctx);
 		System.out.println("LOG: - leave block");
@@ -81,6 +84,29 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 		System.out.println("LOG: - Compiling invoke...");
 		this.cb.invokedynamic(DynamicCallSiteDesc.of(BSM_NATURAL_PROC, "()", MTD_ObjectObjectObject));
 
+		return result;
+	}
+
+	@Override
+	public Void visitVar(MajestikParser.VarContext ctx)
+	{
+		if (ctx.parent instanceof MajestikParser.ArgumentContext) {
+			var varname = ctx.getText();
+			this.cb.aload(this.varList.indexOf(varname));
+		}
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public Void visitAssign(MajestikParser.AssignContext ctx) {
+		var result = visitChildren(ctx);
+
+		var varname = ctx.lhs().var().getText();
+
+		if (!this.varList.contains(varname))
+			this.varList.add(varname);
+
+		this.cb.astore(this.varList.indexOf(varname));
 		return result;
 	}
 }
