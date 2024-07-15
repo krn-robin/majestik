@@ -6,8 +6,11 @@ import java.lang.constant.ConstantDescs;
 import java.lang.constant.DirectMethodHandleDesc;
 import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.constant.MethodTypeDesc;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikParser;
@@ -30,6 +33,10 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	static final MethodTypeDesc MTD_Object = MethodTypeDesc.of(ConstantDescs.CD_Object);
 	static final MethodTypeDesc MTD_ObjectObjectObject = MethodTypeDesc.of(ConstantDescs.CD_Object,
 			ConstantDescs.CD_Object, ConstantDescs.CD_Object);
+	static final MethodTypeDesc MTD_Doubledouble = MethodTypeDesc.of(ConstantDescs.CD_Double,
+			ConstantDescs.CD_double);
+	static final MethodTypeDesc MTD_Longlong = MethodTypeDesc.of(ConstantDescs.CD_Long,
+			ConstantDescs.CD_long);
 
 	CodeBuilder cb;
 	List<String> varList = new ArrayList<String>();
@@ -58,10 +65,30 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	private String normalizeString(String quotedString) {
-	    assert quotedString.length() >= 2;
-	    assert quotedString.charAt(0) == '\"' && quotedString.charAt(quotedString.length() - 1) == '\"' ||
-	           quotedString.charAt(0) == '\'' && quotedString.charAt(quotedString.length() - 1) == '\'';
-	    return quotedString.substring(1, quotedString.length() - 1);
+		assert quotedString.length() >= 2;
+		assert quotedString.charAt(0) == '\"' && quotedString.charAt(quotedString.length() - 1) == '\"' ||
+				quotedString.charAt(0) == '\'' && quotedString.charAt(quotedString.length() - 1) == '\'';
+		return quotedString.substring(1, quotedString.length() - 1);
+	}
+
+	@Override
+	public Void visitNumber(MajestikParser.NumberContext ctx) {
+		var numberString = ctx.getText();
+		try {
+			var number = NumberFormat.getInstance(Locale.ROOT).parse(numberString);
+			if (number instanceof Long n) {
+				this.cb.constantInstruction(n);
+				this.cb.invokestatic(ConstantDescs.CD_Long, "valueOf", MTD_Longlong);
+			} else if (number instanceof Double n) {
+				this.cb.constantInstruction(n);
+				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", MTD_Doubledouble);
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return visitChildren(ctx);
 	}
 
 	@Override
@@ -88,8 +115,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	@Override
-	public Void visitVar(MajestikParser.VarContext ctx)
-	{
+	public Void visitVar(MajestikParser.VarContext ctx) {
 		if (ctx.parent instanceof MajestikParser.ArgumentContext) {
 			var varname = ctx.getText();
 			this.cb.aload(this.varList.indexOf(varname));

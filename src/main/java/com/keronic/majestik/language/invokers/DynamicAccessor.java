@@ -16,8 +16,8 @@ public class DynamicAccessor {
 	private static MethodHandle todo;
 
 	public static void todo(Object o) {
-    	System.out.format("DYNAMIC: %s\n", o);
-    }
+		// System.out.format("DYNAMIC: %s\n", o);
+	}
 
     static {
     	try {
