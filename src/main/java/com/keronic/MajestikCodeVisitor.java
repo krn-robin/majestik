@@ -1,15 +1,12 @@
 package com.keronic;
 
 import java.lang.classfile.CodeBuilder;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.DirectMethodHandleDesc;
 import java.lang.constant.DynamicCallSiteDesc;
-import java.lang.constant.MethodTypeDesc;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.antlr4.MajestikBaseVisitor;
@@ -18,7 +15,7 @@ import com.keronic.antlr4.MajestikParser;
 public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 
 	CodeBuilder cb;
-	List<String> varList = new ArrayList<String>();
+	Map<String, Integer> varMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Constructs a new MajestikCodeVisitor that utilizes a provided CodeBuilder.
@@ -39,7 +36,8 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 		String quotedString = ctx.getText();
 		String pureString = normalizeString(quotedString);
 
-		this.cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_STRING_BUILDER, "string", ConstantDescs.MTD_Object, pureString));
+		this.cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_STRING_BUILDER, "string",
+				ConstantDescs.MTD_Object, pureString));
 		return visitChildren(ctx);
 	}
 
@@ -64,6 +62,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", ConstantDescs.MTD_Doubledouble);
 			}
 		} catch (ParseException e) {
+			System.err.println("Error parsing number: " + numberString);
 			throw new RuntimeException("Failed to parse number: " + numberString, e);
 		}
 
@@ -81,14 +80,16 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	@Override
 	public Void visitInvoke(MajestikParser.InvokeContext ctx) {
 		this.cb.invokedynamic(
-				DynamicCallSiteDesc.of(ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", ctx.name.getText()));
+				DynamicCallSiteDesc.of(ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw",
+						ctx.name.getText()));
 
 		var result = visitChildren(ctx);
 
 		// https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/invoke/CallSite.html
 
 		System.out.println("LOG: - Compiling invoke...");
-		this.cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
+		this.cb.invokedynamic(
+				DynamicCallSiteDesc.of(ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
 
 		return result;
 	}
@@ -97,7 +98,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	public Void visitVar(MajestikParser.VarContext ctx) {
 		if (ctx.parent instanceof MajestikParser.ArgumentContext) {
 			var varname = ctx.getText();
-			this.cb.aload(this.varList.indexOf(varname));
+			this.cb.aload(this.varMap.getOrDefault(varname, -1));
 		}
 		return visitChildren(ctx);
 	}
@@ -108,10 +109,10 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 
 		var varname = ctx.lhs().var().getText();
 
-		if (!this.varList.contains(varname))
-			this.varList.add(varname);
+		if (!this.varMap.containsKey(varname))
+			this.varMap.put(varname, this.varMap.size());
 
-		this.cb.astore(this.varList.indexOf(varname));
+		this.cb.astore(this.varMap.getOrDefault(varname, -1));
 		return result;
 	}
 }
