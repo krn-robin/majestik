@@ -2,7 +2,6 @@ package com.keronic;
 
 import java.lang.classfile.CodeBuilder;
 import java.lang.constant.ClassDesc;
-import java.lang.constant.ConstantDescs;
 import java.lang.constant.DirectMethodHandleDesc;
 import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.constant.MethodTypeDesc;
@@ -12,31 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikParser;
 
 public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
-
-	static final ClassDesc CD_PrintStream = ClassDesc.of("java.io.PrintStream");
-	static final ClassDesc CD_System = ClassDesc.of("java.lang.System");
-	static final ClassDesc CD_ConstantBuilder = ClassDesc.of("com.keronic.majestik.language.invokers.ConstantBuilder");
-	static final ClassDesc CD_GlobalAccessor = ClassDesc.of("com.keronic.majestik.language.invokers.GlobalAccessor");
-	static final ClassDesc CD_ProcInvoker = ClassDesc.of("com.keronic.majestik.language.invokers.ProcInvoker");
-
-	static final DirectMethodHandleDesc BSM_STRING_BUILDER = ConstantDescs.ofCallsiteBootstrap(CD_ConstantBuilder,
-			"stringBootstrap", ConstantDescs.CD_CallSite, ConstantDescs.CD_String);
-	static final DirectMethodHandleDesc BSM_GLOBAL_FETCHER = ConstantDescs.ofCallsiteBootstrap(CD_GlobalAccessor,
-			"bootstrapFetcher2", ConstantDescs.CD_CallSite, ConstantDescs.CD_String, ConstantDescs.CD_String);
-	static final DirectMethodHandleDesc BSM_NATURAL_PROC = ConstantDescs.ofCallsiteBootstrap(CD_ProcInvoker,
-			"naturalBootstrap", ConstantDescs.CD_CallSite);
-
-	static final MethodTypeDesc MTD_Object = MethodTypeDesc.of(ConstantDescs.CD_Object);
-	static final MethodTypeDesc MTD_ObjectObjectObject = MethodTypeDesc.of(ConstantDescs.CD_Object,
-			ConstantDescs.CD_Object, ConstantDescs.CD_Object);
-	static final MethodTypeDesc MTD_Doubledouble = MethodTypeDesc.of(ConstantDescs.CD_Double,
-			ConstantDescs.CD_double);
-	static final MethodTypeDesc MTD_Longlong = MethodTypeDesc.of(ConstantDescs.CD_Long,
-			ConstantDescs.CD_long);
 
 	CodeBuilder cb;
 	List<String> varList = new ArrayList<String>();
@@ -60,7 +39,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 		String quotedString = ctx.getText();
 		String pureString = normalizeString(quotedString);
 
-		this.cb.invokedynamic(DynamicCallSiteDesc.of(BSM_STRING_BUILDER, "string", MTD_Object, pureString));
+		this.cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_STRING_BUILDER, "string", ConstantDescs.MTD_Object, pureString));
 		return visitChildren(ctx);
 	}
 
@@ -78,10 +57,10 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 			var number = NumberFormat.getInstance(Locale.ROOT).parse(numberString);
 			if (number instanceof Long n) {
 				this.cb.constantInstruction(n);
-				this.cb.invokestatic(ConstantDescs.CD_Long, "valueOf", MTD_Longlong);
+				this.cb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
 			} else if (number instanceof Double n) {
 				this.cb.constantInstruction(n);
-				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", MTD_Doubledouble);
+				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", ConstantDescs.MTD_Doubledouble);
 			}
 		} catch (ParseException e) {
 			throw new RuntimeException("Failed to parse number: " + numberString, e);
@@ -101,14 +80,14 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	@Override
 	public Void visitInvoke(MajestikParser.InvokeContext ctx) {
 		this.cb.invokedynamic(
-				DynamicCallSiteDesc.of(BSM_GLOBAL_FETCHER, "fetch", MTD_Object, "sw", ctx.name.getText()));
+				DynamicCallSiteDesc.of(ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", ctx.name.getText()));
 
 		var result = visitChildren(ctx);
 
 		// https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/invoke/CallSite.html
 
 		System.out.println("LOG: - Compiling invoke...");
-		this.cb.invokedynamic(DynamicCallSiteDesc.of(BSM_NATURAL_PROC, "()", MTD_ObjectObjectObject));
+		this.cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
 
 		return result;
 	}
