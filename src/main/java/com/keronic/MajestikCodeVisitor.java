@@ -44,9 +44,10 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 	}
 
 	private String normalizeString(String quotedString) {
-		assert quotedString.length() >= 2;
-		assert quotedString.charAt(0) == '\"' && quotedString.charAt(quotedString.length() - 1) == '\"' ||
-				quotedString.charAt(0) == '\'' && quotedString.charAt(quotedString.length() - 1) == '\'';
+		assert quotedString.length() >= 2 : "String length is too short to be valid.";
+		assert (quotedString.charAt(0) == '\"' && quotedString.charAt(quotedString.length() - 1) == '\"') ||
+				(quotedString.charAt(0) == '\'' && quotedString.charAt(quotedString.length() - 1) == '\'')
+				: "String is not properly quoted.";
 		return quotedString.substring(1, quotedString.length() - 1);
 	}
 
