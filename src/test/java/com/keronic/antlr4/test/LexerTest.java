@@ -68,6 +68,20 @@ public class LexerTest {
 	}
 
 	@Test
+	public void testNumberLong() throws IOException {
+		var tokens = this.getTokensFromText("54321");
+		assertEquals(1, tokens.size());
+		assertEquals(MajestikLexer.NUMBER, tokens.get(0).getType());
+	}
+
+	@Test
+	public void testNumberDouble() throws IOException {
+		var tokens = this.getTokensFromText("5.4321");
+		assertEquals(1, tokens.size());
+		assertEquals(MajestikLexer.NUMBER, tokens.get(0).getType());
+	}
+
+	@Test
 	public void testVariable() throws IOException {
 		var tokens = this.getTokensFromText("var");
 		assertEquals(1, tokens.size());

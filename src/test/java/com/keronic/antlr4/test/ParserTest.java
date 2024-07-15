@@ -36,9 +36,7 @@ public class ParserTest {
 	}
 
 	static String toStringTree(RuleContext ctx) {
-		var result = ctx.toStringTree().replaceAll("\\[[\\ 0-9]*\\]\\ ", "");
-		System.out.println(result);
-		return result;
+		return ctx.toStringTree().replaceAll("\\[[\\ 0-9]*\\]\\ ", "");
 	}
 
 	@Test
@@ -61,8 +59,6 @@ public class ParserTest {
 				new CommonToken(MajestikLexer.VAR, "arg"),
 				new CommonToken(MajestikLexer.RIGHT_RBRACKET, ")")));
 		var invoke = parser.invoke();
-
-		System.out.println(invoke.toStringTree());
 		assertEquals("(proc ( (((arg))) ))", toStringTree(invoke));
 		assertEquals(1, invoke.argss.children.size());
 	}

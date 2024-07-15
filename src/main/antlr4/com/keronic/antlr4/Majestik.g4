@@ -19,6 +19,10 @@ expression
     | invoke
     ;
 
+number
+    : NUMBER
+    ;
+
 string
     : STRING
     ;
@@ -33,11 +37,13 @@ lhs
 
 rhs
     : var
+    | number
     | string
     ;
 
 argument
     : var
+    | number
     | string
     ;
 
@@ -107,3 +113,7 @@ BLOCK : '_' B L O C K;
 ENDBLOCK : '_' E N D B L O C K;
 
 ASSIGN : '<<';
+
+NUMBER : [0-9]+
+       | [0-9]* '.' [0-9]+
+       ;

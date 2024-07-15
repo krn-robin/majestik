@@ -18,32 +18,29 @@ public class ProcInvoker {
 	private static MethodHandle todo;
 
 	public static Object todo(Object o1, Object o2) {
-//		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
-		ProcImpl proc = (ProcImpl)o1;
 		try {
-    		System.out.format("PROCINVOKE: %s %s\n", o1, o2);
+			ProcImpl proc = (ProcImpl) o1;
 			proc.invoke(o1, o2);
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
-    }
+	}
 
-    static {
-    	try {
+	static {
+		try {
 			todo = MethodHandles.lookup().findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-    }
+	}
 
-    public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
-        return new ConstantCallSite(todo);
-    }
+	public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
+		return new ConstantCallSite(todo);
+	}
 
 	public static CallSite naturalBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
-        return new ConstantCallSite(todo);
-    }
+		return new ConstantCallSite(todo);
+	}
 }
