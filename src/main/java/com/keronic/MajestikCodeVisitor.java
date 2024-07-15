@@ -84,8 +84,7 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", MTD_Doubledouble);
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Failed to parse number: " + numberString, e);
 		}
 
 		return visitChildren(ctx);
