@@ -32,8 +32,7 @@ public class ProcInvoker {
 		try {
 			todo = MethodHandles.lookup().findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
