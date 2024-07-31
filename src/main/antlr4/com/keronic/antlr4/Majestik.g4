@@ -108,14 +108,6 @@ STRING
    | SINGLEQUOTE (~ [\\'\r\n])*? SINGLEQUOTE
    ;
 
-BLOCK
-   : '_block'
-   ;
-
-ENDBLOCK
-   : '_endblock'
-   ;
-
 ASSIGN
    : '<<'
    ;
@@ -125,3 +117,214 @@ NUMBER
        | [0-9]* '.' [0-9]+
        ;
 
+ABSTRACT
+   : '_abstract'
+   ;
+
+ALLRESULTS
+   : '_allresults'
+   ;
+
+BLOCK
+   : '_block'
+   ;
+
+CATCH
+   : '_catch'
+   ;
+
+CF
+   : '_cf'
+   ;
+
+CLASS
+   : '_class'
+   ;
+
+CONSTANT
+   : '_constant'
+   ;
+
+CONTINUE
+   : '_continue'
+   ;
+
+DEFAULT
+   : '_default'
+   ;
+
+DYNAMIC
+   : '_dynamic'
+   ;
+
+ELIF
+   : '_elif'
+   ;
+
+ELSE
+   : '_else'
+   ;
+
+ENDBLOCK
+   : '_endblock'
+   ;
+
+ENDCATCH
+   : '_endcatch'
+   ;
+
+ENDIF
+   : '_endif'
+   ;
+
+ENDLOCK
+   : '_endlock'
+   ;
+
+ENDLOOP
+   : '_endloop'
+   ;
+
+ENDMETHOD
+   : '_endmethod'
+   ;
+
+ENDPROC
+   : '_endproc'
+   ;
+
+ENDPROTECT
+   : '_endprotect'
+   ;
+
+ENDTRY
+   : '_endtry'
+   ;
+
+FINALLY
+   : '_finally'
+   ;
+
+FOR
+   : '_for'
+   ;
+
+GATHER
+   : '_gather'
+   ;
+
+GLOBAL
+   : '_global'
+   ;
+
+HANDLING
+   : '_handling'
+   ;
+
+IF
+   : '_if'
+   ;
+
+IMPORT
+   : '_import'
+   ;
+
+ITER
+   : '_iter'
+   ;
+
+LEAVE
+   : '_leave'
+   ;
+
+LOCAL
+   : '_local'
+   ;
+
+LOCK
+   : '_lock'
+   ;
+
+LOCKING
+   : '_locking'
+   ;
+
+LOOP
+   : '_loop'
+   ;
+
+LOOPBODY
+   : '_loopbody'
+   ;
+
+METHOD
+   : '_method'
+   ;
+
+OPTIONAL
+   : '_optional'
+   ;
+
+OVER
+   : '_over'
+   ;
+
+PACKAGE
+   : '_package'
+   ;
+
+PRIMITIVE
+   : '_primitive'
+   ;
+
+PRIVATE
+   : '_private'
+   ;
+
+PROC
+   : '_proc'
+   ;
+
+PROTECT
+   : '_protect'
+   ;
+
+PROTECTION
+   : '_protection'
+   ;
+
+RETURN
+   : '_return'
+   ;
+
+SCATTER
+   : '_scatter'
+   ;
+
+THEN
+   : '_then'
+   ;
+
+THISTHREAD
+   : '_thisthread'
+   ;
+
+THROW
+   : '_throw'
+   ;
+
+TRY
+   : '_try'
+   ;
+
+WHEN
+   : '_when'
+   ;
+
+WHILE
+   : '_while'
+   ;
+
+WITH
+   : '_with'
+   ;
