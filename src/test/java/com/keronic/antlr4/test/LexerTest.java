@@ -2,9 +2,10 @@ package com.keronic.antlr4.test;
 
 import static org.junit.Assert.*;
 
+import com.keronic.antlr4.MajestikLexer;
 import java.io.IOException;
 import java.util.List;
-
+import java.util.stream.IntStream;
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStreams;
@@ -14,14 +15,18 @@ import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
 import org.junit.Test;
 
-import com.keronic.antlr4.MajestikLexer;
-
 public class LexerTest {
-	ANTLRErrorListener errorListener = new BaseErrorListener() {
+  ANTLRErrorListener errorListener =
+      new BaseErrorListener() {
 
 		@Override
-		public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine,
-				String msg, RecognitionException e) {
+        public void syntaxError(
+            Recognizer<?, ?> recognizer,
+            Object offendingSymbol,
+            int line,
+            int charPositionInLine,
+            String msg,
+            RecognitionException e) {
 			fail(String.format("%i %i %s %n", line, charPositionInLine, msg, offendingSymbol));
 		}
 	};
@@ -36,56 +41,74 @@ public class LexerTest {
 		return tokens;
 	}
 
+	private void compareTokens(int[] expected, List<Token> actual) {
+		assertEquals(expected.length, actual.size());
+        IntStream.range(0, expected.length)
+                 .forEach(n -> assertEquals(expected[n], actual.get(n).getType()));
+	}
+
 	@Test
 	public void testAssignString() throws IOException {
+    final var expected = new int[] {MajestikLexer.VAR, MajestikLexer.ASSIGN, MajestikLexer.STRING};
 		var tokens = this.getTokensFromText("var << \"value\"");
-		assertEquals(3, tokens.size());
-		assertEquals(MajestikLexer.VAR, tokens.get(0).getType());
-		assertEquals(MajestikLexer.ASSIGN, tokens.get(1).getType());
-		assertEquals(MajestikLexer.STRING, tokens.get(2).getType());
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testBlock() throws IOException {
+    final var expected = new int[] {MajestikLexer.BLOCK, MajestikLexer.ENDBLOCK};
 		var tokens = this.getTokensFromText("_block _endblock");
-		assertEquals(2, tokens.size());
-		assertEquals(MajestikLexer.BLOCK, tokens.get(0).getType());
-		assertEquals(MajestikLexer.ENDBLOCK, tokens.get(1).getType());
+
+		this.compareTokens(expected, tokens);
+	}
+
+	@Test
+	public void testCaseInsensitive() throws IOException {
+    final var expected =
+        new int[] {MajestikLexer.ENDBLOCK, MajestikLexer.ENDBLOCK, MajestikLexer.ENDBLOCK};
+		var tokens = this.getTokensFromText("_EndBlock _ENDBLOCK _eNDBLOCk");
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testEmptyStringDoubleQuote() throws IOException {
+    final var expected = new int[] {MajestikLexer.STRING};
 		var tokens = this.getTokensFromText("\"\"");
-		assertEquals(1, tokens.size());
-		assertEquals(MajestikLexer.STRING, tokens.get(0).getType());
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testEmptyStringSingleQuote() throws IOException {
+    final var expected = new int[] {MajestikLexer.STRING};
 		var tokens = this.getTokensFromText("''");
-		assertEquals(1, tokens.size());
-		assertEquals(MajestikLexer.STRING, tokens.get(0).getType());
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testNumberLong() throws IOException {
+    final var expected = new int[] {MajestikLexer.NUMBER};
 		var tokens = this.getTokensFromText("54321");
-		assertEquals(1, tokens.size());
-		assertEquals(MajestikLexer.NUMBER, tokens.get(0).getType());
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testNumberDouble() throws IOException {
+    final var expected = new int[] {MajestikLexer.NUMBER};
 		var tokens = this.getTokensFromText("5.4321");
-		assertEquals(1, tokens.size());
-		assertEquals(MajestikLexer.NUMBER, tokens.get(0).getType());
+
+		this.compareTokens(expected, tokens);
 	}
 
 	@Test
 	public void testVariable() throws IOException {
+    final var expected = new int[] {MajestikLexer.VAR};
 		var tokens = this.getTokensFromText("var");
-		assertEquals(1, tokens.size());
-		assertEquals(MajestikLexer.VAR, tokens.get(0).getType());
-	}
 
+		this.compareTokens(expected, tokens);
+	}
 }
