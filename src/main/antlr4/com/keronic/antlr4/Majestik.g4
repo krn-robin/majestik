@@ -1,9 +1,7 @@
 grammar Majestik;
 
-options {
-    caseInsensitive = true;
-}
 
+options { caseInsensitive = true; }
 prog
     : expression_list EOF
     ;
@@ -66,31 +64,64 @@ invoke
     ;
 
 assign
-    : lhs ASSIGN rhs;
+   : lhs ASSIGN rhs
+   ;
 
-CRLF : '\r'? '\n'  -> skip;
-WHITESPACE: (' ' | '\t') -> skip;
+CRLF
+   : '\r'? '\n' -> skip
+   ;
 
-LEFT_RBRACKET : '(';
-RIGHT_RBRACKET : ')';
+WHITESPACE
+   : (' ' | '\t') -> skip
+   ;
 
-COMMA : ',';
+LEFT_RBRACKET
+   : '('
+   ;
 
-SEMICOLON: ';';
+RIGHT_RBRACKET
+   : ')'
+   ;
 
-VAR : [a-zA-Z][a-zA-Z0-9_]*;
+COMMA
+   : ','
+   ;
 
-DOUBLEQUOTE: '"';
-SINGLEQUOTE: '\'';
+SEMICOLON
+   : ';'
+   ;
 
-STRING : DOUBLEQUOTE (~[\\"\r\n])*? DOUBLEQUOTE
-       | SINGLEQUOTE (~[\\'\r\n])*? SINGLEQUOTE;
+VAR
+   : [a-zA-Z] [a-zA-Z0-9_]*
+   ;
 
-BLOCK : '_block';
-ENDBLOCK : '_endblock';
+DOUBLEQUOTE
+   : '"'
+   ;
 
-ASSIGN : '<<';
+SINGLEQUOTE
+   : '\''
+   ;
 
-NUMBER : [0-9]+
+STRING
+   : DOUBLEQUOTE (~ [\\"\r\n])*? DOUBLEQUOTE
+   | SINGLEQUOTE (~ [\\'\r\n])*? SINGLEQUOTE
+   ;
+
+BLOCK
+   : '_block'
+   ;
+
+ENDBLOCK
+   : '_endblock'
+   ;
+
+ASSIGN
+   : '<<'
+   ;
+
+NUMBER
+   : [0-9]+
        | [0-9]* '.' [0-9]+
        ;
+

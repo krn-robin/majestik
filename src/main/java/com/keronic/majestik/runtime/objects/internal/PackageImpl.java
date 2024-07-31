@@ -17,7 +17,7 @@ public class PackageImpl implements Package {
 	protected final String name;
 	protected final Package[] parents;
 	private final static Package SW_PACKAGE = new PackageImpl("sw");
-	private final static Package USER_PACKAGE = new PackageImpl("user", new Package[] { SW_PACKAGE });
+    private final static Package USER_PACKAGE = new PackageImpl("user", new Package[] { SW_PACKAGE });
 
 	public PackageImpl(String name, Package[] parents) {
 		this.name = name;
