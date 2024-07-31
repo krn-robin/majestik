@@ -43,8 +43,8 @@ public class LexerTest {
 
 	private void compareTokens(int[] expected, List<Token> actual) {
 		assertEquals(expected.length, actual.size());
-    IntStream.range(0, expected.length)
-        .forEach(n -> assertEquals(expected[n], actual.get(n).getType()));
+        IntStream.range(0, expected.length)
+                 .forEach(n -> assertEquals(expected[n], actual.get(n).getType()));
 	}
 
 	@Test
