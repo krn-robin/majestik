@@ -19,6 +19,7 @@ public final class ConstantDescs {
 	public static final ClassDesc CD_ConstantBuilder = ClassDesc.of("com.keronic.majestik.language.invokers.ConstantBuilder");
 	public static final ClassDesc CD_GlobalAccessor = ClassDesc.of("com.keronic.majestik.language.invokers.GlobalAccessor");
 	public static final ClassDesc CD_ProcInvoker = ClassDesc.of("com.keronic.majestik.language.invokers.ProcInvoker");
+	public static final ClassDesc CD_BinaryDispatcher = ClassDesc.of("com.keronic.majestik.language.invokers.BinaryDispatcher");
 
 	public static final DirectMethodHandleDesc BSM_STRING_BUILDER = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_ConstantBuilder,
 			"stringBootstrap", CD_CallSite, CD_String);
@@ -26,6 +27,8 @@ public final class ConstantDescs {
 			"bootstrapFetcher2", CD_CallSite, CD_String, CD_String);
 	public static final DirectMethodHandleDesc BSM_NATURAL_PROC = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_ProcInvoker,
 			"naturalBootstrap", ConstantDescs.CD_CallSite);
+	public static DirectMethodHandleDesc BSM_BINARY_DISPATCHER = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_BinaryDispatcher,
+	  "bootstrap", ConstantDescs.CD_CallSite);
 
 	public static final MethodTypeDesc MTD_Object = MethodTypeDesc.of(ConstantDescs.CD_Object);
 	public static final MethodTypeDesc MTD_ObjectObjectObject = MethodTypeDesc.of(ConstantDescs.CD_Object,
