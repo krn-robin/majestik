@@ -19,17 +19,20 @@ public class BinaryDispatcherTest {
   public void testLongPlusLong() throws Throwable {
     var mt = MethodType.methodType(Long.class, Long.class, Long.class);
     var mtd = mt.describeConstable().get();
+    long l1 = 1, l2 = 2, l3 = 3;
 
     Consumer<CodeBuilder> cb =
         xb -> {
-          xb.constantInstruction((long) 1);
+          xb.constantInstruction(l1);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
-          xb.constantInstruction((long) 2);
+          xb.constantInstruction(l2);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_BINARY_DISPATCHER, "+", ConstantDescs.MTD_Object));
-          xb.pop();
+                  ConstantDescs.BSM_BINARY_DISPATCHER,
+                  "+",
+                  MethodType.genericMethodType(2).describeConstable().get()));
+          xb.checkcast(ConstantDescs.CD_Long);
           xb.areturn();
         };
 
@@ -43,6 +46,6 @@ public class BinaryDispatcherTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertEquals(m.invoke((long) 1, (long) 2), 3);
+    assertEquals(m.invoke(l1, l2), l3);
   }
 }
