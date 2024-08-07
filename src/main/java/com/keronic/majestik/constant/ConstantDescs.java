@@ -27,7 +27,7 @@ public final class ConstantDescs {
 			"bootstrapFetcher2", CD_CallSite, CD_String, CD_String);
 	public static final DirectMethodHandleDesc BSM_NATURAL_PROC = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_ProcInvoker,
 			"naturalBootstrap", ConstantDescs.CD_CallSite);
-	public static DirectMethodHandleDesc BSM_BINARY_DISPATCHER = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_BinaryDispatcher,
+	public static final DirectMethodHandleDesc BSM_BINARY_DISPATCHER = java.lang.constant.ConstantDescs.ofCallsiteBootstrap(CD_BinaryDispatcher,
 	  "bootstrap", ConstantDescs.CD_CallSite);
 
 	public static final MethodTypeDesc MTD_Object = MethodTypeDesc.of(ConstantDescs.CD_Object);
