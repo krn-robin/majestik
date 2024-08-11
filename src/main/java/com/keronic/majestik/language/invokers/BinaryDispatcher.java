@@ -1,6 +1,6 @@
 package com.keronic.majestik.language.invokers;
 
-import com.keronic.MajestikRuntimeException;
+import com.keronic.majestik.internal.Utils;
 import java.lang.invoke.CallSite;
 import java.lang.invoke.ConstantCallSite;
 import java.lang.invoke.MethodHandle;
@@ -8,17 +8,8 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
 public class BinaryDispatcher {
-  private static MethodHandle todo;
-
-  static {
-    try {
-      todo =
-          MethodHandles.lookup()
-              .findStatic(BinaryDispatcher.class, "todo", MethodType.genericMethodType(2));
-    } catch (Exception e) {
-      throw new MajestikRuntimeException(e);
-    }
-  }
+  private static MethodHandle todo =
+      Utils.findStatic(BinaryDispatcher.class, "todo", MethodType.genericMethodType(2));
 
   private BinaryDispatcher() {}
 
