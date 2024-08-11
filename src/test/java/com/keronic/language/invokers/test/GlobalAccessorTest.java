@@ -39,7 +39,6 @@ public class GlobalAccessorTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    System.out.println(m.invoke());
     assertNotNull(m.invoke());
     assertEquals(m.invoke().getClass().getSimpleName(), classname);
   }
