@@ -14,36 +14,32 @@ import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
 import org.junit.Test;
 
-public class GlobalAccessorTest {
+public class ConstantBuilderTest {
   @Test
-  public void testGlobalFetch() throws Throwable {
-    var mt = MethodType.genericMethodType(0);
+  public void testStringBuilder() throws Throwable {
+    var mt = MethodType.methodType(String.class);
     var mtd = mt.describeConstable().get();
-    var classname = Class.forName("com.keronic.majestik.runtime.WriteProcTemp").getSimpleName();
+    var str = "a_test";
 
     Consumer<CodeBuilder> cb =
-	xb -> {
-	  xb.invokedynamic(
+        xb -> {
+          xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_GLOBAL_FETCHER,
-                  "fetch",
-                  ConstantDescs.MTD_Object,
-                  "sw",
-                  "write"));
-	  xb.areturn();
-	};
+                  ConstantDescs.BSM_STRING_BUILDER, "string", ConstantDescs.MTD_Object, str));
+          xb.checkcast(ConstantDescs.CD_String);
+          xb.areturn();
+        };
 
     var bytes =
-	ClassFile.of()
-	    .build(
-		ClassDesc.of("com.keronic.language.invokers.test.C"),
-		clb -> {
-		  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
-		});
+        ClassFile.of()
+            .build(
+                ClassDesc.of("com.keronic.language.invokers.test.C"),
+                clb -> {
+                  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
+                });
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertNotNull(m.invoke());
-    assertEquals(m.invoke().getClass().getSimpleName(), classname);
+    assertEquals(m.invoke(), str);
   }
 }
