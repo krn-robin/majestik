@@ -55,6 +55,6 @@ public class ConstantBuilder {
         return new ConstantCallSite(target);
 	}
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private ConstantBuilder() {}
 }

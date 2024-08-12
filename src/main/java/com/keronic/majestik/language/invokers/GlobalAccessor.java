@@ -33,6 +33,6 @@ public class GlobalAccessor {
         return new ConstantCallSite(MethodHandles.insertArguments(getGlobal, 0, packageName, global));
     }
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private GlobalAccessor() {}
 }

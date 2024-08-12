@@ -43,6 +43,6 @@ public class Invoker {
 		return new MutableCallSite(todo);
     }
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private Invoker() {}
 }

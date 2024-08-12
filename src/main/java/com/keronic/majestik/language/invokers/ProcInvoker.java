@@ -55,6 +55,6 @@ public class ProcInvoker {
 		return new ConstantCallSite(todo);
 	}
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private ProcInvoker() {}
 }

@@ -35,6 +35,6 @@ public class DynamicAccessor {
         return new ConstantCallSite(todo);
     }
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private DynamicAccessor() {}
 }
