@@ -14,6 +14,10 @@ public class Invoker {
   private static MethodHandle todo =
       Utils.findStatic(Invoker.class, "todo", MethodType.genericMethodType(1));
 
+  /**
+   * @param o
+   * @return
+   */
     @SuppressWarnings("unused")
 	public static Object todo(Object o) {
 		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
@@ -28,9 +32,17 @@ public class Invoker {
 		return null;
     }
 
+  /**
+   * @param lookup
+   * @param name
+   * @param type
+   * @return
+   */
     public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
 		System.out.format("name: %s %s %s\n", lookup, name, type);
-    //		new Exception().printStackTrace();
 		return new MutableCallSite(todo);
     }
+
+  /** */
+  private Invoker() {}
 }

@@ -14,6 +14,11 @@ public class ProcInvoker {
   private static MethodHandle todo =
       Utils.findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));
 
+  /**
+   * @param o1
+   * @param o2
+   * @return
+   */
 	public static Object todo(Object o1, Object o2) {
 		try {
 			ProcImpl proc = (ProcImpl) o1;
@@ -25,12 +30,27 @@ public class ProcInvoker {
 		return null;
 	}
 
+  /**
+   * @param lookup
+   * @param name
+   * @param type
+   * @return
+   */
 	public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
 		return new ConstantCallSite(todo);
 	}
 
+  /**
+   * @param lookup
+   * @param name
+   * @param type
+   * @return
+   */
   public static CallSite naturalBootstrap(
       MethodHandles.Lookup lookup, String name, MethodType type) {
 		return new ConstantCallSite(todo);
 	}
+
+  /** */
+  private ProcInvoker() {}
 }

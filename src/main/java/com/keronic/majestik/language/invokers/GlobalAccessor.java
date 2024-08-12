@@ -15,6 +15,14 @@ public class GlobalAccessor {
       Utils.findStatic(
           package_class, "get", MethodType.methodType(Object.class, String.class, String.class));
 
+  /**
+   * @param lookup
+   * @param name
+   * @param type
+   * @param packageName
+   * @param global
+   * @return
+   */
   public static CallSite bootstrapFetcher2(
       MethodHandles.Lookup lookup,
       String name,
@@ -23,4 +31,7 @@ public class GlobalAccessor {
       String global) {
         return new ConstantCallSite(MethodHandles.insertArguments(getGlobal, 0, packageName, global));
     }
+
+  /** */
+  private GlobalAccessor() {}
 }

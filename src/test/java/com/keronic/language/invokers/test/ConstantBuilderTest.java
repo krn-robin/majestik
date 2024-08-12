@@ -16,6 +16,10 @@ import java.util.function.Consumer;
 import org.junit.Test;
 
 public class ConstantBuilderTest {
+  public static Object testM() {
+    return Integer.valueOf(12345);
+  }
+
   /**
    * @throws Throwable
    */
@@ -45,10 +49,6 @@ public class ConstantBuilderTest {
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
     assertEquals(str, m.invoke());
-  }
-
-  public static Object testM() {
-    return Integer.valueOf(12345);
   }
 
   /**
