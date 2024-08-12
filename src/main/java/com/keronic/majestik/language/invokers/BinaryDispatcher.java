@@ -29,10 +29,12 @@ public class BinaryDispatcher {
   }
 
   /**
-   * @param lookup
-   * @param name
-   * @param type
-   * @return
+   * Creates a call site for binary operations.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @return a constant call site for the operation
    */
   @SuppressWarnings("java:S1172")
   public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
