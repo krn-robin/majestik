@@ -18,9 +18,11 @@ public class ProcInvoker {
       Utils.findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));
 
   /**
-   * @param o1
-   * @param o2
-   * @return
+   * Invokes the procedure with the given objects.
+   *
+   * @param o1 the procedure object
+   * @param o2 the argument object
+   * @return the result of the invocation
    */
 	public static Object todo(Object o1, Object o2) {
 		try {
@@ -34,20 +36,24 @@ public class ProcInvoker {
 	}
 
   /**
-   * @param lookup
-   * @param name
-   * @param type
-   * @return
+   * Creates a call site for tuple operations.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @return a constant call site for the operation
    */
 	public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
 		return new ConstantCallSite(todo);
 	}
 
   /**
-   * @param lookup
-   * @param name
-   * @param type
-   * @return
+   * Creates a call site for natural operations.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @return a constant call site for the operation
    */
   @SuppressWarnings("java:S1172")
   public static CallSite naturalBootstrap(

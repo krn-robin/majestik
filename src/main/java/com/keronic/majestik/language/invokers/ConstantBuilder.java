@@ -9,11 +9,13 @@ import java.lang.invoke.MethodType;
 
 public class ConstantBuilder {
   /**
-   * @param lookup
-   * @param name
-   * @param type
-   * @param aString
-   * @return
+   * Creates a call site for string operations.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @param aString the string to format
+   * @return a constant call site for the operation
    */
   @SuppressWarnings("java:S1172")
   public static CallSite stringBootstrap(
@@ -23,18 +25,20 @@ public class ConstantBuilder {
     }
 
   /**
-   * @param lookup
-   * @param name
-   * @param type
-   * @param aClass
-   * @param jMethodName
-   * @param magikMethodName
-   * @param numArgs
-   * @param mandatoryArgs
-   * @param iterator
-   * @param primNo
-   * @return
-   * @throws Throwable
+   * Creates a call site for a procedure with an empty environment.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @param aClass the class containing the method
+   * @param jMethodName the Java method name
+   * @param magikMethodName the Magik method name
+   * @param numArgs the number of arguments
+   * @param mandatoryArgs the number of mandatory arguments
+   * @param iterator flag indicating if an iterator is used
+   * @param primNo the primitive number
+   * @return a constant call site for the procedure
+   * @throws Throwable if an error occurs during call site creation
    */
   @SuppressWarnings({"java:S107", "java:S1172"})
   public static CallSite procWithEmptyEnvBootstrap(

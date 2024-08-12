@@ -16,9 +16,11 @@ public class BinaryDispatcher {
       Utils.findStatic(BinaryDispatcher.class, "todo", MethodType.genericMethodType(2));
 
   /**
-   * @param o1
-   * @param o2
-   * @return
+   * Performs a binary operation on two objects.
+   *
+   * @param o1 the first operand
+   * @param o2 the second operand
+   * @return the result of the operation
    */
   public static Object todo(Object o1, Object o2) {
     if ((o1 instanceof Long l1) && (o2 instanceof Long l2)) return Long.sum(l1, l2);
