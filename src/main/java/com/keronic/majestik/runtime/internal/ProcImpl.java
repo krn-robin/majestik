@@ -10,6 +10,7 @@ import java.lang.invoke.MethodType;
 public class ProcImpl implements Proc {
 	public MethodHandle methodHandle;
 
+  @SuppressWarnings("java:S1172")
   public ProcImpl(
       Class<?> aClass,
       String jMethodName,

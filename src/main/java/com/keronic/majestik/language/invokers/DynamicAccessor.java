@@ -28,6 +28,7 @@ public class DynamicAccessor {
    * @param packageName
    * @return
    */
+  @SuppressWarnings("java:S1172")
   public static CallSite bootstrapStorer(
       MethodHandles.Lookup lookup, String name, MethodType type, String packageName) {
     // System.out.format("\n\n--> %s, %s, %s, %s\n", lookup, name, type, packageName);

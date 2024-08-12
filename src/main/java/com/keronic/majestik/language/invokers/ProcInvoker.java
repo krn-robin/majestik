@@ -46,6 +46,7 @@ public class ProcInvoker {
    * @param type
    * @return
    */
+  @SuppressWarnings("java:S1172")
   public static CallSite naturalBootstrap(
       MethodHandles.Lookup lookup, String name, MethodType type) {
 		return new ConstantCallSite(todo);

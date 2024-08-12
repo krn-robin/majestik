@@ -15,6 +15,7 @@ public class ConstantBuilder {
    * @param aString
    * @return
    */
+  @SuppressWarnings("java:S1172")
   public static CallSite stringBootstrap(
       MethodHandles.Lookup lookup, String name, MethodType type, String aString) {
     	var bla = MethodHandles.constant(Object.class, String.format(aString));
@@ -35,6 +36,7 @@ public class ConstantBuilder {
    * @return
    * @throws Throwable
    */
+  @SuppressWarnings({"java:S107", "java:S1172"})
   public static CallSite procWithEmptyEnvBootstrap(
       MethodHandles.Lookup lookup,
       String name,

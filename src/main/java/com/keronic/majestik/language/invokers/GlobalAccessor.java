@@ -23,6 +23,7 @@ public class GlobalAccessor {
    * @param global
    * @return
    */
+  @SuppressWarnings("java:S1172")
   public static CallSite bootstrapFetcher2(
       MethodHandles.Lookup lookup,
       String name,
