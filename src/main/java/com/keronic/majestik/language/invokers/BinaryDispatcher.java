@@ -25,7 +25,8 @@ public class BinaryDispatcher {
   public static Object todo(Object o1, Object o2) {
     if ((o1 instanceof Long l1) && (o2 instanceof Long l2)) return Long.sum(l1, l2);
     throw new UnsupportedOperationException(
-        String.format("Not implemented: %s %s", o1.getClass(), o2.getClass()));
+        String.format(
+            "Operator not implemented for types: %s and %s", o1.getClass(), o2.getClass()));
   }
 
   /**
