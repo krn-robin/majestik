@@ -1,42 +1,37 @@
-/**
- *
- */
+/** */
 package com.keronic;
-
-import java.io.File;
-import java.lang.classfile.ClassFile;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.ConstantDescs;
-import java.nio.file.Path;
 
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikLexer;
 import com.keronic.antlr4.MajestikParser;
 import com.keronic.antlr4.MajestikParser.ProgContext;
-import com.keronic.majestik.runtime.WriteProcTemp;
-
+import com.keronic.majestik.MajestikRuntimeException;
+import java.io.File;
+import java.lang.classfile.ClassFile;
+import java.lang.constant.ClassDesc;
+import java.lang.constant.ConstantDescs;
+import java.nio.file.Path;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
-/**
- *
- */
+/** */
 public class Majestik {
 
 	/**
 	 * @param args
 	 */
-
 	public static void main(String[] args) {
 		System.out.println("Majestik v0.0");
 
 		try {
 			@SuppressWarnings("unused")
-			var wp = new WriteProcTemp(); // FIXME: force load of stub sw:write proc
+      var wp =
+          Class.forName(
+              "com.keronic.majestik.runtime.WriteProcTemp"); // FIXME: force load of stub sw:write
+      // proc
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+      throw new MajestikRuntimeException(e);
 		}
 
 		if (args.length == 0)
