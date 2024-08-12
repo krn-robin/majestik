@@ -9,7 +9,10 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
-/** */
+/**
+ * ProcInvoker is responsible for invoking procedures and managing method handles for dynamic
+ * invocation.
+ */
 public class ProcInvoker {
   private static MethodHandle todo =
       Utils.findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));

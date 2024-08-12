@@ -7,6 +7,10 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+/**
+ * BinaryDispatcher is responsible for handling binary operations and dispatching them to
+ * appropriate handlers.
+ */
 public class BinaryDispatcher {
   private static MethodHandle todo =
       Utils.findStatic(BinaryDispatcher.class, "todo", MethodType.genericMethodType(2));
@@ -34,6 +38,6 @@ public class BinaryDispatcher {
     throw new UnsupportedOperationException(String.format("Not implemented: operator %s ", name));
   }
 
-  /** */
+  /** Private constructor to prevent instantiation. */
   private BinaryDispatcher() {}
 }
