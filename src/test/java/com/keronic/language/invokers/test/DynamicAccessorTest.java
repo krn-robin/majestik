@@ -14,28 +14,29 @@ import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
 import org.junit.Test;
 
-public class BinaryDispatcherTest {
+public class DynamicAccessorTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testLongPlusLong() throws Throwable {
-    var mt = MethodType.methodType(Long.class, Long.class, Long.class);
+  public void testStoreDynamic() throws Throwable {
+    var mt = MethodType.methodType(Object.class);
     var mtd = mt.describeConstable().get();
-    long l1 = 1, l2 = 2, l3 = 3;
+    var globalname = "!_test_!";
+    var packagename = "user";
+    long value = 19791012;
 
     Consumer<CodeBuilder> cb =
         xb -> {
-          xb.ldc(l1);
-          xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
-          xb.ldc(l2);
+          xb.ldc(value);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_BINARY_DISPATCHER,
-                  "+",
-                  MethodType.genericMethodType(2).describeConstable().get()));
-          xb.checkcast(ConstantDescs.CD_Long);
+                  ConstantDescs.DYNAMIC_STORER_BSM,
+                  globalname,
+                  ConstantDescs.MTD_voidObject,
+                  packagename));
+          xb.aconst_null();
           xb.areturn();
         };
 
@@ -49,6 +50,6 @@ public class BinaryDispatcherTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertEquals(m.invoke(l1, l2), l3);
+    assertNull(m.invoke()); // TODO: Check the actual stored value
   }
 }

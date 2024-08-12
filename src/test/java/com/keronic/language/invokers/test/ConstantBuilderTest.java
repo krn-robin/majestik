@@ -89,7 +89,6 @@ public class ConstantBuilderTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    System.out.format("====> %s%n", m.invoke());
     var result = (ProcImpl) m.invoke();
     assertNotNull(result);
     assertEquals(result.invoke(), 12345);
