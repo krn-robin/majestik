@@ -63,6 +63,8 @@ public final class ConstantDescs {
   public static final MethodTypeDesc MTD_Longlong =
       MethodTypeDesc.of(ConstantDescs.CD_Long, ConstantDescs.CD_long);
   public static final MethodTypeDesc MTD_Object = MethodTypeDesc.of(ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_ObjectObject =
+      MethodTypeDesc.of(ConstantDescs.CD_Object, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_ObjectObjectObject =
       MethodTypeDesc.of(ConstantDescs.CD_Object, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_voidObject =

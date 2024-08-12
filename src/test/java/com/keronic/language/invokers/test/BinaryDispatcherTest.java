@@ -32,9 +32,7 @@ public class BinaryDispatcherTest {
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_BINARY_DISPATCHER,
-                  "+",
-                  MethodType.genericMethodType(2).describeConstable().get()));
+                  ConstantDescs.BSM_BINARY_DISPATCHER, "+", ConstantDescs.MTD_ObjectObjectObject));
           xb.checkcast(ConstantDescs.CD_Long);
           xb.areturn();
         };
@@ -49,6 +47,6 @@ public class BinaryDispatcherTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertEquals(m.invoke(l1, l2), l3);
+    assertEquals(l3, m.invoke(l1, l2));
   }
 }

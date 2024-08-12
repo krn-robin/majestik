@@ -44,13 +44,12 @@ public class ConstantBuilderTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertEquals(m.invoke(), str);
+    assertEquals(str, m.invoke());
   }
 
   public static Object testM() {
     return Integer.valueOf(12345);
   }
-  ;
 
   /**
    * @throws Throwable
@@ -91,6 +90,6 @@ public class ConstantBuilderTest {
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
     var result = (ProcImpl) m.invoke();
     assertNotNull(result);
-    assertEquals(result.invoke(), 12345);
+    assertEquals(12345, result.invoke());
   }
 }
