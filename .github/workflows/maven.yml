@@ -34,6 +34,7 @@ jobs:
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package --file pom.xml
     - name: Analyze with SonarCloud
+      if: env.SONAR_TOKEN != ''
       run: mvn --batch-mode sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
