@@ -230,6 +230,7 @@
         <version>3.8.0</version>
         <configuration>
           <additionalOptions>--enable-preview</additionalOptions>
+          <doclint>all,-missing</doclint>
         </configuration>
       </plugin>
 
