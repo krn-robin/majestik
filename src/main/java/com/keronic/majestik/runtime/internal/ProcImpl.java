@@ -4,10 +4,15 @@ package com.keronic.majestik.runtime.internal;
 import com.keronic.majestik.internal.Utils;
 import com.keronic.majestik.runtime.Proc;
 import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.util.logging.Logger;
 
 /** */
 public class ProcImpl implements Proc {
+  private static final Logger LOGGER =
+      Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+
 	public MethodHandle methodHandle;
 
   @SuppressWarnings("java:S1172")
@@ -18,8 +23,19 @@ public class ProcImpl implements Proc {
       int numArgs,
       int mandatoryArgs,
       boolean iterator) {
-    this.methodHandle =
-        Utils.findStatic(aClass, jMethodName, MethodType.genericMethodType(numArgs));
+    LOGGER.finest(
+        () ->
+            String.format(
+                "new ProcImpl(%s, %s, %s, %s, %s, %s)",
+                aClass, jMethodName, magikMethodName, numArgs, mandatoryArgs, iterator));
+    var mt = MethodType.genericMethodType(numArgs);
+
+    if (iterator) {
+      mt = MethodType.genericMethodType(numArgs - 2);
+      mt = mt.insertParameterTypes(0, MethodHandle.class, Object.class.arrayType());
+    }
+
+    this.methodHandle = Utils.findStatic(aClass, jMethodName, mt);
 	}
 
   public ProcImpl(

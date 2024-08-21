@@ -61,6 +61,10 @@ public class ProcInvoker {
 		return new ConstantCallSite(todo);
 	}
 
+  public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
+    return new ConstantCallSite(todo);
+  }
+
   /** Private constructor to prevent instantiation. */
   private ProcInvoker() {}
 }

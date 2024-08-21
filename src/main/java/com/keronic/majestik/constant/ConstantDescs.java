@@ -39,6 +39,9 @@ public final class ConstantDescs {
   public static final DirectMethodHandleDesc BSM_GLOBAL_FETCHER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_GlobalAccessor, "bootstrapFetcher2", CD_CallSite, CD_String, CD_String);
+  public static final DirectMethodHandleDesc BSM_GLOBAL_STORER =
+      java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
+          CD_GlobalAccessor, "bootstrapStorer2", CD_CallSite, CD_String, CD_String);
   public static final DirectMethodHandleDesc BSM_NATURAL_PROC =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_ProcInvoker, "naturalBootstrap", CD_CallSite);
