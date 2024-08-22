@@ -50,6 +50,6 @@ public class TupleBuilderTest {
 
     Object result = m.invoke();
     assertEquals(ResultTuple.create(magic), result);
-    assertEquals(1, ((ResultTuple)result).size());
+    assertEquals(1, ((ResultTuple) result).size());
   }
 }

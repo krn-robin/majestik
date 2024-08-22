@@ -44,8 +44,7 @@ public class PackageImpl implements Package {
 	}
 
   private void put(String variableName, Object o) {
-    LOGGER.finest(
-        () -> String.format("PackageImpl.put(%s, %s, %s)", this.name, variableName, o));
+    LOGGER.finest(() -> String.format("PackageImpl.put(%s, %s, %s)", this.name, variableName, o));
     this.variables.put(variableName, o);
 	}
 }

@@ -39,6 +39,16 @@ public class GlobalAccessor {
         return new ConstantCallSite(MethodHandles.insertArguments(getGlobal, 0, packageName, global));
     }
 
+  /**
+   * Creates a CallSite for storing global variables.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the method
+   * @param type the method type
+   * @param packageName the name of the package
+   * @param global the global variable name
+   * @return a CallSite for storing global variables
+   */
   public static CallSite bootstrapStorer2(
       MethodHandles.Lookup lookup,
       String name,

@@ -15,6 +15,16 @@ public class ProcImpl implements Proc {
 
 	public MethodHandle methodHandle;
 
+  /**
+   * Constructs a ProcImpl with the specified parameters.
+   *
+   * @param aClass the class containing the method
+   * @param jMethodName the Java method name
+   * @param magikMethodName the Magik method name
+   * @param numArgs the number of arguments
+   * @param mandatoryArgs the number of mandatory arguments
+   * @param iterator indicates if the method is an iterator
+   */
   @SuppressWarnings("java:S1172")
   public ProcImpl(
       Class<?> aClass,
