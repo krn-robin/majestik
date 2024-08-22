@@ -18,6 +18,9 @@ public final class ConstantDescs {
 	public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
 	public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
 
+  public static final ClassDesc CD_ResultTuple =
+      ClassDesc.of("com.keronic.majestik.language.ResultTuple");
+
   public static final ClassDesc CD_BinaryDispatcher =
       ClassDesc.of("com.keronic.majestik.language.invokers.BinaryDispatcher");
   public static final ClassDesc CD_ConstantBuilder =
@@ -28,6 +31,8 @@ public final class ConstantDescs {
       ClassDesc.of("com.keronic.majestik.language.invokers.GlobalAccessor");
   public static final ClassDesc CD_ProcInvoker =
       ClassDesc.of("com.keronic.majestik.language.invokers.ProcInvoker");
+  public static final ClassDesc CD_TupleBuilder =
+      ClassDesc.of("com.keronic.majestik.language.invokers.TupleBuilder");
 
   public static final DirectMethodHandleDesc DYNAMIC_STORER_BSM =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
@@ -60,6 +65,9 @@ public final class ConstantDescs {
   public static final DirectMethodHandleDesc BSM_STRING_BUILDER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_ConstantBuilder, "stringBootstrap", CD_CallSite, CD_String);
+  public static final DirectMethodHandleDesc BSM_TUPLE_BUILDER =
+      java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
+	      CD_TupleBuilder, "bootstrap", CD_CallSite);
 
   public static final MethodTypeDesc MTD_Doubledouble =
       MethodTypeDesc.of(ConstantDescs.CD_Double, ConstantDescs.CD_double);
@@ -70,6 +78,8 @@ public final class ConstantDescs {
       MethodTypeDesc.of(ConstantDescs.CD_Object, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_ObjectObjectObject =
       MethodTypeDesc.of(ConstantDescs.CD_Object, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_ResultTupleObject =
+      MethodTypeDesc.of(ConstantDescs.CD_ResultTuple, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_voidObject =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_voidString =
