@@ -21,8 +21,14 @@ public class ResultTuple {
     return this.objects.length;
   }
 
+  @Override
   public boolean equals(Object obj) {
     if (obj instanceof ResultTuple that) return Arrays.deepEquals(this.objects, that.objects);
 	  return false;
+  }
+
+  @Override
+  public int hashCode() {
+	  return super.hashCode();
   }
 }

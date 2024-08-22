@@ -49,6 +49,7 @@ public class TupleBuilderTest {
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
 
     Object result = m.invoke();
-    assertEquals(ResultTuple.create(new Object[] {magic}), result);
+    assertEquals(ResultTuple.create(magic), result);
+    assertEquals(1, ((ResultTuple)result).size());
   }
 }
