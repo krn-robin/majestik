@@ -8,12 +8,12 @@ import org.junit.Test;
 public class ResultTupleTest {
   private ResultTuple rs1 = ResultTuple.create("Str", "ing");
   private ResultTuple rs2 = ResultTuple.create("Str", "ing");
-  private Object[] elems = new Object[]{"Str", "ing"};
+  private Object[] elems = new Object[] {"Str", "ing"};
 
   @Test
   public void testEquals() throws Throwable {
     assertEquals(rs1, rs2);
-    assertFalse(rs1.equals(elems));
+    assertNotEquals(rs1, elems);
   }
 
   @Test

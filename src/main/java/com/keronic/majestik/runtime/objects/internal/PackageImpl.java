@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class PackageImpl implements Package {
   private static final Logger LOGGER =
       Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
-  private static final Map<String, Package> all_packages = new ConcurrentHashMap<String, Package>();
-  private final Map<String, Object> variables = new ConcurrentHashMap<String, Object>();
+  private static final Map<String, Package> all_packages = new ConcurrentHashMap<>();
+  private final Map<String, Object> variables = new ConcurrentHashMap<>();
 	protected final String name;
 	protected final Package[] parents;
   private static final Package SW_PACKAGE = new PackageImpl("sw");
