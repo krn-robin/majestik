@@ -29,6 +29,6 @@ public class ResultTuple {
 
   @Override
   public int hashCode() {
-	  return super.hashCode();
+    return Arrays.hashCode(objects);
   }
 }
