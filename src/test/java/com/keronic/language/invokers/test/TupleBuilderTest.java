@@ -18,7 +18,18 @@ import org.junit.Test;
 /** */
 public class TupleBuilderTest {
   /**
-   * @throws Throwable
+   * Tests the dynamic creation of a `ResultTuple` using the `BSM_TUPLE_BUILDER` bootstrap method.
+   *
+   * <p>This test dynamically generates a method that returns a `ResultTuple` containing a single
+   * string element. The method is defined in a hidden class and invoked to verify that the
+   * `ResultTuple` is correctly created with the expected value and size.
+   *
+   * <p>The test ensures that:<br>
+   * 1. The dynamic method invocation correctly uses the `BSM_TUPLE_BUILDER` bootstrap method.<br>
+   * 2. The returned `ResultTuple` contains the string "MagicString".<br>
+   * 3. The size of the `ResultTuple` is 1.<br>
+   *
+   * @throws Throwable if any error occurs during method generation or invocation.
    */
   @Test
   public void testBootstrap() throws Throwable {
