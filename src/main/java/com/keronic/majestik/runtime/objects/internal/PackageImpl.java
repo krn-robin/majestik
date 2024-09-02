@@ -16,6 +16,7 @@ public class PackageImpl implements Package {
 	protected final String name;
 	protected final Package[] parents;
   private static final Package SW_PACKAGE = new PackageImpl("sw");
+  @SuppressWarnings("unused")
   private static final Package USER_PACKAGE = new PackageImpl("user", new Package[] {SW_PACKAGE});
 
 	public PackageImpl(String name, Package[] parents) {

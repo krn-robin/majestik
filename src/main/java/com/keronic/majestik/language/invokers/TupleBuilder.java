@@ -15,6 +15,7 @@ public class TupleBuilder {
           "create",
           MethodType.methodType(ResultTuple.class, Object.class.arrayType()));
 
+  @SuppressWarnings("java:S1172")
   public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
     return new ConstantCallSite(
         tuplecreator.asCollector(Object.class.arrayType(), type.parameterCount()));

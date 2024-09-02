@@ -49,6 +49,7 @@ public class GlobalAccessor {
    * @param global the global variable name
    * @return a CallSite for storing global variables
    */
+  @SuppressWarnings("java:S1172")
   public static CallSite bootstrapStorer2(
       MethodHandles.Lookup lookup,
       String name,

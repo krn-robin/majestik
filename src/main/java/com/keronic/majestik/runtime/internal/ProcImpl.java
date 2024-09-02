@@ -38,12 +38,11 @@ public class ProcImpl implements Proc {
             String.format(
                 "new ProcImpl(%s, %s, %s, %s, %s, %s)",
                 aClass, jMethodName, magikMethodName, numArgs, mandatoryArgs, iterator));
-    var mt = MethodType.genericMethodType(numArgs);
-
-    if (iterator) {
-      mt = MethodType.genericMethodType(numArgs - 2);
-      mt = mt.insertParameterTypes(0, MethodHandle.class, Object.class.arrayType());
-    }
+    var mt =
+        iterator
+            ? MethodType.genericMethodType(numArgs - 2)
+                .insertParameterTypes(0, MethodHandle.class, Object.class.arrayType())
+            : MethodType.genericMethodType(numArgs);
 
     this.methodHandle = Utils.findStatic(aClass, jMethodName, mt);
 	}
