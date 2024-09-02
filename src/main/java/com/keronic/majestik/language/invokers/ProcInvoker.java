@@ -61,6 +61,19 @@ public class ProcInvoker {
 		return new ConstantCallSite(todo);
 	}
 
+  /**
+   * Creates a call site for simple operations.
+   *
+   * @param lookup the lookup context
+   * @param name the name of the operation
+   * @param type the method type
+   * @return a constant call site for the operation
+   */
+  @SuppressWarnings("java:S1172")
+  public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
+    return new ConstantCallSite(todo);
+  }
+
   /** Private constructor to prevent instantiation. */
   private ProcInvoker() {}
 }

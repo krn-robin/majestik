@@ -20,20 +20,28 @@ public class GlobalAccessorTest {
    * @throws Throwable
    */
   @Test
-  public void testGlobalFetch() throws Throwable {
+  public void testGlobalStoreAndFetch() throws Throwable {
     var mt = MethodType.genericMethodType(0);
     var mtd = mt.describeConstable().get();
-    var classname = Class.forName("com.keronic.majestik.runtime.WriteProcTemp").getSimpleName();
 
     Consumer<CodeBuilder> cb =
 	xb -> {
+          xb.ldc((long) 54321);
+          xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
+          xb.invokedynamic(
+              DynamicCallSiteDesc.of(
+                  ConstantDescs.BSM_GLOBAL_STORER,
+                  "store",
+                  ConstantDescs.MTD_voidObject,
+                  "user",
+                  "test"));
 	  xb.invokedynamic(
               DynamicCallSiteDesc.of(
                   ConstantDescs.BSM_GLOBAL_FETCHER,
                   "fetch",
                   ConstantDescs.MTD_Object,
-                  "sw",
-                  "write"));
+                  "user",
+                  "test"));
 	  xb.areturn();
 	};
 
@@ -47,7 +55,6 @@ public class GlobalAccessorTest {
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertNotNull(m.invoke());
-    assertEquals(classname, m.invoke().getClass().getSimpleName());
+    assertEquals(Long.valueOf(54321), m.invoke());
   }
 }

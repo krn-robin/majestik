@@ -23,6 +23,7 @@ public class ProcInvokerTest {
   public void testNaturalBootstrap() throws Throwable {
     var mt = MethodType.methodType(void.class);
     var mtd = mt.describeConstable().get();
+    Class.forName("com.keronic.majestik.runtime.WriteProcTemp").getSimpleName();
 
     Consumer<CodeBuilder> cb =
         xb -> {
