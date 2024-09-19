@@ -1,4 +1,4 @@
-package com.keronic.test;
+package com.keronic;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -6,22 +6,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.keronic.antlr4.MajestikParser;
 import java.lang.classfile.CodeBuilder;
 import java.lang.classfile.constantpool.InvokeDynamicEntry;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import com.keronic.MajestikCodeVisitor;
-import com.keronic.antlr4.MajestikParser;
-
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-@Ignore("Test class not ready yet")
+@Disabled("Test class not ready yet")
 public class MajestikCodeVisitorTest {
 	MajestikCodeVisitor visitor;
 	CodeBuilder mockCodeBuilder;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		mockCodeBuilder = mock(CodeBuilder.class);
 		visitor = new MajestikCodeVisitor(mockCodeBuilder);

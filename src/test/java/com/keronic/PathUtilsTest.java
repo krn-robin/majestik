@@ -1,17 +1,11 @@
-/**
- *
- */
-package com.keronic.test;
+/** */
+package com.keronic;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import com.keronic.PathUtils;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-/**
- *
- */
+/** */
 public class PathUtilsTest {
 	@Test
 	public void testGetBaseName() {

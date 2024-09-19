@@ -1,8 +1,7 @@
-package com.keronic.antlr4.test;
+package com.keronic.antlr4;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import com.keronic.antlr4.MajestikLexer;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -13,7 +12,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LexerTest {
   ANTLRErrorListener errorListener =

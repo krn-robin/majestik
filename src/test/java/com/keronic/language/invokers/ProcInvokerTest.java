@@ -1,8 +1,8 @@
-package com.keronic.language.invokers.test;
+package com.keronic.language.invokers;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import java.lang.classfile.ClassFile;
@@ -12,7 +12,7 @@ import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /** */
 public class ProcInvokerTest {
@@ -44,7 +44,7 @@ public class ProcInvokerTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of("com.keronic.language.invokers.test.C"),
+                ClassDesc.of(this.getClass().getPackageName() + ".C"),
                 clb -> {
       clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
     });

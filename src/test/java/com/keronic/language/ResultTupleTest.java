@@ -1,9 +1,9 @@
-package com.keronic.language.test;
+package com.keronic.language;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.language.ResultTuple;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ResultTupleTest {
   private ResultTuple rs1 = ResultTuple.create("Str", "ing");

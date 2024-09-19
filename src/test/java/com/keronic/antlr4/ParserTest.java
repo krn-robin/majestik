@@ -1,15 +1,9 @@
-package com.keronic.antlr4.test;
+package com.keronic.antlr4;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.junit.Test;
-
-import com.keronic.antlr4.MajestikLexer;
-import com.keronic.antlr4.MajestikParser;
-
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CommonToken;
@@ -19,12 +13,19 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
-	ANTLRErrorListener errorListener = new BaseErrorListener() {
+  ANTLRErrorListener errorListener =
+      new BaseErrorListener() {
 		@Override
-		public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine,
-				String msg, RecognitionException e) {
+        public void syntaxError(
+            Recognizer<?, ?> recognizer,
+            Object offendingSymbol,
+            int line,
+            int charPositionInLine,
+            String msg,
+            RecognitionException e) {
 			fail();
 		}
 	};
@@ -41,7 +42,9 @@ public class ParserTest {
 
 	@Test
 	public void testInvokeNoArgs() {
-		var parser = this.getParser(Arrays.asList(
+    var parser =
+        this.getParser(
+            Arrays.asList(
 				new CommonToken(MajestikLexer.VAR, "proc"),
 				new CommonToken(MajestikLexer.LEFT_RBRACKET, "("),
 				new CommonToken(MajestikLexer.RIGHT_RBRACKET, ")")));
@@ -53,7 +56,9 @@ public class ParserTest {
 
 	@Test
 	public void testInvokeSingleVarArg() {
-		var parser = this.getParser(Arrays.asList(
+    var parser =
+        this.getParser(
+            Arrays.asList(
 				new CommonToken(MajestikLexer.VAR, "proc"),
 				new CommonToken(MajestikLexer.LEFT_RBRACKET, "("),
 				new CommonToken(MajestikLexer.VAR, "arg"),
@@ -65,7 +70,9 @@ public class ParserTest {
 
 	@Test
 	public void testAssignString() {
-		var parser = this.getParser(Arrays.asList(
+    var parser =
+        this.getParser(
+            Arrays.asList(
 				new CommonToken(MajestikLexer.VAR, "var"),
 				new CommonToken(MajestikLexer.ASSIGN, "<<"),
 				new CommonToken(MajestikLexer.STRING, "\"value\"")));
@@ -75,7 +82,9 @@ public class ParserTest {
 
 	@Test
 	public void testBlock() {
-		var parser = this.getParser(Arrays.asList(
+    var parser =
+        this.getParser(
+            Arrays.asList(
 				new CommonToken(MajestikLexer.BLOCK, "_block"),
 				new CommonToken(MajestikLexer.ENDBLOCK, "_endblock")));
 		var block = parser.block();
