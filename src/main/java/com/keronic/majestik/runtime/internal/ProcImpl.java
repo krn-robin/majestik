@@ -1,17 +1,15 @@
 /** */
 package com.keronic.majestik.runtime.internal;
 
+import module java.base;
+
 import com.keronic.majestik.internal.Utils;
 import com.keronic.majestik.runtime.Proc;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.logging.Logger;
 
 /** */
 public class ProcImpl implements Proc {
-  private static final Logger LOGGER =
-      Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+  private static final System.Logger LOGGER =
+      System.getLogger(MethodHandles.lookup().lookupClass().getName());
 
 	public MethodHandle methodHandle;
 
@@ -33,7 +31,8 @@ public class ProcImpl implements Proc {
       int numArgs,
       int mandatoryArgs,
       boolean iterator) {
-    LOGGER.finest(
+    LOGGER.log(
+        System.Logger.Level.DEBUG,
         () ->
             String.format(
                 "new ProcImpl(%s, %s, %s, %s, %s, %s)",

@@ -1,17 +1,12 @@
 package com.keronic.language.invokers;
 
+import module java.base;
+
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.CodeBuilder;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.DynamicCallSiteDesc;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** */

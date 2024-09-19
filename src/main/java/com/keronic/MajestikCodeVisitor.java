@@ -1,16 +1,10 @@
 package com.keronic;
 
-import java.lang.classfile.CodeBuilder;
-import java.lang.constant.DynamicCallSiteDesc;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import module java.base;
 
-import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikParser;
+import com.keronic.majestik.constant.ConstantDescs;
 
 public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 
@@ -55,10 +49,10 @@ public class MajestikCodeVisitor extends MajestikBaseVisitor<Void> {
 		try {
 			var number = NumberFormat.getInstance(Locale.ROOT).parse(numberString);
 			if (number instanceof Long n) {
-				this.cb.constantInstruction(n);
+        this.cb.loadConstant(n);
 				this.cb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
 			} else if (number instanceof Double n) {
-				this.cb.constantInstruction(n);
+        this.cb.loadConstant(n);
 				this.cb.invokestatic(ConstantDescs.CD_Double, "valueOf", ConstantDescs.MTD_Doubledouble);
 			}
 		} catch (ParseException e) {

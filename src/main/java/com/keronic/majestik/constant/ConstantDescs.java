@@ -1,8 +1,6 @@
 package com.keronic.majestik.constant;
 
-import java.lang.constant.ClassDesc;
-import java.lang.constant.DirectMethodHandleDesc;
-import java.lang.constant.MethodTypeDesc;
+import module java.base;
 
 public final class ConstantDescs {
 

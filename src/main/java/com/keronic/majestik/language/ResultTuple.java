@@ -1,7 +1,7 @@
 /** */
 package com.keronic.majestik.language;
 
-import java.util.Arrays;
+import module java.base;
 
 /** */
 public class ResultTuple {

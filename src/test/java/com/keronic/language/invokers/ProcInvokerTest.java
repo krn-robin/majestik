@@ -48,10 +48,10 @@ class ProcInvokerTest {
                             ClassFile.ACC_PUBLIC,
                             cb ->
                                 cb.aload(0)
-                                    .constantInstruction(cd_t)
-                                    .constantInstruction("run")
-                                    .constantInstruction("run_test")
-                                    .constantInstruction(2)
+                                    .loadConstant(cd_t)
+                                    .loadConstant("run")
+                                    .loadConstant("run_test")
+                                    .loadConstant(2)
                                     .invokespecial(
                                         cd_p, INIT_NAME, ConstantDescs.MTD_voidClassStringStringint)
                                     .return_()));

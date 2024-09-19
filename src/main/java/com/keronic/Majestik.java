@@ -1,16 +1,13 @@
 /** */
 package com.keronic;
 
+import module java.base;
+
 import com.keronic.antlr4.MajestikBaseVisitor;
 import com.keronic.antlr4.MajestikLexer;
 import com.keronic.antlr4.MajestikParser;
 import com.keronic.antlr4.MajestikParser.ProgContext;
 import com.keronic.majestik.MajestikRuntimeException;
-import java.io.File;
-import java.lang.classfile.ClassFile;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.ConstantDescs;
-import java.nio.file.Path;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -25,11 +22,11 @@ public class Majestik {
 		System.out.println("Majestik v0.0");
 
 		try {
+      // FIXME: force load of stub sw:write proc
 			@SuppressWarnings("unused")
       var wp =
           Class.forName(
-              "com.keronic.majestik.runtime.WriteProcTemp"); // FIXME: force load of stub sw:write
-      // proc
+              "com.keronic.majestik.runtime.WriteProcTemp");
 		} catch (Exception e) {
       throw new MajestikRuntimeException(e);
 		}

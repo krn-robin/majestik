@@ -1,9 +1,8 @@
 package com.keronic.majestik.internal;
 
+import module java.base;
+
 import com.keronic.majestik.MajestikRuntimeException;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
 
 public class Utils {
   private Utils() {}
