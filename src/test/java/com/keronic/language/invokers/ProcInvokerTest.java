@@ -15,12 +15,12 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** */
-public class ProcInvokerTest {
+class ProcInvokerTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testNaturalBootstrap() throws Throwable {
+  void testNaturalBootstrap() throws Throwable {
     var mt = MethodType.methodType(void.class);
     var mtd = mt.describeConstable().get();
     Class.forName("com.keronic.majestik.runtime.WriteProcTemp").getSimpleName();

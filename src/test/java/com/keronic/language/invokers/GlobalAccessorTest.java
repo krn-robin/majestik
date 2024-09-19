@@ -15,12 +15,12 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** */
-public class GlobalAccessorTest {
+class GlobalAccessorTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testGlobalStoreAndFetch() throws Throwable {
+  void testGlobalStoreAndFetch() throws Throwable {
     var mt = MethodType.genericMethodType(0);
     var mtd = mt.describeConstable().get();
 

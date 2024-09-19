@@ -24,7 +24,7 @@ public class ConstantBuilderTest {
    * @throws Throwable
    */
   @Test
-  public void testStringBuilder() throws Throwable {
+  void testStringBuilder() throws Throwable {
     var mt = MethodType.methodType(String.class);
     var mtd = mt.describeConstable().get();
     var str = "a_test";
@@ -55,7 +55,7 @@ public class ConstantBuilderTest {
    * @throws Throwable
    */
   @Test
-  public void testProcWithEmptyEnvBootstrap() throws Throwable {
+  void testProcWithEmptyEnvBootstrap() throws Throwable {
     var mt = MethodType.methodType(ProcImpl.class);
     var mtd = mt.describeConstable().get();
     var classname = ClassDesc.of(this.getClass().getName());

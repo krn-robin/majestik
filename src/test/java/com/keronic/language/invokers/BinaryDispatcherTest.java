@@ -14,12 +14,12 @@ import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
-public class BinaryDispatcherTest {
+class BinaryDispatcherTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testLongPlusLong() throws Throwable {
+  void testLongPlusLong() throws Throwable {
     var mt = MethodType.methodType(Long.class, Long.class, Long.class);
     var mtd = mt.describeConstable().get();
     long l1 = 1, l2 = 2, l3 = 3;

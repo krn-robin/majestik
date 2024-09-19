@@ -14,12 +14,12 @@ import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
-public class DynamicAccessorTest {
+class DynamicAccessorTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testStoreDynamic() throws Throwable {
+  void testStoreDynamic() throws Throwable {
     var mt = MethodType.methodType(Object.class);
     var mtd = mt.describeConstable().get();
     var globalname = "!_test_!";

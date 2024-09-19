@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @Disabled("Test class not ready yet")
-public class MajestikCodeVisitorTest {
+class MajestikCodeVisitorTest {
 	MajestikCodeVisitor visitor;
 	CodeBuilder mockCodeBuilder;
 
@@ -25,7 +25,7 @@ public class MajestikCodeVisitorTest {
 	}
 
 	@Test
-	public void testVisitString() {
+  void testVisitString() {
 		// Test input
 		MajestikParser.StringContext mockContext = mock(MajestikParser.StringContext.class);
 		when(mockContext.getText()).thenReturn("\"example\"");
@@ -41,7 +41,7 @@ public class MajestikCodeVisitorTest {
 	}
 
 	@Test
-	public void testVisitBlock_statement() {
+  void testVisitBlock_statement() {
 		// Test input
 		MajestikParser.BlockContext mockContext = mock(MajestikParser.BlockContext.class);
 
@@ -54,7 +54,7 @@ public class MajestikCodeVisitorTest {
 	}
 
 	@Test
-	public void testVisitInvoke() {
+  void testVisitInvoke() {
 		// Test input
 		MajestikParser.InvokeContext mockContext = mock(MajestikParser.InvokeContext.class);
 		when(mockContext.name.getText()).thenReturn("sw");

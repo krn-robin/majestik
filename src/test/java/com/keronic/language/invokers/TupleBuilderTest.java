@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** */
-public class TupleBuilderTest {
+class TupleBuilderTest {
   /**
    * Tests the dynamic creation of a `ResultTuple` using the `BSM_TUPLE_BUILDER` bootstrap method.
    *
@@ -32,7 +32,7 @@ public class TupleBuilderTest {
    * @throws Throwable if any error occurs during method generation or invocation.
    */
   @Test
-  public void testBootstrap() throws Throwable {
+  void testBootstrap() throws Throwable {
     var mt = MethodType.methodType(ResultTuple.class);
     var mtd = mt.describeConstable().get();
     var magic = "MagicString";

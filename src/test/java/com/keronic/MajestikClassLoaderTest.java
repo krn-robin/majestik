@@ -2,7 +2,7 @@ package com.keronic;
 
 import org.junit.jupiter.api.Test;
 
-public class MajestikClassLoaderTest {
+class MajestikClassLoaderTest {
   @Test
-  public void testFindClass() {}
+  void testFindClass() {}
 }

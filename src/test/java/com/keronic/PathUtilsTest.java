@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /** */
-public class PathUtilsTest {
+class PathUtilsTest {
 	@Test
-	public void testGetBaseName() {
+  void testGetBaseName() {
 		assertEquals("test", PathUtils.getBaseName("test.majestik"));
 	}
 }

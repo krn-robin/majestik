@@ -15,7 +15,7 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.Token;
 import org.junit.jupiter.api.Test;
 
-public class ParserTest {
+class ParserTest {
   ANTLRErrorListener errorListener =
       new BaseErrorListener() {
 		@Override
@@ -26,7 +26,7 @@ public class ParserTest {
             int charPositionInLine,
             String msg,
             RecognitionException e) {
-			fail();
+          fail(String.format("%s (%d:%d)", msg, line, charPositionInLine));
 		}
 	};
 
@@ -41,7 +41,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void testInvokeNoArgs() {
+  void testInvokeNoArgs() {
     var parser =
         this.getParser(
             Arrays.asList(
@@ -55,7 +55,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void testInvokeSingleVarArg() {
+  void testInvokeSingleVarArg() {
     var parser =
         this.getParser(
             Arrays.asList(
@@ -69,7 +69,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void testAssignString() {
+  void testAssignString() {
     var parser =
         this.getParser(
             Arrays.asList(
@@ -81,7 +81,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void testBlock() {
+  void testBlock() {
     var parser =
         this.getParser(
             Arrays.asList(
