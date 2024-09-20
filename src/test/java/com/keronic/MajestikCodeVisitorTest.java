@@ -1,4 +1,4 @@
-package com.keronic.test;
+package com.keronic;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -6,29 +6,26 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.keronic.antlr4.MajestikParser;
 import java.lang.classfile.CodeBuilder;
 import java.lang.classfile.constantpool.InvokeDynamicEntry;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import com.keronic.MajestikCodeVisitor;
-import com.keronic.antlr4.MajestikParser;
-
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-@Ignore("Test class not ready yet")
-public class MajestikCodeVisitorTest {
+@Disabled("Test class not ready yet")
+class MajestikCodeVisitorTest {
 	MajestikCodeVisitor visitor;
 	CodeBuilder mockCodeBuilder;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		mockCodeBuilder = mock(CodeBuilder.class);
 		visitor = new MajestikCodeVisitor(mockCodeBuilder);
 	}
 
 	@Test
-	public void testVisitString() {
+  void testVisitString() {
 		// Test input
 		MajestikParser.StringContext mockContext = mock(MajestikParser.StringContext.class);
 		when(mockContext.getText()).thenReturn("\"example\"");
@@ -44,7 +41,7 @@ public class MajestikCodeVisitorTest {
 	}
 
 	@Test
-	public void testVisitBlock_statement() {
+  void testVisitBlock_statement() {
 		// Test input
 		MajestikParser.BlockContext mockContext = mock(MajestikParser.BlockContext.class);
 
@@ -57,7 +54,7 @@ public class MajestikCodeVisitorTest {
 	}
 
 	@Test
-	public void testVisitInvoke() {
+  void testVisitInvoke() {
 		// Test input
 		MajestikParser.InvokeContext mockContext = mock(MajestikParser.InvokeContext.class);
 		when(mockContext.name.getText()).thenReturn("sw");

@@ -1,8 +1,8 @@
-package com.keronic.language.invokers.test;
+package com.keronic.language.invokers;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.majestik.runtime.internal.ProcImpl;
@@ -13,7 +13,7 @@ import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ConstantBuilderTest {
   public static Object testM() {
@@ -24,7 +24,7 @@ public class ConstantBuilderTest {
    * @throws Throwable
    */
   @Test
-  public void testStringBuilder() throws Throwable {
+  void testStringBuilder() throws Throwable {
     var mt = MethodType.methodType(String.class);
     var mtd = mt.describeConstable().get();
     var str = "a_test";
@@ -41,7 +41,7 @@ public class ConstantBuilderTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of("com.keronic.language.invokers.test.C"),
+                ClassDesc.of(this.getClass().getPackageName() + ".C"),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });
@@ -55,7 +55,7 @@ public class ConstantBuilderTest {
    * @throws Throwable
    */
   @Test
-  public void testProcWithEmptyEnvBootstrap() throws Throwable {
+  void testProcWithEmptyEnvBootstrap() throws Throwable {
     var mt = MethodType.methodType(ProcImpl.class);
     var mtd = mt.describeConstable().get();
     var classname = ClassDesc.of(this.getClass().getName());
@@ -81,7 +81,7 @@ public class ConstantBuilderTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of("com.keronic.language.invokers.test.C"),
+                ClassDesc.of(this.getClass().getPackageName() + ".C"),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });

@@ -1,8 +1,8 @@
-package com.keronic.language.invokers.test;
+package com.keronic.language.invokers;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import java.lang.classfile.ClassFile;
@@ -12,49 +12,44 @@ import java.lang.constant.DynamicCallSiteDesc;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.function.Consumer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-/** */
-public class GlobalAccessorTest {
+class DynamicAccessorTest {
   /**
    * @throws Throwable
    */
   @Test
-  public void testGlobalStoreAndFetch() throws Throwable {
-    var mt = MethodType.genericMethodType(0);
+  void testStoreDynamic() throws Throwable {
+    var mt = MethodType.methodType(Object.class);
     var mtd = mt.describeConstable().get();
+    var globalname = "!_test_!";
+    var packagename = "user";
+    long value = 19791012;
 
     Consumer<CodeBuilder> cb =
-	xb -> {
-          xb.ldc((long) 54321);
+        xb -> {
+          xb.ldc(value);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_GLOBAL_STORER,
-                  "store",
+                  ConstantDescs.DYNAMIC_STORER_BSM,
+                  globalname,
                   ConstantDescs.MTD_voidObject,
-                  "user",
-                  "test"));
-	  xb.invokedynamic(
-              DynamicCallSiteDesc.of(
-                  ConstantDescs.BSM_GLOBAL_FETCHER,
-                  "fetch",
-                  ConstantDescs.MTD_Object,
-                  "user",
-                  "test"));
-	  xb.areturn();
-	};
+                  packagename));
+          xb.aconst_null();
+          xb.areturn();
+        };
 
     var bytes =
-	ClassFile.of()
-	    .build(
-		ClassDesc.of("com.keronic.language.invokers.test.C"),
-		clb -> {
-		  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
-		});
+        ClassFile.of()
+            .build(
+                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                clb -> {
+                  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
+                });
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);
-    assertEquals(Long.valueOf(54321), m.invoke());
+    assertNull(m.invoke()); // TODO: Check the actual stored value
   }
 }

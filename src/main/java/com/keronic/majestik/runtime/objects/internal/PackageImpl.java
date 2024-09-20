@@ -16,6 +16,7 @@ public class PackageImpl implements Package {
 	protected final String name;
 	protected final Package[] parents;
   private static final Package SW_PACKAGE = new PackageImpl("sw");
+
   @SuppressWarnings("unused")
   private static final Package USER_PACKAGE = new PackageImpl("user", new Package[] {SW_PACKAGE});
 
@@ -46,6 +47,7 @@ public class PackageImpl implements Package {
 
   private void put(String variableName, Object o) {
     LOGGER.finest(() -> String.format("PackageImpl.put(%s, %s, %s)", this.name, variableName, o));
-    this.variables.put(variableName, o);
+    if (o != null) this.variables.put(variableName, o);
+    else this.variables.remove(variableName);
 	}
 }
