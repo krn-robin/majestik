@@ -21,6 +21,12 @@ import org.junit.jupiter.api.Test;
 /** */
 class ProcInvokerTest {
 
+  /**
+   * Sets up the test environment before each test case. This method dynamically constructs a class
+   * that extends `ProcImpl` and registers it in the package.
+   *
+   * @throws Throwable if an error occurs during setup.
+   */
   @BeforeEach
   void setUp() throws Throwable {
     var cd_t = ClassDesc.of(this.getClass().getPackageName() + ".T");
@@ -53,13 +59,24 @@ class ProcInvokerTest {
     Package.put("sw", "run_test", tlookup.lookupClass().getDeclaredConstructor().newInstance());
   }
 
+  /**
+   * Cleans up resources after each test by removing the dynamically registered class from the
+   * package.
+   *
+   * @throws Throwable if an error occurs during teardown.
+   */
   @AfterEach
   void tearDown() throws Throwable {
     Package.put("sw", "run_test", null);
   }
 
   /**
-   * @throws Throwable
+   * Tests the dynamic invocation using a bootstrap method. This test sets up a class `C` that
+   * dynamically invokes the method `run_test` from class `T` using `invokedynamic`. It verifies
+   * that the expected result "succeed" is returned, ensuring that dynamic method resolution and
+   * invocation are functioning correctly.
+   *
+   * @throws Throwable if any exception occurs during the test.
    */
   @Test
   void testNaturalBootstrap() throws Throwable {
