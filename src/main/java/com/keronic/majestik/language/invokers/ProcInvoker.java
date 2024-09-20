@@ -27,7 +27,7 @@ public class ProcInvoker {
 	public static Object todo(Object o1, Object o2) {
 		try {
 			ProcImpl proc = (ProcImpl) o1;
-			proc.invoke(o1, o2);
+			return proc.invoke(o1, o2);
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

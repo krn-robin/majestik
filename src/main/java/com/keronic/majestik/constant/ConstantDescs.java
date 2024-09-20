@@ -69,6 +69,8 @@ public final class ConstantDescs {
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
 	      CD_TupleBuilder, "bootstrap", CD_CallSite);
 
+  public static final MethodTypeDesc MTD_void = java.lang.constant.ConstantDescs.MTD_void;
+
   public static final MethodTypeDesc MTD_Doubledouble =
       MethodTypeDesc.of(ConstantDescs.CD_Double, ConstantDescs.CD_double);
   public static final MethodTypeDesc MTD_Longlong =
@@ -82,6 +84,12 @@ public final class ConstantDescs {
       MethodTypeDesc.of(ConstantDescs.CD_ResultTuple, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_voidObject =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_voidObjectObject =
+    MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_voidObjectObjectObject =
+    MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Object, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
+public static final MethodTypeDesc MTD_voidClassStringStringint =
+  MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Class,ConstantDescs.CD_String, ConstantDescs.CD_String, ConstantDescs.CD_int);
   public static final MethodTypeDesc MTD_voidString =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_String);
 }
