@@ -24,8 +24,7 @@ public class MajestikClassLoader extends ClassLoader {
 				var cd = this.loadClassData(name);
 				return super.defineClass(name, cd, 0, cd.length);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		    return super.findClass(name);
 			}
 		}
 		return super.findClass(name);
