@@ -33,8 +33,11 @@ public class MajestikClassLoader extends ClassLoader {
 	private byte[] loadClassData(String className) throws IOException {
     var fileName = className.replace('.', File.separatorChar) + ".class";
 
+    // ClassFile instance for parsing and transforming the class file
     var cf = ClassFile.of(ClassFile.ConstantPoolSharingOption.NEW_POOL);
+    // ClassModel representing the parsed class file
     var cm = cf.parse(Path.of(fileName));
+    // ClassRemapper for applying the REMAP_FUNCTION
 		var crm = ClassRemapper.of(REMAP_FUNCTION);
 
     // Transform the class file, applying the REMAP_FUNCTION to update package names
