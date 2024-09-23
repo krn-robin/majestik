@@ -58,6 +58,7 @@ java --enable-preview -jar target/majestik-0.0.0-SNAPSHOT.jar helloworld.magik
 
 FAQ
 ---
+
 * Q: Why does Majestik require JDK 23?
   A: Majestik uses the Class-File API[^3], which was introduced as a preview feature in Java 23.
 

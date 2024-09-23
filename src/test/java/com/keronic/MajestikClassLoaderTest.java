@@ -58,11 +58,16 @@ class MajestikClassLoaderTest {
     assertEquals("magik.T", validClass.getName());
     validClass.getConstructor().newInstance();
 
-    // Test with an invalid class name
+    // Test with invalid class names
     assertThrows(
         ClassNotFoundException.class,
         () -> {
-          classLoader.findClass("magik.Q");
+          classLoader.findClass("magik.Q.NonExistingClass");
+        });
+    assertThrows(
+	    ClassNotFoundException.class,
+	    () -> {
+	      classLoader.findClass("com.example.NonExistingClass");
         });
   }
 }

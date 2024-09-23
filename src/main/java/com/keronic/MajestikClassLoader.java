@@ -37,6 +37,7 @@ public class MajestikClassLoader extends ClassLoader {
     var cm = cf.parse(Path.of(fileName));
 		var crm = ClassRemapper.of(REMAP_FUNCTION);
 
+    // Transform the class file, applying the REMAP_FUNCTION to update package names
     return cf.transform(cm, crm);
 	}
 }
