@@ -63,7 +63,7 @@ FAQ
   A: Majestik uses the Class-File API[^3], which was introduced as a preview feature in Java 23.
 
 * Q: Can generated class files be used in a (Smallworld) Magik session?
-  A: Yes, they can be used in a Magik session, provided the Magik session is started with JDK 23 with preview features enabled.
+  A: Yes, they can be used in a Magik session, provided the Magik session is started with JDK 23 and preview features are enabled.
 
 
 
