@@ -2,7 +2,6 @@ package com.keronic;
 
 import module java.base;
 
-import static java.lang.constant.ConstantDescs.INIT_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
@@ -32,13 +31,15 @@ class MajestikClassLoaderTest {
             ClassDesc.of("magik.T"),
             clb ->
                 clb.withMethodBody(
-                        INIT_NAME,
+                    ConstantDescs.INIT_NAME,
                         ConstantDescs.MTD_void,
                         ClassFile.ACC_PUBLIC,
                         cb ->
                             cb.aload(0)
                                 .invokespecial(
-                                    ConstantDescs.CD_Object, INIT_NAME, ConstantDescs.MTD_void)
+                                ConstantDescs.CD_Object,
+                                ConstantDescs.INIT_NAME,
+                                ConstantDescs.MTD_void)
                             .invokedynamic(dyndesc)
                             .return_()));
   }

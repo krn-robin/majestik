@@ -1,19 +1,13 @@
 package com.keronic.language.invokers;
 
+import module java.base;
+
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static java.lang.constant.ConstantDescs.INIT_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.majestik.runtime.objects.Package;
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.CodeBuilder;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.DynamicCallSiteDesc;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.function.Consumer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +37,7 @@ class ProcInvokerTest {
                             ACC_PUBLIC | ACC_STATIC,
                             cb -> cb.aload(1).areturn())
                         .withMethodBody(
-                            INIT_NAME,
+                            ConstantDescs.INIT_NAME,
                             ConstantDescs.MTD_void,
                             ClassFile.ACC_PUBLIC,
                             cb ->
@@ -53,7 +47,9 @@ class ProcInvokerTest {
                                     .loadConstant("run_test")
                                     .loadConstant(2)
                                     .invokespecial(
-                                        cd_p, INIT_NAME, ConstantDescs.MTD_voidClassStringStringint)
+                                        cd_p,
+                                        ConstantDescs.INIT_NAME,
+                                        ConstantDescs.MTD_voidClassStringStringint)
                                     .return_()));
     var tlookup = MethodHandles.lookup().defineHiddenClass(tbytes, true);
     Package.put("sw", "run_test", tlookup.lookupClass().getDeclaredConstructor().newInstance());

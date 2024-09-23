@@ -3,6 +3,8 @@ package com.keronic.majestik.constant;
 import module java.base;
 
 public final class ConstantDescs {
+  public static final String INIT_NAME = java.lang.constant.ConstantDescs.INIT_NAME;
+  public static final String CLASS_INIT_NAME = java.lang.constant.ConstantDescs.CLASS_INIT_NAME;
 
 	public static final ClassDesc CD_double = java.lang.constant.ConstantDescs.CD_double;
   public static final ClassDesc CD_int = java.lang.constant.ConstantDescs.CD_int;
