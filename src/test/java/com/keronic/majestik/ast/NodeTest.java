@@ -6,10 +6,9 @@ import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-/**
- * Provides utility methods for testing AST node compilation into bytecode.
- */
+/** Provides utility methods for testing AST node compilation into bytecode. */
 abstract class NodeTest {
   /**
    * Compiles a code builder consumer into a CodeModel for testing.
@@ -38,5 +37,9 @@ abstract class NodeTest {
     var code = cm.methods().getFirst().code().orElseThrow();
     assertInstanceOf(CodeModel.class, code, "Generated code should be an instance of CodeModel");
     return code;
+  }
+
+  public static void assertNotEqualsNull(Object actual) {
+    assertNotEquals(actual, null);
   }
 }

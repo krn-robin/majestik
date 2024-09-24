@@ -10,9 +10,6 @@ import org.junit.jupiter.api.Test;
 
 class StringNodeTest extends NodeTest {
   @Test
-  // Suppressing "Assertion arguments should be passed in the correct order" as the expected/actual
-  // order is correct here
-  @SuppressWarnings("java:S3415")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new StringNode("string1");
     var node2 = new StringNode("string1");
@@ -24,24 +21,24 @@ class StringNodeTest extends NodeTest {
     var node3 = new StringNode("String2");
     assertNotEquals(node1, node3);
     var node4 = new StringNode("");
-    assertNotEquals(node4, null);
+    assertNotEqualsNull(node4);
   }
 
   @Test
   void shouldHaveSameHashCodeWhenValuesAreEqual() {
     var node1 = new StringNode("string2");
     var node2 = new StringNode("string2");
-    
+
     // Test consistency
     int hash1 = node1.hashCode();
     assertEquals(hash1, node1.hashCode(), "hashCode should be consistent");
-    
+
     // Test equality contract
     assertEquals(node1.hashCode(), node2.hashCode(), "Equal objects should have equal hashCodes");
-    
+
     // Verify hashCode/equals consistency
     if (node1.equals(node2)) {
-        assertEquals(node1.hashCode(), node2.hashCode(), "Equal objects must have equal hashCodes");
+      assertEquals(node1.hashCode(), node2.hashCode(), "Equal objects must have equal hashCodes");
     }
   }
 

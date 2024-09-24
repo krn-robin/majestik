@@ -1,9 +1,14 @@
 {
     "test_cases": [
         {
-            "file": "write_string.magik",
-            "description": "Test string output with newline",
-            "expected": "Hello\nWorld!"
+            "file": "write_boolean.magik",
+            "description": "Test boolean output",
+            "expected": "true\nfalse"
+        },
+        {
+            "file": "write_float.magik",
+            "description": "Test float output",
+            "expected": "5.4321"
         },
         {
             "file": "write_integer.magik",
@@ -11,9 +16,14 @@
             "expected": "12345"
         },
         {
-            "file": "write_float.magik",
-            "description": "Test float output",
-            "expected": "5.4321"
+            "file": "write_string.magik",
+            "description": "Test string output with newline",
+            "expected": "Hello\nWorld!"
+        },
+        {
+            "file": "ifexpression.magik",
+            "description": "Test if expression",
+            "expected": "success"
         }
     ]
 }

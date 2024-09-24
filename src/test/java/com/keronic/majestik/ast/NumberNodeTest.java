@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 
 class NumberNodeTest extends NodeTest {
   @Test
-  // Suppressed "Assertion arguments should be passed in the correct order" as the expected/actual
-  // order is clear in this context
-  @SuppressWarnings("java:S3415")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new NumberNode(5);
     var node2 = new NumberNode(5);
@@ -25,7 +22,7 @@ class NumberNodeTest extends NodeTest {
     var node3 = new NumberNode(10);
     assertNotEquals(node1, node3);
     var node4 = new NumberNode(0);
-    assertNotEquals(node4, null);
+    assertNotEqualsNull(node4);
   }
 
   @Test

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class IdentifierNodeTest {
+class IdentifierNodeTest extends NodeTest {
   @Test
   void testEquals() {
     var node1 = new IdentifierNode("var");
@@ -27,7 +27,7 @@ class IdentifierNodeTest {
     assertEquals(node1, node4);
 
     assertNotEquals(node1, node3);
-    assertNotEquals(node2, null);
+    assertNotEqualsNull(node2);
     assertNotEquals(node3, new StringNode("other"));
 
     // Verify equals-hashCode contract

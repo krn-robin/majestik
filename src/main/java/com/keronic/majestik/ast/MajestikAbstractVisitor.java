@@ -34,11 +34,14 @@ public abstract class MajestikAbstractVisitor<T> {
     if (nodeType instanceof MagikGrammar type) {
       return switch (type) {
         case ASSIGNMENT_EXPRESSION -> visitAssignmentExpression(node);
+        case FALSE -> visitFalse(node);
         case IDENTIFIER -> visitIdentifier(node);
+        case IF -> visitIfExpression(node);
         case MAGIK -> visitMagik(node);
         case NUMBER -> visitNumber(node);
         case PROCEDURE_INVOCATION -> visitProcedureInvocation(node);
         case STRING -> visitString(node);
+        case TRUE -> visitTrue(node);
         default -> visitDefault(node);
       };
     }
@@ -82,6 +85,10 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visitDefault(node);
   }
 
+  protected T visitFalse(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
   /**
    * Visits an identifier node.
    *
@@ -89,6 +96,10 @@ public abstract class MajestikAbstractVisitor<T> {
    * @return result of the visit operation
    */
   protected T visitIdentifier(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  protected T visitIfExpression(final AstNode node) {
     return this.visitDefault(node);
   }
 
@@ -105,6 +116,10 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   protected T visitString(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  protected T visitTrue(final AstNode node) {
     return this.visitDefault(node);
   }
 }

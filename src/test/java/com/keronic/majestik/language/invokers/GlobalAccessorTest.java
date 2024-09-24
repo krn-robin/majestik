@@ -1,4 +1,4 @@
-package com.keronic.language.invokers;
+package com.keronic.majestik.language.invokers;
 
 import module java.base;
 
@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 /** */
 class GlobalAccessorTest {
+  private static final String TEST_PACKAGE = GlobalAccessorTest.class.getPackageName();
+  private static final String TEST_CLASS = TEST_PACKAGE + ".C";
   /**
    * @throws Throwable
    */
@@ -20,7 +22,7 @@ class GlobalAccessorTest {
     var mtd = mt.describeConstable().get();
 
     Consumer<CodeBuilder> cb =
-	xb -> {
+        xb -> {
           xb.ldc((long) 54321);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
@@ -30,20 +32,20 @@ class GlobalAccessorTest {
                   ConstantDescs.MTD_voidObject,
                   "user",
                   "test"));
-	  xb.invokedynamic(
+          xb.invokedynamic(
               DynamicCallSiteDesc.of(
                   ConstantDescs.BSM_GLOBAL_FETCHER,
                   "fetch",
                   ConstantDescs.MTD_Object,
                   "user",
                   "test"));
-	  xb.areturn();
-	};
+          xb.areturn();
+        };
 
     var bytes =
 	ClassFile.of()
 	    .build(
-                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                ClassDesc.of(TEST_CLASS),
 		clb -> {
 		  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
 		});
