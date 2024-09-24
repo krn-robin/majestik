@@ -1,5 +1,7 @@
 package com.keronic;
 
+import module java.base;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -7,8 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.keronic.antlr4.MajestikParser;
-import java.lang.classfile.CodeBuilder;
-import java.lang.classfile.constantpool.InvokeDynamicEntry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

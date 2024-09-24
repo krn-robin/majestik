@@ -1,16 +1,14 @@
 /** */
 package com.keronic.majestik.runtime.objects.internal;
 
+import module java.base;
+
 import com.keronic.majestik.runtime.objects.Package;
-import java.lang.invoke.MethodHandles;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
 /** */
 public class PackageImpl implements Package {
-  private static final Logger LOGGER =
-      Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
+  private static final System.Logger LOGGER =
+      System.getLogger(MethodHandles.lookup().lookupClass().getName());
   private static final Map<String, Package> all_packages = new ConcurrentHashMap<>();
   private final Map<String, Object> variables = new ConcurrentHashMap<>();
 	protected final String name;
@@ -41,12 +39,16 @@ public class PackageImpl implements Package {
 	}
 
 	private Object get(String variableName) {
-    LOGGER.finest(() -> String.format("PackageImpl.get(%s, %s)", this.name, variableName));
+    LOGGER.log(
+        System.Logger.Level.DEBUG,
+        () -> String.format("PackageImpl.get(%s, %s)", this.name, variableName));
 		return this.variables.get(variableName);
 	}
 
   private void put(String variableName, Object o) {
-    LOGGER.finest(() -> String.format("PackageImpl.put(%s, %s, %s)", this.name, variableName, o));
+    LOGGER.log(
+        System.Logger.Level.DEBUG,
+        () -> String.format("PackageImpl.put(%s, %s, %s)", this.name, variableName, o));
     if (o != null) this.variables.put(variableName, o);
     else this.variables.remove(variableName);
 	}
