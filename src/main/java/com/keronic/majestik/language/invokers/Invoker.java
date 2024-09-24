@@ -2,12 +2,14 @@
 package com.keronic.majestik.language.invokers;
 
 import module java.base;
-
+import com.keronic.majestik.MajestikRuntimeException;
 import com.keronic.majestik.internal.Utils;
 import com.keronic.majestik.runtime.internal.ProcImpl;
 
 /** */
 public class Invoker {
+  private static final System.Logger LOGGER =
+      System.getLogger(MethodHandles.lookup().lookupClass().getName());
   private static MethodHandle todo =
       Utils.findStatic(Invoker.class, "todo", MethodType.genericMethodType(1));
 
@@ -20,11 +22,10 @@ public class Invoker {
 		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
     ProcImpl proc = (ProcImpl) o;
 		try {
-			System.out.format("INVOKE: %s\n", o);
+      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("INVOKE: %s%n", o));
 			proc.invoke(o);
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+      throw new MajestikRuntimeException(e);
 		}
 		return null;
     }
@@ -36,7 +37,8 @@ public class Invoker {
    * @return
    */
     public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
-		System.out.format("name: %s %s %s\n", lookup, name, type);
+    LOGGER.log(
+        System.Logger.Level.DEBUG, () -> String.format("name: %s %s %s%n", lookup, name, type));
 		return new MutableCallSite(todo);
     }
 

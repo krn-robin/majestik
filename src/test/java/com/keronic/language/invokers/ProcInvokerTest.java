@@ -23,14 +23,14 @@ class ProcInvokerTest {
    */
   @BeforeEach
   void setUp() throws Throwable {
-    var cd_t = ClassDesc.of(this.getClass().getPackageName() + ".T");
-    var cd_p = ClassDesc.of("com.keronic.majestik.runtime.internal.ProcImpl");
+    var cdTestClass = ClassDesc.of(this.getClass().getPackageName() + ".T");
+    var cdProcImpl = ClassDesc.of("com.keronic.majestik.runtime.internal.ProcImpl");
     var tbytes =
         ClassFile.of()
             .build(
-                cd_t,
+                cdTestClass,
                 clb ->
-                    clb.withSuperclass(cd_p)
+                    clb.withSuperclass(cdProcImpl)
                         .withMethodBody(
                             "run",
                             MethodType.genericMethodType(2).describeConstable().get(),
@@ -42,12 +42,12 @@ class ProcInvokerTest {
                             ClassFile.ACC_PUBLIC,
                             cb ->
                                 cb.aload(0)
-                                    .loadConstant(cd_t)
+                                    .loadConstant(cdTestClass)
                                     .loadConstant("run")
                                     .loadConstant("run_test")
                                     .loadConstant(2)
                                     .invokespecial(
-                                        cd_p,
+                                        cdProcImpl,
                                         ConstantDescs.INIT_NAME,
                                         ConstantDescs.MTD_voidClassStringStringint)
                                     .return_()));

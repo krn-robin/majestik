@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MajestikClassLoaderTest {
+  private static final Path MAGIK_DIR = Path.of("magik");
+  private static final Path T_CLASS_PATH = MAGIK_DIR.resolve("T.class");
+
   @BeforeEach
   void setUp() throws Throwable {
     var dyndesc =
@@ -23,11 +26,11 @@ class MajestikClassLoaderTest {
             ConstantDescs.MTD_Object,
             "test");
 
-    Files.createDirectories(Path.of("magik"));
+    Files.createDirectories(MAGIK_DIR);
 
     ClassFile.of()
         .buildTo(
-            Path.of("magik/T.class"),
+            T_CLASS_PATH,
             ClassDesc.of("magik.T"),
             clb ->
                 clb.withMethodBody(
@@ -46,7 +49,7 @@ class MajestikClassLoaderTest {
 
   @AfterEach
   void tearDown() throws Throwable {
-    Files.deleteIfExists(Path.of("magik/T.class"));
+    Files.deleteIfExists(T_CLASS_PATH);
   }
 
   @Test
