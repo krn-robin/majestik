@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 
 /** */
 class TupleBuilderTest {
+  private static final String TEST_PACKAGE = TupleBuilderTest.class.getPackageName();
+  private static final String TEST_CLASS = TEST_PACKAGE + ".C";
+
   /**
    * Tests the dynamic creation of a `ResultTuple` using the `BSM_TUPLE_BUILDER` bootstrap method.
    *
@@ -46,7 +49,7 @@ class TupleBuilderTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                ClassDesc.of(TEST_CLASS),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });

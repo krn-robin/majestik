@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 /** */
 class ProcInvokerTest {
+  private static final String TEST_PACKAGE = ProcInvokerTest.class.getPackageName();
+  private static final String TEST_CLASS = TEST_PACKAGE + ".C";
 
   /**
    * Sets up the test environment before each test case. This method dynamically constructs a class
@@ -23,7 +25,7 @@ class ProcInvokerTest {
    */
   @BeforeEach
   void setUp() throws Throwable {
-    var cdTestClass = ClassDesc.of(this.getClass().getPackageName() + ".T");
+    var cdTestClass = ClassDesc.of(TEST_PACKAGE + ".T");
     var cdProcImpl = ClassDesc.of("com.keronic.majestik.runtime.internal.ProcImpl");
     var tbytes =
         ClassFile.of()
@@ -100,7 +102,7 @@ class ProcInvokerTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                ClassDesc.of(TEST_CLASS),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });
