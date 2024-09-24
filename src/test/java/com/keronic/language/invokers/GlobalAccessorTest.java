@@ -20,7 +20,7 @@ class GlobalAccessorTest {
     var mtd = mt.describeConstable().get();
 
     Consumer<CodeBuilder> cb =
-	xb -> {
+        xb -> {
           xb.ldc((long) 54321);
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
@@ -30,15 +30,15 @@ class GlobalAccessorTest {
                   ConstantDescs.MTD_voidObject,
                   "user",
                   "test"));
-	  xb.invokedynamic(
+          xb.invokedynamic(
               DynamicCallSiteDesc.of(
                   ConstantDescs.BSM_GLOBAL_FETCHER,
                   "fetch",
                   ConstantDescs.MTD_Object,
                   "user",
                   "test"));
-	  xb.areturn();
-	};
+          xb.areturn();
+        };
 
     var bytes =
 	ClassFile.of()

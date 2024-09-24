@@ -95,15 +95,15 @@ class ProcInvokerTest {
               DynamicCallSiteDesc.of(
                   ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
           xb.areturn();
-    };
+        };
 
     var bytes =
         ClassFile.of()
             .build(
                 ClassDesc.of(this.getClass().getPackageName() + ".C"),
                 clb -> {
-      clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
-    });
+                  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
+                });
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);

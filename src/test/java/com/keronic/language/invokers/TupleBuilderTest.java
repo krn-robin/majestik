@@ -33,23 +33,23 @@ class TupleBuilderTest {
     var magic = "MagicString";
 
     Consumer<CodeBuilder> cb =
-	    xb -> {
-        xb.ldc(new String(magic));
-	      xb.invokedynamic(
-	        DynamicCallSiteDesc.of(
-		        ConstantDescs.BSM_TUPLE_BUILDER,
-		        "tuplebuilder",
-		        ConstantDescs.MTD_ResultTupleObject));
-        xb.areturn();
-	};
+        xb -> {
+          xb.ldc(new String(magic));
+          xb.invokedynamic(
+              DynamicCallSiteDesc.of(
+                  ConstantDescs.BSM_TUPLE_BUILDER,
+                  "tuplebuilder",
+                  ConstantDescs.MTD_ResultTupleObject));
+          xb.areturn();
+        };
 
     var bytes =
-	ClassFile.of()
-	    .build(
+        ClassFile.of()
+            .build(
                 ClassDesc.of(this.getClass().getPackageName() + ".C"),
-		clb -> {
-		  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
-		});
+                clb -> {
+                  clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
+                });
 
     var lookup = MethodHandles.lookup().defineHiddenClass(bytes, true);
     var m = lookup.findStatic(lookup.lookupClass(), "m", mt);

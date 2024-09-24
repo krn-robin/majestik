@@ -27,7 +27,7 @@ class DynamicAccessorTest {
           xb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);
           xb.invokedynamic(
               DynamicCallSiteDesc.of(
-                  ConstantDescs.DYNAMIC_STORER_BSM,
+                  ConstantDescs.BSM_DYNAMIC_STORER,
                   globalname,
                   ConstantDescs.MTD_voidObject,
                   packagename));
