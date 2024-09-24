@@ -1,4 +1,4 @@
-package com.keronic.language.invokers;
+package com.keronic.majestik.language.invokers;
 
 import module java.base;
 

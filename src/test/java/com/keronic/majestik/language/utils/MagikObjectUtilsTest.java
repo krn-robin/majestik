@@ -1,8 +1,7 @@
-package com.keronic.language.utils;
+package com.keronic.majestik.language.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.keronic.majestik.MajestikRuntimeException;
-import com.keronic.majestik.language.utils.MagikObjectUtils;
 import org.junit.jupiter.api.Test;
 
 public class MagikObjectUtilsTest {
