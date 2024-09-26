@@ -92,7 +92,7 @@ class ParserTest {
 	}
 
 	@Test
-	public void testIfExpr() {
+	void testIfExpr() {
 		var parser = this.getParser(Arrays.asList(
 				new CommonToken(MajestikLexer.IF, "_if"),
 				new CommonToken(MajestikLexer.TRUE, "_true"),
@@ -100,7 +100,7 @@ class ParserTest {
 				//new CommonToken(MajestikLexer.ELIF, "_elif"),
 				new CommonToken(MajestikLexer.ELSE, "_else"),
 				new CommonToken(MajestikLexer.ENDIF, "_endif")));
-		var if_expr = parser.if_expression();
-		assertEquals("(_if ((_true)) _then _else _endif)", toStringTree(if_expr));
+		var ifExpr = parser.if_expression();
+		assertEquals("(_if ((_true)) _then _else _endif)", toStringTree(ifExpr));
 	}
 }
