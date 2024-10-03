@@ -90,4 +90,17 @@ class ParserTest {
 		var block = parser.block();
 		assertEquals("(_block _endblock)", toStringTree(block));
 	}
+
+	@Test
+	void testIfExpr() {
+		var parser = this.getParser(Arrays.asList(
+				new CommonToken(MajestikLexer.IF, "_if"),
+				new CommonToken(MajestikLexer.TRUE, "_true"),
+				new CommonToken(MajestikLexer.THEN, "_then"),
+				//new CommonToken(MajestikLexer.ELIF, "_elif"),
+				new CommonToken(MajestikLexer.ELSE, "_else"),
+				new CommonToken(MajestikLexer.ENDIF, "_endif")));
+		var ifExpr = parser.if_expression();
+		assertEquals("(_if ((_true)) _then _else _endif)", toStringTree(ifExpr));
+	}
 }

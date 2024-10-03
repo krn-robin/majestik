@@ -1,8 +1,7 @@
-package com.keronic.language;
+package com.keronic.majestik.language;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.keronic.majestik.language.ResultTuple;
 import org.junit.jupiter.api.Test;
 
 class ResultTupleTest {
