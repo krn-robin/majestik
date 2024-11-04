@@ -65,7 +65,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.5.1</version>
+          <version>3.5.2</version>
           <configuration>
             <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --enable-preview</argLine>
           </configuration>
