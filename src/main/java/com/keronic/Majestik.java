@@ -3,15 +3,10 @@ package com.keronic;
 
 import module java.base;
 
-import com.keronic.antlr4.MajestikBaseVisitor;
-import com.keronic.antlr4.MajestikLexer;
-import com.keronic.antlr4.MajestikParser;
-import com.keronic.antlr4.MajestikParser.ProgContext;
 import com.keronic.majestik.MajestikRuntimeException;
+import nl.ramsolutions.sw.MagikToolsProperties;
+import nl.ramsolutions.sw.magik.MagikFile;
 import java.lang.System.Logger.Level;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
 
 /** */
 public class Majestik {
@@ -36,20 +31,14 @@ public class Majestik {
 		else
 			try {
         LOGGER.log(Level.INFO, () -> String.format("Reading file: %s", args[0]));
-				CharStream in = CharStreams.fromFileName(args[0]);
-				MajestikLexer lexer = new MajestikLexer(in);
-				MajestikParser parser = new MajestikParser(new CommonTokenStream(lexer));
-				ProgContext tree = parser.prog(); // parse
-        MajestikBaseVisitor<Void> mbv =
-            new MajestikBaseVisitor<Void>(); // Yield unrecognized tokens early
-				mbv.visit(tree);
+        var mf = new MagikFile(MagikToolsProperties.DEFAULT_PROPERTIES, Path.of(args[0]));
 
         LOGGER.log(Level.INFO, () -> String.format("Compiling..."));
 				var baseName = PathUtils.getBaseName(args[0]);
         Files.createDirectories(Path.of("majestik"));
 
 				var newFileName = "majestik/%s.class".formatted(baseName); // TODO: move to pathutils
-        LOGGER.log(Level.INFO, () -> String.format("Writing to classfile: %s%n", newFileName));
+        LOGGER.log(Level.INFO, () -> String.format("Writing to classfile: %s", newFileName));
         ClassFile.of()
             .buildTo(
                 Path.of(newFileName),
@@ -74,7 +63,7 @@ public class Majestik {
                             ClassFile.ACC_STATIC,
                             codeBuilder -> {
 											MajestikCodeVisitor mcv = new MajestikCodeVisitor(codeBuilder);
-											mcv.visit(tree);
+                              mcv.scanFile(mf);
 											codeBuilder.return_();
 										}));
 				var cl = new MajestikClassLoader();
