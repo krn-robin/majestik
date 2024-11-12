@@ -5,12 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-/** */
+/**
+ * Unit tests for the PathUtils class, focusing on path manipulation
+ * and file extension handling functionality.
+ */
 class PathUtilsTest {
-	@Test
+  @Test
   void testGetBaseName() {
-		assertEquals("test", PathUtils.getBaseName("test.majestik"));
-	}
+    assertEquals("test", PathUtils.getBaseName("test.majestik"));
+  }
 
   @Test
   void testGetBaseNameDoubleExt() {

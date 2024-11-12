@@ -22,7 +22,7 @@ public class Invoker {
 		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
     ProcImpl proc = (ProcImpl) o;
 		try {
-      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("INVOKE: %s%n", o));
+      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("Invoking procedure: %s with type: %s", o, o.getClass().getName()));
 			proc.invoke(o);
 		} catch (Throwable e) {
       throw new MajestikRuntimeException(e);
@@ -38,7 +38,7 @@ public class Invoker {
    */
     public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
     LOGGER.log(
-        System.Logger.Level.DEBUG, () -> String.format("name: %s %s %s%n", lookup, name, type));
+        System.Logger.Level.DEBUG, () -> String.format("Bootstrap operation - name: %s, type: %s", name, type));
 		return new MutableCallSite(todo);
     }
 
