@@ -1,0 +1,4 @@
+_block
+    write("Hello World!")
+_endblock
+$
