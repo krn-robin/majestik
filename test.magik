@@ -1,0 +1,6 @@
+_package user
+
+_block
+    write("Hello world")
+_endblock
+$
