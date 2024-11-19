@@ -43,7 +43,7 @@ jobs:
       run: mvn --batch-mode --update-snapshots package --file pom.xml
     - name: Test artifact
       run: |
-        majestik.sh test.magik
+        ./majestik.sh test.magik
     - name: Analyze with SonarCloud
       if: env.SONAR_TOKEN != ''
       run: mvn --batch-mode sonar:sonar
