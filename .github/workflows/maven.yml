@@ -36,9 +36,9 @@ jobs:
         SQUID_VERSION: 0.10.1
       run: |
         wget https://github.com/StevenLooman/magik-tools/releases/download/${SQUID_VERSION}/magik-squid-${SQUID_VERSION}.jar && \
-        wget https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
+        wget -O magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
         mvn install:install-file -Dfile=magik-squid-${SQUID_VERSION}.jar -DgroupId=nl.ramsolutions -DartifactId=magik-squid -Dversion=${SQUID_VERSION} -Dpackaging=jar && \
-        mvn install:install-file -Dfile=pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom
+        mvn install:install-file -Dfile=magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package --file pom.xml
     - name: Test artifact
