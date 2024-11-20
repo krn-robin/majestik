@@ -34,7 +34,8 @@ public class Majestik {
         var mf = new MagikFile(MagikToolsProperties.DEFAULT_PROPERTIES, Path.of(args[0]));
 
         LOGGER.log(Level.INFO, () -> String.format("Compiling..."));
-				var baseName = PathUtils.getBaseName(args[0]);
+
+        var baseName = PathUtils.getBaseName(Paths.get(args[0]).getFileName().toString());
         Files.createDirectories(Path.of("majestik"));
 
 				var newFileName = "majestik/%s.class".formatted(baseName); // TODO: move to pathutils
