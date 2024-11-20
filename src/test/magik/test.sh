@@ -1,0 +1,28 @@
+#!/bin/bash
+
+test() {
+    local input_file="src/test/magik/$1"
+    local expected_output="$2"
+
+    printf "\e[33mRunning test for %s\e[0m\n" "$input_file"
+
+    # Run the JAR and capture the output
+    output=$(java -jar --enable-preview target/majestik*.jar "$input_file")
+
+    # Compare the output with the expected output
+    if [ "$output" = "$expected_output" ]; then
+        printf "\e[32mTest passed for %s\e[0m\n" "$input_file"
+    else
+        printf "\e[31mTest failed for %s\e[0m\n" "$input_file"
+        printf "\e[33mExpected: '%s'\e[0m\n" "$expected_output"
+        printf "\e[33mGot: '%s'\e[0m\n" "$output"
+        exit 1
+    fi
+}
+
+test "write_string.magik" "Hello
+World!"
+test "write_integer.magik" "12345"
+test "write_float.magik" "5.4321"
+
+printf "\e[32mAll tests passed!\e[0m\n"

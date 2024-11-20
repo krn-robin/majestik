@@ -1,0 +1,4 @@
+_block
+  flt << 5.4321
+  write(flt)
+_endblock
