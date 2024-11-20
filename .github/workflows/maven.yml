@@ -32,13 +32,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Get External jars
+      working-directory: ${{ runner.temp }}
       env:
         SQUID_VERSION: 0.10.1
       run: |
-        wget https://github.com/StevenLooman/magik-tools/releases/download/${SQUID_VERSION}/magik-squid-${SQUID_VERSION}.jar && \
-        wget -O magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
-        mvn install:install-file -Dfile=magik-squid-${SQUID_VERSION}.jar -DgroupId=nl.ramsolutions -DartifactId=magik-squid -Dversion=${SQUID_VERSION} -Dpackaging=jar && \
-        mvn install:install-file -Dfile=magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom
+        wget --no-verbose -O magik-squid-0.10.1.jar https://github.com/StevenLooman/magik-tools/releases/download/0.10.1/magik-squid-0.10.1.jar && \
+        mvn --batch-mode install:install-file -Dfile=magik-squid-0.10.1.jar -DgroupId=nl.ramsolutions -DartifactId=magik-squid -Dversion=0.10.1 -Dpackaging=jar && \
+        wget --no-verbose -O magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/0.10.1/pom.xml && \
+        mvn --batch-mode install:install-file -Dfile=magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=0.10.1 -Dpackaging=pom
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package --file pom.xml
     - name: Test artifact
