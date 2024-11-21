@@ -20,9 +20,14 @@ test() {
     fi
 }
 
-test "write_string.magik" "Hello
-World!"
-test "write_integer.magik" "12345"
-test "write_float.magik" "5.4321"
+# Read and execute test cases from configuration
+while read -r case; do
+    file=$(echo "$case" | jq -r '.file')
+    description=$(echo "$case" | jq -r '.description')
+    expected=$(echo "$case" | jq -r '.expected')
+
+    printf "\e[36m%s\e[0m\n" "$description"
+    test "$file" "$expected"
+done < <(jq -c '.test_cases[]' src/test/magik/test_cases.json)
 
 printf "\e[32mAll tests passed!\e[0m\n"
