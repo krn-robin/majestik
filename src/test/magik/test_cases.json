@@ -1,0 +1,19 @@
+{
+    "test_cases": [
+        {
+            "file": "write_string.magik",
+            "description": "Test string output with newline",
+            "expected": "Hello\nWorld!"
+        },
+        {
+            "file": "write_integer.magik",
+            "description": "Test integer output",
+            "expected": "12345"
+        },
+        {
+            "file": "write_float.magik",
+            "description": "Test float output",
+            "expected": "5.4321"
+        }
+    ]
+}
