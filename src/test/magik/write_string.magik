@@ -1,5 +1,4 @@
 _block
-  world << "World!"
-  write("Hello")
-  write(world)
+        write("Hello")
+        write("World!")
 _endblock

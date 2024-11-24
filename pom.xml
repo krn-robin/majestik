@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.keronic.majestik</groupId>
   <artifactId>majestik</artifactId>
   <version>0.0.0-SNAPSHOT</version>
-
   <name>majestik</name>
   <url>http://www.keronic.com</url>
-
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>23</maven.compiler.source>
     <maven.compiler.target>23</maven.compiler.target>
-
-    <sonar.organization>krn-robin</sonar.organization>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.java.enablePreview>true</sonar.java.enablePreview>
+    <sonar.organization>krn-robin</sonar.organization>
   </properties>
-
   <dependencies>
-    <dependency>
-      <groupId>org.sonarsource.sslr</groupId>
-      <artifactId>sslr-core</artifactId>
-      <version>1.24.0.633</version>
-    </dependency>
     <dependency>
       <groupId>nl.ramsolutions</groupId>
       <artifactId>magik-squid</artifactId>
@@ -42,21 +32,35 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
-
     <pluginManagement>
-      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>2.43.0</version>
+          <configuration>
+            <java>
+              <googleJavaFormat>
+                <version>1.25.0</version>
+                <style>GOOGLE</style>
+              </googleJavaFormat>
+            </java>
+            <pom>
+              <sortPom>
+                <keepBlankLines>false</keepBlankLines>
+                <sortDependencies>scope,groupId,artifactId</sortDependencies>
+                <sortExecutions>true</sortExecutions>
+                <sortModules>true</sortModules>
+                <sortPlugins>scope,groupId,artifactId</sortPlugins>
+                <sortProperties>true</sortProperties>
+              </sortPom>
+            </pom>
+          </configuration>
+        </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.4.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -68,11 +72,16 @@
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.5.2</version>
-          <configuration>
-            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --enable-preview</argLine>
-          </configuration>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.8.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.3</version>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -87,68 +96,27 @@
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.3</version>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.8.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.3</version>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
         </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.21.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.8.1</version>
-        </plugin>
-        <plugin>
-          <groupId>com.diffplug.spotless</groupId>
-          <artifactId>spotless-maven-plugin</artifactId>
-          <version>2.43.0</version>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.5.2</version>
           <configuration>
-            <java>
-              <googleJavaFormat></googleJavaFormat>
-            </java>
-            <pom>
-              <sortPom></sortPom>
-            </pom>
+            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --enable-preview</argLine>
           </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.12</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <!-- attached to Maven test phase -->
-          <execution>
-            <id>report</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <phase>test</phase>
-            <configuration>
-              <formats>
-                <format>XML</format>
-              </formats>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -169,13 +137,36 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.12</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <phase>test</phase>
+            <configuration>
+              <formats>
+                <format>XML</format>
+              </formats>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.sonarsource.scanner.maven</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
         <version>5.0.0.4389</version>
       </plugin>
     </plugins>
   </build>
-
   <reporting>
     <plugins>
       <plugin>
@@ -186,7 +177,6 @@
           <onlyAnalyze>com.keronic.*,com.keronic.majestik.-</onlyAnalyze>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -199,7 +189,6 @@
           </sourceDirectories>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -209,7 +198,6 @@
           <doclint>all,-missing</doclint>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>

@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 /** */
 class PathUtilsTest {
-	@Test
+  @Test
   void testGetBaseName() {
-		assertEquals("test", PathUtils.getBaseName("test.majestik"));
-	}
+    assertEquals("test", PathUtils.getBaseName("test.majestik"));
+  }
 
   @Test
   void testGetBaseNameDoubleExt() {

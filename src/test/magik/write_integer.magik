@@ -1,4 +1,3 @@
 _block
-  int << 12345
-  write(int)
+        write(12345)
 _endblock
