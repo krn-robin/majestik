@@ -1,0 +1,170 @@
+Classfile /Users/robin.putters/src/majestik/tmp/simple_increment_24.class
+  Last modified 14 Jul 2024; size 1944 bytes
+  SHA-256 checksum 158dcf2fcf5e7dd8e8f278c0e2b2562d4872ca7aeb765ba2be687c08f081e5b8
+  Compiled from "modules\empty_module\source\simple_increment.magik"
+public class magik.krn_empty_product.empty_module.simple_increment_24 extends java.lang.Object implements com.gesmallworld.magik.language.utils.ExecutableMagik
+  minor version: 0
+  major version: 51
+  flags: (0x0001) ACC_PUBLIC
+  this_class: #2                          // magik/krn_empty_product/empty_module/simple_increment_24
+  super_class: #5                         // java/lang/Object
+  interfaces: 1, fields: 0, methods: 3, attributes: 4
+Constant pool:
+   #1 = Utf8               magik/krn_empty_product/empty_module/simple_increment_24
+   #2 = Class              #1             // magik/krn_empty_product/empty_module/simple_increment_24
+   #3 = Utf8               Ljava/lang/Object;Lcom/gesmallworld/magik/language/utils/ExecutableMagik;
+   #4 = Utf8               java/lang/Object
+   #5 = Class              #4             // java/lang/Object
+   #6 = Utf8               com/gesmallworld/magik/language/utils/ExecutableMagik
+   #7 = Class              #6             // com/gesmallworld/magik/language/utils/ExecutableMagik
+   #8 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/Debugger;
+   #9 = Utf8               value
+  #10 = Utf8               MagikDebug
+  #11 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/CodeType;
+  #12 = Utf8               Primary
+  #13 = Utf8               modules\\empty_module\\source\\simple_increment.magik
+  #14 = Utf8               <init>
+  #15 = Utf8               ()V
+  #16 = Utf8               EmptyConstructor
+  #17 = NameAndType        #14:#15        // "<init>":()V
+  #18 = Methodref          #5.#17         // java/lang/Object."<init>":()V
+  #19 = Utf8               this
+  #20 = Utf8               Ljava/lang/Object;
+  #21 = Utf8               execute
+  #22 = Utf8               ()Ljava/lang/Object;
+  #23 = Utf8               TopLevel
+  #24 = Utf8               D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\simple_increment.magik
+  #25 = String             #24            // D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\simple_increment.magik
+  #26 = Utf8               com/gesmallworld/magik/language/invokers/ConstantBuilder
+  #27 = Class              #26            // com/gesmallworld/magik/language/invokers/ConstantBuilder
+  #28 = Utf8               stringBootstrap
+  #29 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #30 = NameAndType        #28:#29        // stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #31 = Methodref          #27.#30        // com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #32 = MethodHandle       6:#31          // REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #33 = Utf8               string
+  #34 = NameAndType        #33:#22        // string:()Ljava/lang/Object;
+  #35 = InvokeDynamic      #0:#34         // #0:string:()Ljava/lang/Object;
+  #36 = Utf8               sw
+  #37 = String             #36            // sw
+  #38 = Utf8               com/gesmallworld/magik/language/invokers/DynamicAccessor
+  #39 = Class              #38            // com/gesmallworld/magik/language/invokers/DynamicAccessor
+  #40 = Utf8               bootstrapStorer
+  #41 = NameAndType        #40:#29        // bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #42 = Methodref          #39.#41        // com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #43 = MethodHandle       6:#42          // REF_invokeStatic com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #44 = Utf8               !source_file!
+  #45 = Utf8               (Ljava/lang/Object;)V
+  #46 = NameAndType        #44:#45        // "!source_file!":(Ljava/lang/Object;)V
+  #47 = InvokeDynamic      #1:#46         // #1:"!source_file!":(Ljava/lang/Object;)V
+  #48 = Utf8               java/lang/Integer
+  #49 = Class              #48            // java/lang/Integer
+  #50 = Utf8               valueOf
+  #51 = Utf8               (I)Ljava/lang/Integer;
+  #52 = NameAndType        #50:#51        // valueOf:(I)Ljava/lang/Integer;
+  #53 = Methodref          #49.#52        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+  #54 = Utf8               com/gesmallworld/magik/language/invokers/BinaryDispatcher
+  #55 = Class              #54            // com/gesmallworld/magik/language/invokers/BinaryDispatcher
+  #56 = Utf8               bootstrap
+  #57 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #58 = NameAndType        #56:#57        // bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #59 = Methodref          #55.#58        // com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #60 = MethodHandle       6:#59          // REF_invokeStatic com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #61 = Utf8               +
+  #62 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #63 = NameAndType        #61:#62        // "+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #64 = InvokeDynamic      #2:#63         // #2:"+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #65 = Utf8               com/gesmallworld/magik/language/ResultTuple
+  #66 = Class              #65            // com/gesmallworld/magik/language/ResultTuple
+  #67 = Utf8               EMPTY_TUPLE
+  #68 = Utf8               Lcom/gesmallworld/magik/language/ResultTuple;
+  #69 = NameAndType        #67:#68        // EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+  #70 = Fieldref           #66.#69        // com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+  #71 = Utf8               preload
+  #72 = Utf8               Code
+  #73 = Utf8               LocalVariableTable
+  #74 = Utf8               RuntimeVisibleAnnotations
+  #75 = Utf8               LineNumberTable
+  #76 = Utf8               Signature
+  #77 = Utf8               SourceFile
+  #78 = Utf8               BootstrapMethods
+{
+  public magik.krn_empty_product.empty_module.simple_increment_24();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+         4: return
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ljava/lang/Object;
+    RuntimeVisibleAnnotations:
+      0: #8(#9=s#10)
+        com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+          value="MagikDebug"
+        )
+      1: #11(#9=s#16)
+        com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+          value="EmptyConstructor"
+        )
+
+  public java.lang.Object execute();
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: invokedynamic #35,  0             // InvokeDynamic #0:string:()Ljava/lang/Object;
+         5: invokedynamic #47,  0             // InvokeDynamic #1:"!source_file!":(Ljava/lang/Object;)V
+        10: iconst_2
+        11: invokestatic  #53                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        14: iconst_1
+        15: invokestatic  #53                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        18: invokedynamic #64,  0             // InvokeDynamic #2:"+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        23: pop
+        24: getstatic     #70                 // Field com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+        27: areturn
+      LineNumberTable:
+        line 3: 10
+        line 4: 14
+        line 0: 18
+        line 4: 24
+        line 7: 27
+    RuntimeVisibleAnnotations:
+      0: #8(#9=s#10)
+        com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+          value="MagikDebug"
+        )
+      1: #11(#9=s#23)
+        com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+          value="TopLevel"
+        )
+
+  public void preload();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=0, locals=1, args_size=1
+         0: return
+}
+Signature: #3                           // Ljava/lang/Object;Lcom/gesmallworld/magik/language/utils/ExecutableMagik;
+SourceFile: "modules\empty_module\source\simple_increment.magik"
+RuntimeVisibleAnnotations:
+  0: #8(#9=s#10)
+    com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+      value="MagikDebug"
+    )
+  1: #11(#9=s#12)
+    com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+      value="Primary"
+    )
+BootstrapMethods:
+  0: #32 REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #25 D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\simple_increment.magik
+  1: #43 REF_invokeStatic com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #37 sw
+  2: #60 REF_invokeStatic com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
