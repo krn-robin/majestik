@@ -42,14 +42,22 @@ jobs:
         mvn --batch-mode install:install-file -Dfile=magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package --file pom.xml
-    - name: Test artifact
-      run: src/test/magik/test.sh
+    - name: View target
+      if: always()
+      run: |
+        ls -al target/
+        ls -al /home/runner/.m2/repository/
+        ls -al /home/runner/.m2/repository/nl
+        ls -al /home/runner/.m2/repository/nl/ramsolutions/
+        ls -al /home/runner/.m2/repository/nl/ramsolutions/magik-squid/
     - name: Analyze with SonarCloud
       if: env.SONAR_TOKEN != ''
       run: mvn --batch-mode sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Test artifact
+      run: sh src/test/magik/test.sh
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Maven Dependency Tree Dependency Submission
