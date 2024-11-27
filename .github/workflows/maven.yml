@@ -41,7 +41,7 @@ jobs:
         wget --no-verbose -O magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
         mvn --batch-mode install:install-file -Dfile=magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom
     - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots package --file pom.xml
+      run: mvn -X -e --batch-mode --update-snapshots package --file pom.xml
     - name: View target
       if: always()
       run: |
