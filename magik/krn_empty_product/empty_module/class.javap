@@ -1,0 +1,49 @@
+Classfile /Users/robin.putters/src/majestik/tmp/class.class
+  Last modified 12 Aug 2024; size 484 bytes
+  SHA-256 checksum 835f36aaa93fd6a4702a28ff9c3202ec238ee70fa51d85b497da61046312794c
+public class com.keronic.language.invokers.test.C
+  minor version: 0
+  major version: 66
+  flags: (0x0001) ACC_PUBLIC
+  this_class: #2                          // com/keronic/language/invokers/test/C
+  super_class: #21                        // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 1
+Constant pool:
+   #1 = Utf8               com/keronic/language/invokers/test/C
+   #2 = Class              #1             // com/keronic/language/invokers/test/C
+   #3 = Utf8               m
+   #4 = Utf8               ()Ljava/lang/Object;
+   #5 = Utf8               value
+   #6 = String             #5             // value
+   #7 = Utf8               com/keronic/majestik/language/invokers/DynamicAccessor
+   #8 = Class              #7             // com/keronic/majestik/language/invokers/DynamicAccessor
+   #9 = Utf8               bootstrapStorer
+  #10 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #11 = NameAndType        #9:#10         // bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #12 = Methodref          #8.#11         // com/keronic/majestik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #13 = MethodHandle       6:#12          // REF_invokeStatic com/keronic/majestik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+  #14 = Utf8               user
+  #15 = String             #14            // user
+  #16 = Utf8               !_test_!
+  #17 = Utf8               (Ljava/lang/String;)V
+  #18 = NameAndType        #16:#17        // "!_test_!":(Ljava/lang/String;)V
+  #19 = InvokeDynamic      #0:#18         // #0:"!_test_!":(Ljava/lang/String;)V
+  #20 = Utf8               java/lang/Object
+  #21 = Class              #20            // java/lang/Object
+  #22 = Utf8               Code
+  #23 = Utf8               BootstrapMethods
+{
+  public static java.lang.Object m();
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: ldc           #6                  // String value
+         2: invokedynamic #19,  0             // InvokeDynamic #0:"!_test_!":(Ljava/lang/String;)V
+         7: aconst_null
+         8: areturn
+}
+BootstrapMethods:
+  0: #13 REF_invokeStatic com/keronic/majestik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #15 user

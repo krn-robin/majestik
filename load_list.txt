@@ -1,0 +1,6 @@
+magik/
+majestik/
+src/
+target/
+test
+tmp/

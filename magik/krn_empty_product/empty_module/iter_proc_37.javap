@@ -1,0 +1,194 @@
+Classfile /Users/robin.putters/src/majestik/magik/krn_empty_product/empty_module/iter_proc_37.class
+  Last modified 21 Aug 2024; size 2030 bytes
+  SHA-256 checksum a1389e2b1788f0c89b39186de13153a9004e436b29b4e471e027e3d03a9a34ca
+  Compiled from "modules\empty_module\source\iter_proc.magik"
+public class magik.krn_empty_product.empty_module.iter_proc_37 extends java.lang.Object
+  minor version: 0
+  major version: 51
+  flags: (0x0001) ACC_PUBLIC
+  this_class: #2                          // magik/krn_empty_product/empty_module/iter_proc_37
+  super_class: #5                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 1, attributes: 4
+Constant pool:
+   #1 = Utf8               magik/krn_empty_product/empty_module/iter_proc_37
+   #2 = Class              #1             // magik/krn_empty_product/empty_module/iter_proc_37
+   #3 = Utf8               Ljava/lang/Object;
+   #4 = Utf8               java/lang/Object
+   #5 = Class              #4             // java/lang/Object
+   #6 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/Debugger;
+   #7 = Utf8               value
+   #8 = Utf8               MagikDebug
+   #9 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/CodeType;
+  #10 = Utf8               Subsidiary
+  #11 = Utf8               modules\\empty_module\\source\\iter_proc.magik
+  #12 = Utf8               proc__range_
+  #13 = Utf8               (Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #14 = Utf8               __loopbody__
+  #15 = Utf8               __loopenv__
+  #16 = Utf8               _self
+  #17 = Utf8               start
+  #18 = Utf8               end
+  #19 = Utf8               step
+  #20 = Utf8               Lcom/gesmallworld/magik/language/SourceHash;
+  #21 = Integer            1952286139
+  #22 = Utf8               Proc
+  #23 = Utf8               java/lang/Integer
+  #24 = Class              #23            // java/lang/Integer
+  #25 = Utf8               valueOf
+  #26 = Utf8               (I)Ljava/lang/Integer;
+  #27 = NameAndType        #25:#26        // valueOf:(I)Ljava/lang/Integer;
+  #28 = Methodref          #24.#27        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+  #29 = Utf8               com/gesmallworld/magik/language/invokers/BinaryDispatcher
+  #30 = Class              #29            // com/gesmallworld/magik/language/invokers/BinaryDispatcher
+  #31 = Utf8               bootstrap
+  #32 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #33 = NameAndType        #31:#32        // bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #34 = Methodref          #30.#33        // com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #35 = MethodHandle       6:#34          // REF_invokeStatic com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #36 = Utf8               \\g
+  #37 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #38 = NameAndType        #36:#37        // "\\g":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #39 = InvokeDynamic      #0:#38         // #0:"\\g":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #40 = Utf8               com/gesmallworld/magik/language/utils/MagikObjectUtils
+  #41 = Class              #40            // com/gesmallworld/magik/language/utils/MagikObjectUtils
+  #42 = Utf8               should_be_boolean
+  #43 = Utf8               (Ljava/lang/Object;)Z
+  #44 = NameAndType        #42:#43        // should_be_boolean:(Ljava/lang/Object;)Z
+  #45 = Methodref          #41.#44        // com/gesmallworld/magik/language/utils/MagikObjectUtils.should_be_boolean:(Ljava/lang/Object;)Z
+  #46 = Utf8               com/gesmallworld/magik/language/ResultTuple
+  #47 = Class              #46            // com/gesmallworld/magik/language/ResultTuple
+  #48 = Utf8               EMPTY_TUPLE
+  #49 = Utf8               Lcom/gesmallworld/magik/language/ResultTuple;
+  #50 = NameAndType        #48:#49        // EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+  #51 = Fieldref           #47.#50        // com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+  #52 = Utf8               java/lang/invoke/MethodHandle
+  #53 = Class              #52            // java/lang/invoke/MethodHandle
+  #54 = Utf8               [Ljava/lang/Object;
+  #55 = Class              #54            // "[Ljava/lang/Object;"
+  #56 = Utf8               com/gesmallworld/magik/language/invokers/LoopBodyInvoker
+  #57 = Class              #56            // com/gesmallworld/magik/language/invokers/LoopBodyInvoker
+  #58 = Utf8               naturalBootstrap
+  #59 = NameAndType        #58:#32        // naturalBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #60 = Methodref          #57.#59        // com/gesmallworld/magik/language/invokers/LoopBodyInvoker.naturalBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #61 = MethodHandle       6:#60          // REF_invokeStatic com/gesmallworld/magik/language/invokers/LoopBodyInvoker.naturalBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #62 = Utf8               _loopbody
+  #63 = Utf8               (Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #64 = NameAndType        #62:#63        // _loopbody:(Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #65 = InvokeDynamic      #1:#64         // #1:_loopbody:(Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #66 = Utf8               +
+  #67 = NameAndType        #66:#37        // "+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #68 = InvokeDynamic      #0:#67         // #0:"+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #69 = Utf8               Ljava/lang/invoke/MethodHandle;
+  #70 = Utf8               Code
+  #71 = Utf8               StackMapTable
+  #72 = Utf8               LineNumberTable
+  #73 = Utf8               LocalVariableTable
+  #74 = Utf8               RuntimeVisibleAnnotations
+  #75 = Utf8               MethodParameters
+  #76 = Utf8               Signature
+  #77 = Utf8               SourceFile
+  #78 = Utf8               BootstrapMethods
+{
+  public static java.lang.Object proc__range_(java.lang.invoke.MethodHandle, java.lang.Object[], java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object);
+    descriptor: (Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=6, args_size=6
+         0: aload         5
+         2: ifnonnull     14
+         5: iconst_1
+         6: invokestatic  #28                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         9: astore        5
+        11: goto          14
+        14: aload         5
+        16: iconst_0
+        17: invokestatic  #28                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        20: invokedynamic #39,  0             // InvokeDynamic #0:"\\g":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        25: invokestatic  #45                 // Method com/gesmallworld/magik/language/utils/MagikObjectUtils.should_be_boolean:(Ljava/lang/Object;)Z
+        28: ifeq          76
+        31: aload_3
+        32: aload         4
+        34: invokedynamic #39,  0             // InvokeDynamic #0:"\\g":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        39: invokestatic  #45                 // Method com/gesmallworld/magik/language/utils/MagikObjectUtils.should_be_boolean:(Ljava/lang/Object;)Z
+        42: ifeq          49
+        45: getstatic     #51                 // Field com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+        48: areturn
+        49: aload_0
+        50: checkcast     #53                 // class java/lang/invoke/MethodHandle
+        53: aload_1
+        54: checkcast     #55                 // class "[Ljava/lang/Object;"
+        57: aload_3
+        58: invokedynamic #65,  0             // InvokeDynamic #1:_loopbody:(Ljava/lang/invoke/MethodHandle;[Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        63: pop
+        64: aload_3
+        65: aload         5
+        67: invokedynamic #68,  0             // InvokeDynamic #0:"+":(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        72: astore_3
+        73: goto          31
+        76: getstatic     #51                 // Field com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+        79: areturn
+      StackMapTable: number_of_entries = 4
+        frame_type = 14 /* same */
+        frame_type = 16 /* same */
+        frame_type = 17 /* same */
+        frame_type = 26 /* same */
+      LineNumberTable:
+        line 4: 0
+        line 0: 2
+        line 4: 5
+        line 5: 14
+        line 8: 31
+        line 0: 45
+        line 9: 57
+        line 10: 64
+        line 0: 67
+        line 10: 72
+        line 0: 73
+        line 12: 76
+        line 13: 79
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      80     4   end   Ljava/lang/Object;
+            0      80     5  step   Ljava/lang/Object;
+            0      80     0 __loopbody__   Ljava/lang/invoke/MethodHandle;
+            0      80     2 _self   Ljava/lang/Object;
+            0      80     3 start   Ljava/lang/Object;
+            0      80     1 __loopenv__   [Ljava/lang/Object;
+    RuntimeVisibleAnnotations:
+      0: #20(#7=I#21)
+        com.gesmallworld.magik.language.SourceHash(
+          value=1952286139
+        )
+      1: #6(#7=s#8)
+        com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+          value="MagikDebug"
+        )
+      2: #9(#7=s#22)
+        com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+          value="Proc"
+        )
+    MethodParameters:
+      Name                           Flags
+      __loopbody__
+      __loopenv__
+      _self
+      start
+      end
+      step
+}
+Signature: #3                           // Ljava/lang/Object;
+SourceFile: "modules\empty_module\source\iter_proc.magik"
+RuntimeVisibleAnnotations:
+  0: #6(#7=s#8)
+    com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+      value="MagikDebug"
+    )
+  1: #9(#7=s#10)
+    com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+      value="Subsidiary"
+    )
+BootstrapMethods:
+  0: #35 REF_invokeStatic com/gesmallworld/magik/language/invokers/BinaryDispatcher.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+  1: #61 REF_invokeStatic com/gesmallworld/magik/language/invokers/LoopBodyInvoker.naturalBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:

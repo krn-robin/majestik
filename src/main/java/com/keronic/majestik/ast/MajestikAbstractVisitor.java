@@ -3,7 +3,6 @@ package com.keronic.majestik.ast;
 import module java.base;
 
 import com.sonar.sslr.api.AstNode;
-import java.lang.System.Logger.Level;
 import nl.ramsolutions.sw.magik.MagikFile;
 import nl.ramsolutions.sw.magik.api.MagikGrammar;
 
