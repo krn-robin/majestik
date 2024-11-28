@@ -2,9 +2,9 @@ package com.keronic.majestik.ast;
 
 import module java.base;
 
+import com.sonar.sslr.api.AstNode;
 import nl.ramsolutions.sw.magik.MagikFile;
 import nl.ramsolutions.sw.magik.api.MagikGrammar;
-import com.sonar.sslr.api.AstNode;
 
 /** Magik visitor. */
 public abstract class MajestikAbstractVisitor<T> {

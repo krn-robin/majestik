@@ -20,12 +20,4 @@ public class NumberNode extends Node {
       cb.invokestatic(ConstantDescs.CD_Double, "valueOf", ConstantDescs.MTD_Doubledouble);
     }
   }
-
-  @Override
-  public boolean equals(Object obj) {
-    return switch (obj) {
-      case NumberNode other -> this.value.equals(other.value);
-      default -> false;
-    };
-  }
 }

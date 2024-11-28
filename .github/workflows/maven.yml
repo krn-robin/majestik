@@ -37,12 +37,16 @@ jobs:
       env:
         SQUID_VERSION: 0.10.1
       run: |
-        wget --no-verbose -O ${RUNNER_TEMP}/magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
-        mvn --batch-mode install:install-file -Dfile=${RUNNER_TEMP}/magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom && \
-        wget --no-verbose -O ${RUNNER_TEMP}/magik-squid-${SQUID_VERSION}.jar https://github.com/StevenLooman/magik-tools/releases/download/${SQUID_VERSION}/magik-squid-${SQUID_VERSION}.jar && \
-        mvn --batch-mode install:install-file -Dfile=${RUNNER_TEMP}/magik-squid-${SQUID_VERSION}.jar
+        wget --no-verbose -O ${TMPDIR}magik-tools-pom.xml https://raw.githubusercontent.com/StevenLooman/magik-tools/${SQUID_VERSION}/pom.xml && \
+        mvn --batch-mode install:install-file -Dfile=${TMPDIR}magik-tools-pom.xml -DgroupId=nl.ramsolutions -DartifactId=magik-tools -Dversion=${SQUID_VERSION} -Dpackaging=pom && \
+        wget --no-verbose -O ${TMPDIR}magik-squid-${SQUID_VERSION}.jar https://github.com/StevenLooman/magik-tools/releases/download/${SQUID_VERSION}/magik-squid-${SQUID_VERSION}.jar && \
+        mvn --batch-mode install:install-file -Dfile=${TMPDIR}magik-squid-${SQUID_VERSION}.jar
+        cat /home/runner/.m2/repository/nl/ramsolutions/magik-squid/0.10.1/magik-squid-0.10.1.pom
     - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots package --file pom.xml
+      run: |
+        mvn --version
+        mvn --batch-mode dependency:tree
+        mvn --batch-mode --update-snapshots package --file pom.xml
     - name: Analyze with SonarCloud
       if: env.SONAR_TOKEN != ''
       run: mvn --batch-mode sonar:sonar

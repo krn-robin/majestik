@@ -1,0 +1,204 @@
+Classfile /Users/robin.putters/src/majestik/magik/krn_empty_product/empty_module/iter_proc_36.class
+  Last modified 21 Aug 2024; size 2504 bytes
+  SHA-256 checksum 981c7959903e87697ca2b20d9d74e2b6cb58566503bdca4518ea2364fc760d7f
+  Compiled from "modules\empty_module\source\iter_proc.magik"
+public class magik.krn_empty_product.empty_module.iter_proc_36 extends java.lang.Object implements com.gesmallworld.magik.language.utils.ExecutableMagik
+  minor version: 0
+  major version: 51
+  flags: (0x0001) ACC_PUBLIC
+  this_class: #2                          // magik/krn_empty_product/empty_module/iter_proc_36
+  super_class: #5                         // java/lang/Object
+  interfaces: 1, fields: 0, methods: 3, attributes: 4
+Constant pool:
+    #1 = Utf8               magik/krn_empty_product/empty_module/iter_proc_36
+    #2 = Class              #1            // magik/krn_empty_product/empty_module/iter_proc_36
+    #3 = Utf8               Ljava/lang/Object;Lcom/gesmallworld/magik/language/utils/ExecutableMagik;
+    #4 = Utf8               java/lang/Object
+    #5 = Class              #4            // java/lang/Object
+    #6 = Utf8               com/gesmallworld/magik/language/utils/ExecutableMagik
+    #7 = Class              #6            // com/gesmallworld/magik/language/utils/ExecutableMagik
+    #8 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/Debugger;
+    #9 = Utf8               value
+   #10 = Utf8               MagikDebug
+   #11 = Utf8               Lcom/gesmallworld/magik/commons/runtime/annotations/CodeType;
+   #12 = Utf8               Primary
+   #13 = Utf8               modules\\empty_module\\source\\iter_proc.magik
+   #14 = Utf8               <init>
+   #15 = Utf8               ()V
+   #16 = Utf8               EmptyConstructor
+   #17 = NameAndType        #14:#15       // "<init>":()V
+   #18 = Methodref          #5.#17        // java/lang/Object."<init>":()V
+   #19 = Utf8               this
+   #20 = Utf8               Ljava/lang/Object;
+   #21 = Utf8               execute
+   #22 = Utf8               ()Ljava/lang/Object;
+   #23 = Utf8               TopLevel
+   #24 = Utf8               D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\iter_proc.magik
+   #25 = String             #24           // D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\iter_proc.magik
+   #26 = Utf8               com/gesmallworld/magik/language/invokers/ConstantBuilder
+   #27 = Class              #26           // com/gesmallworld/magik/language/invokers/ConstantBuilder
+   #28 = Utf8               stringBootstrap
+   #29 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #30 = NameAndType        #28:#29       // stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #31 = Methodref          #27.#30       // com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #32 = MethodHandle       6:#31         // REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #33 = Utf8               string
+   #34 = NameAndType        #33:#22       // string:()Ljava/lang/Object;
+   #35 = InvokeDynamic      #0:#34        // #0:string:()Ljava/lang/Object;
+   #36 = Utf8               sw
+   #37 = String             #36           // sw
+   #38 = Utf8               com/gesmallworld/magik/language/invokers/DynamicAccessor
+   #39 = Class              #38           // com/gesmallworld/magik/language/invokers/DynamicAccessor
+   #40 = Utf8               bootstrapStorer
+   #41 = NameAndType        #40:#29       // bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #42 = Methodref          #39.#41       // com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #43 = MethodHandle       6:#42         // REF_invokeStatic com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #44 = Utf8               !source_file!
+   #45 = Utf8               (Ljava/lang/Object;)V
+   #46 = NameAndType        #44:#45       // "!source_file!":(Ljava/lang/Object;)V
+   #47 = InvokeDynamic      #1:#46        // #1:"!source_file!":(Ljava/lang/Object;)V
+   #48 = Utf8               magik/krn_empty_product/empty_module/iter_proc_37
+   #49 = Class              #48           // magik/krn_empty_product/empty_module/iter_proc_37
+   #50 = Utf8               proc__range_
+   #51 = String             #50           // proc__range_
+   #52 = Utf8               range
+   #53 = String             #52           // range
+   #54 = Integer            6
+   #55 = Integer            5
+   #56 = Integer            1
+   #57 = Integer            0
+   #58 = Utf8               procWithEmptyEnvBootstrap
+   #59 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;IIII)Ljava/lang/invoke/CallSite;
+   #60 = NameAndType        #58:#59       // procWithEmptyEnvBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;IIII)Ljava/lang/invoke/CallSite;
+   #61 = Methodref          #27.#60       // com/gesmallworld/magik/language/invokers/ConstantBuilder.procWithEmptyEnvBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;IIII)Ljava/lang/invoke/CallSite;
+   #62 = MethodHandle       6:#61         // REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.procWithEmptyEnvBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;IIII)Ljava/lang/invoke/CallSite;
+   #63 = Utf8               proc
+   #64 = NameAndType        #63:#22       // proc:()Ljava/lang/Object;
+   #65 = InvokeDynamic      #2:#64        // #2:proc:()Ljava/lang/Object;
+   #66 = Utf8               user
+   #67 = String             #66           // user
+   #68 = Utf8               com/gesmallworld/magik/language/invokers/GlobalAccessor
+   #69 = Class              #68           // com/gesmallworld/magik/language/invokers/GlobalAccessor
+   #70 = Utf8               bootstrapStorer2
+   #71 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #72 = NameAndType        #70:#71       // bootstrapStorer2:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #73 = Methodref          #69.#72       // com/gesmallworld/magik/language/invokers/GlobalAccessor.bootstrapStorer2:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #74 = MethodHandle       6:#73         // REF_invokeStatic com/gesmallworld/magik/language/invokers/GlobalAccessor.bootstrapStorer2:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+   #75 = Utf8               storeGlobal2
+   #76 = NameAndType        #75:#45       // storeGlobal2:(Ljava/lang/Object;)V
+   #77 = InvokeDynamic      #3:#76        // #3:storeGlobal2:(Ljava/lang/Object;)V
+   #78 = Utf8               com/gesmallworld/magik/language/ResultTuple
+   #79 = Class              #78           // com/gesmallworld/magik/language/ResultTuple
+   #80 = Utf8               EMPTY_TUPLE
+   #81 = Utf8               Lcom/gesmallworld/magik/language/ResultTuple;
+   #82 = NameAndType        #80:#81       // EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+   #83 = Fieldref           #79.#82       // com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+   #84 = Utf8               com/gesmallworld/magik/language/invokers/TupleBuilder
+   #85 = Class              #84           // com/gesmallworld/magik/language/invokers/TupleBuilder
+   #86 = Utf8               bootstrap
+   #87 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+   #88 = NameAndType        #86:#87       // bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+   #89 = Methodref          #85.#88       // com/gesmallworld/magik/language/invokers/TupleBuilder.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+   #90 = MethodHandle       6:#89         // REF_invokeStatic com/gesmallworld/magik/language/invokers/TupleBuilder.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+   #91 = Utf8               tb
+   #92 = Utf8               (Ljava/lang/Object;)Lcom/gesmallworld/magik/language/ResultTuple;
+   #93 = NameAndType        #91:#92       // tb:(Ljava/lang/Object;)Lcom/gesmallworld/magik/language/ResultTuple;
+   #94 = InvokeDynamic      #4:#93        // #4:tb:(Ljava/lang/Object;)Lcom/gesmallworld/magik/language/ResultTuple;
+   #95 = Utf8               preload
+   #96 = Utf8               Code
+   #97 = Utf8               LocalVariableTable
+   #98 = Utf8               RuntimeVisibleAnnotations
+   #99 = Utf8               LineNumberTable
+  #100 = Utf8               Signature
+  #101 = Utf8               SourceFile
+  #102 = Utf8               BootstrapMethods
+{
+  public magik.krn_empty_product.empty_module.iter_proc_36();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+         4: return
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Ljava/lang/Object;
+    RuntimeVisibleAnnotations:
+      0: #8(#9=s#10)
+        com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+          value="MagikDebug"
+        )
+      1: #11(#9=s#16)
+        com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+          value="EmptyConstructor"
+        )
+
+  public java.lang.Object execute();
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: invokedynamic #35,  0             // InvokeDynamic #0:string:()Ljava/lang/Object;
+         5: invokedynamic #47,  0             // InvokeDynamic #1:"!source_file!":(Ljava/lang/Object;)V
+        10: invokedynamic #65,  0             // InvokeDynamic #2:proc:()Ljava/lang/Object;
+        15: invokedynamic #77,  0             // InvokeDynamic #3:storeGlobal2:(Ljava/lang/Object;)V
+        20: getstatic     #83                 // Field com/gesmallworld/magik/language/ResultTuple.EMPTY_TUPLE:Lcom/gesmallworld/magik/language/ResultTuple;
+        23: invokedynamic #94,  0             // InvokeDynamic #4:tb:(Ljava/lang/Object;)Lcom/gesmallworld/magik/language/ResultTuple;
+        28: areturn
+      LineNumberTable:
+        line 3: 10
+        line 2: 15
+        line 15: 28
+    RuntimeVisibleAnnotations:
+      0: #8(#9=s#10)
+        com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+          value="MagikDebug"
+        )
+      1: #11(#9=s#23)
+        com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+          value="TopLevel"
+        )
+
+  public void preload();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: ldc           #49                 // class magik/krn_empty_product/empty_module/iter_proc_37
+         2: pop
+         3: return
+}
+Signature: #3                           // Ljava/lang/Object;Lcom/gesmallworld/magik/language/utils/ExecutableMagik;
+SourceFile: "modules\empty_module\source\iter_proc.magik"
+RuntimeVisibleAnnotations:
+  0: #8(#9=s#10)
+    com.gesmallworld.magik.commons.runtime.annotations.Debugger(
+      value="MagikDebug"
+    )
+  1: #11(#9=s#12)
+    com.gesmallworld.magik.commons.runtime.annotations.CodeType(
+      value="Primary"
+    )
+BootstrapMethods:
+  0: #32 REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.stringBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #25 D:\\workspace\\robin.putters\\empty_product\\modules\\empty_module\\source\\iter_proc.magik
+  1: #43 REF_invokeStatic com/gesmallworld/magik/language/invokers/DynamicAccessor.bootstrapStorer:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #37 sw
+  2: #62 REF_invokeStatic com/gesmallworld/magik/language/invokers/ConstantBuilder.procWithEmptyEnvBootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;IIII)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #49 magik/krn_empty_product/empty_module/iter_proc_37
+      #51 proc__range_
+      #53 range
+      #54 6
+      #55 5
+      #56 1
+      #57 0
+  3: #74 REF_invokeStatic com/gesmallworld/magik/language/invokers/GlobalAccessor.bootstrapStorer2:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #67 user
+      #53 range
+  4: #90 REF_invokeStatic com/gesmallworld/magik/language/invokers/TupleBuilder.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:

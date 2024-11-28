@@ -36,24 +36,7 @@ public class CompoundNode extends Node {
     return sb.toString();
   }
 
-  public int getChildCount() {
-    return children.length;
+  public Node[] getChildren() {
+    return children;
   }
-
-  public Node getChild(int index) {
-    return children[index];
-  }
-
-  public Stream<Node> stream() {
-    return Arrays.stream(children);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return switch (obj) {
-      case CompoundNode other -> Arrays.equals(this.children, other.children);
-      default -> false;
-    };
-  }
-
 }

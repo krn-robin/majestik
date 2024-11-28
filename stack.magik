@@ -1,0 +1,23 @@
+_global a <<
+	_proc @proc_a(arg_a1, arg_a2)
+		arg_a1.boem
+	_endproc
+$
+
+_global b <<
+	_proc @proc_b(arg_b1)
+		_local lb1 << 3
+		a(arg_b1, lb1)
+	_endproc
+$
+
+_global c  <<
+	_proc @proc_c()
+		_local lc1 << 2
+		_try _with e
+			b(2)
+		_when error
+			print_traceback_for(e)
+		_endtry
+	_endproc
+$

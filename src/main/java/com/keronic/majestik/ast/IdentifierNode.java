@@ -12,16 +12,7 @@ public class IdentifierNode extends Node {
 
   @Override
   public void compileInto(CodeBuilder cb) {
-    cb.invokedynamic( DynamicCallSiteDesc.of(
-      ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", this.value));
+    cb.invokedynamic(DynamicCallSiteDesc.of(ConstantDescs.BSM_STRING_BUILDER, "string",
+	ConstantDescs.MTD_Object, this.value));
   }
-
-  @Override
-  public boolean equals(Object obj) {
-    return switch (obj) {
-      case IdentifierNode other -> this.value.equals(other.value);
-      default -> false;
-    };
-  }
-
 }

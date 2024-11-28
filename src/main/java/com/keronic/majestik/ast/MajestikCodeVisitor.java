@@ -36,8 +36,15 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   @Override
   protected Node visitIdentifier(final AstNode node) {
     var varname = node.getTokenValue();
+    var result = new IdentifierNode(varname);
+
     var varidx = this.varMap.get(varname);
-    return varidx == null ? new IdentifierNode(varname) : new VariableNode(varidx);
+    /*
+     * if (varidx == null) this.cb.invokedynamic( DynamicCallSiteDesc.of(
+     * ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw",
+     * node.getParent().getTokenValue())); else this.cb.aload(varidx);
+     */
+    return super.visitIdentifier(node);
   }
 
   @Override
@@ -54,13 +61,12 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
 
   @Override
   protected Node visitNumber(AstNode node) {
-    LOGGER.log(
-	Level.TRACE,
-	() -> String.format("Visiting Number node: %s %s", node.getType(), node.getTokenValue()));
     var numberString = node.getTokenValue();
     try {
       var number = NumberFormat.getInstance(Locale.ROOT).parse(numberString);
-      return new NumberNode(number);
+      var result = new NumberNode(number);
+      // result.compileInto(cb);
+      return super.visitNumber(node);
     } catch (ParseException e) {
       LOGGER.log(Level.ERROR, () -> String.format("Error parsing number: %s", numberString));
       throw new RuntimeException("Failed to parse number: " + numberString, e);
@@ -69,11 +75,14 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
 
   @Override
   protected Node visitProcedureInvocation(AstNode node) {
-    Node compound = new CompoundNode();
-    for (final AstNode childNode : node.getChildren()) {
-      compound = this.mergeResults(compound, this.visit(childNode));
-    }
-    return new InvocationNode((CompoundNode)compound);
+    // https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/invoke/CallSite.html
+
+    var result = super.visitProcedureInvocation(node);
+    /*
+     * this.cb.invokedynamic( DynamicCallSiteDesc.of( ConstantDescs.BSM_NATURAL_PROC, "()",
+     * ConstantDescs.MTD_ObjectObjectObject));
+     */
+    return result;
   }
 
   @Override
