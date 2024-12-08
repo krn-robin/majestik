@@ -4,6 +4,12 @@ import module java.base;
 
 import com.keronic.majestik.constant.ConstantDescs;
 
+/**
+ * Represents a string literal node in the AST. This node handles string values using dynamic
+ * invocation for string building.
+ *
+ * @see Node
+ */
 public class StringNode extends Node {
   private final String value;
 
@@ -21,7 +27,7 @@ public class StringNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
-      case StringNode other -> this.value.equals(other.value);
+      case StringNode other -> Objects.equals(this.value, other.value);
       default -> false;
     };
   }

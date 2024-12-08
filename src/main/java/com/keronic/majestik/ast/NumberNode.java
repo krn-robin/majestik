@@ -16,13 +16,13 @@ public class NumberNode extends Node {
     this.value = value;
   }
 
-  @Override
   /**
    * Compiles this number node into bytecode.
    *
    * @param cb The code builder to compile into
    * @throws IllegalStateException if the value type is unsupported
    */
+  @Override
   public void compileInto(CodeBuilder cb) {
     if (this.value instanceof Long n) {
       cb.loadConstant(n);
@@ -38,7 +38,7 @@ public class NumberNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
-      case NumberNode other -> this.value.equals(other.value);
+      case NumberNode other -> Objects.equals(this.value, other.value);
       default -> false;
     };
   }

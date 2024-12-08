@@ -35,7 +35,7 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
-  protected Node visitMagik(AstNode node) {
+  protected Node visitMagik(final AstNode node) {
     LOGGER.log(
         Level.TRACE,
         () -> String.format("Visiting Magik node: %s %s", node.getType(), node.getTokenValue()));
@@ -47,7 +47,7 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
-  protected Node visitNumber(AstNode node) {
+  protected Node visitNumber(final AstNode node) {
     LOGGER.log(
         Level.TRACE,
         () -> String.format("Visiting Number node: %s %s", node.getType(), node.getTokenValue()));
@@ -62,7 +62,7 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
-  protected Node visitProcedureInvocation(AstNode node) {
+  protected Node visitProcedureInvocation(final AstNode node) {
     Node compound = new CompoundNode();
     for (final AstNode childNode : node.getChildren()) {
       compound = this.mergeResults(compound, this.visit(childNode));
@@ -71,7 +71,7 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
-  protected Node visitString(AstNode node) {
+  protected Node visitString(final AstNode node) {
     LOGGER.log(
         Level.TRACE,
         () -> String.format("Visiting String node: %s %s", node.getType(), node.getTokenValue()));
@@ -82,23 +82,25 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
-  protected Node mergeResults(Node first, Node second) {
+  protected Node mergeResults(final Node first, final Node second) {
     if (second == null) return first;
     if (first == null) return second;
 
     return switch (first) {
       case CompoundNode c -> new CompoundNode(c, second);
-      case Node n -> new CompoundNode(new CompoundNode(n), second);
+      case Node n -> new CompoundNode(n, second);
     };
   }
 
-  private String normalizeString(String quotedString) {
+  private String normalizeString(final String quotedString) {
     if (quotedString.length() < 2)
       throw new IllegalArgumentException("String length is too short to be valid.");
 
+    final String allowedQuotes = "\"'";
+
     char firstChar = quotedString.charAt(0);
     char lastChar = quotedString.charAt(quotedString.length() - 1);
-    if (!((firstChar == '\"' && lastChar == '\"') || (firstChar == '\'' && lastChar == '\'')))
+    if ((firstChar != lastChar) || (allowedQuotes.indexOf(firstChar) == -1))
       throw new IllegalArgumentException("String is not properly quoted.");
 
     return quotedString.substring(1, quotedString.length() - 1);

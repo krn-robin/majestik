@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 
 class NumberNodeTest {
   @Test
-  void testEquals() {
+  void shouldBeEqualWhenValuesAreTheSame() {
     assertEquals(new NumberNode(5), new NumberNode(5));
   }
 
   @Test
-  void testHashcode() {
+  void shouldHaveSameHashCodeWhenValuesAreEqual() {
     assertEquals(new NumberNode(5).hashCode(), new NumberNode(5).hashCode());
   }
-
 }

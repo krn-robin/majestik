@@ -6,7 +6,6 @@ import com.sonar.sslr.api.AstNode;
 import nl.ramsolutions.sw.magik.MagikFile;
 import nl.ramsolutions.sw.magik.api.MagikGrammar;
 
-/** Magik visitor. */
 /**
  * Abstract base class for visiting Magik AST nodes.
  *
@@ -16,9 +15,6 @@ import nl.ramsolutions.sw.magik.api.MagikGrammar;
  * @param <T> The type of result produced by this visitor
  */
 public abstract class MajestikAbstractVisitor<T> {
-  private static final System.Logger LOGGER =
-      System.getLogger(MethodHandles.lookup().lookupClass().getName());
-
   private MagikFile magikFile;
 
   /**
@@ -34,8 +30,8 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visit(topNode);
   }
 
-  protected T visit(AstNode node) {
-    final var nodeType = node.getType();
+  protected T visit(final AstNode node) {
+    final var nodeType = Objects.requireNonNull(node).getType();
     if (nodeType instanceof MagikGrammar type) {
       return switch (type) {
         case ASSIGNMENT_EXPRESSION -> visitAssignmentExpression(node);
@@ -50,39 +46,53 @@ public abstract class MajestikAbstractVisitor<T> {
     return null;
   }
 
-  protected T visitDefault(AstNode node) {
+  protected T visitDefault(final AstNode node) {
     T result = null;
-    for (final AstNode childNode : node.getChildren()) {
+    for (final AstNode childNode : Objects.requireNonNull(node).getChildren()) {
       result = this.mergeResults(result, this.visit(childNode));
     }
     return result;
   }
 
-  protected T mergeResults(T first, T second) {
+  /**
+   * Merges two results from visiting AST nodes. By default, prefers the second result if it is not
+   * null.
+   *
+   * @param first The result from the first node
+   * @param second The result from the second node
+   * @return The merged result
+   */
+  protected T mergeResults(final T first, final T second) {
     return second != null ? second : first;
   }
 
+  /**
+   * Visits an assignment expression node.
+   *
+   * @param node the AST node representing the assignment expression
+   * @return result of the visit operation
+   */
   protected T visitAssignmentExpression(final AstNode node) {
     return this.visitDefault(node);
   }
 
-  protected T visitIdentifier(AstNode node) {
+  protected T visitIdentifier(final AstNode node) {
     return this.visitDefault(node);
   }
 
-  protected T visitMagik(AstNode node) {
+  protected T visitMagik(final AstNode node) {
     return this.visitDefault(node);
   }
 
-  protected T visitNumber(AstNode node) {
+  protected T visitNumber(final AstNode node) {
     return this.visitDefault(node);
   }
 
-  protected T visitProcedureInvocation(AstNode node) {
+  protected T visitProcedureInvocation(final AstNode node) {
     return this.visitDefault(node);
   }
 
-  protected T visitString(AstNode node) {
+  protected T visitString(final AstNode node) {
     return this.visitDefault(node);
   }
 }

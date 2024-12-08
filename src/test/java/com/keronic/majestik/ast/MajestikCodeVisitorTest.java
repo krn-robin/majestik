@@ -1,10 +1,15 @@
 package com.keronic.majestik.ast;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import nl.ramsolutions.sw.magik.MagikFile;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for {@link MajestikCodeVisitor} which verifies the visitor's behavior in processing
+ * AST nodes.
+ */
 class MajestikCodeVisitorTest {
   @Test
   void testVisitString() {
@@ -12,12 +17,19 @@ class MajestikCodeVisitorTest {
     var mf = new MagikFile(MagikFile.DEFAULT_URI, ("\"string1\"%n'string2'%n").formatted());
 
     // Execute
-    var n = (CompoundNode) mcv.scanFile(mf);
+    var node = mcv.scanFile(mf);
 
     // Verify
-    assertEquals(2, n.getChildCount());
-    assertEquals(new StringNode("string1"), n.getChild(0));
-    assertEquals(new StringNode("string2"), n.getChild(1));
+    assertNotNull(node, "Result should not be null");
+    assertTrue(node instanceof CompoundNode, "Expected CompoundNode");
+    var cnode = (CompoundNode)node;
+    assertEquals(2, cnode.getChildCount(), "Expected two string nodes");
+    var child0 = cnode.getChild(0);
+    var child1 = cnode.getChild(1);
+    assertTrue(child0 instanceof StringNode, "First child should be StringNode");
+    assertTrue(child1 instanceof StringNode, "Second child should be StringNode");
+    assertEquals(new StringNode("string1"), (StringNode)child0);
+    assertEquals(new StringNode("string2"), (StringNode)child1);
   }
 
   @Test

@@ -2,6 +2,10 @@ package com.keronic.majestik.ast;
 
 import module java.base;
 
+/**
+ * Represents a block node in the AST, encapsulating a compound statement.
+ *
+ */
 public class BlockNode extends Node {
   /** The compound node containing this block's statements. */
   private final CompoundNode children;

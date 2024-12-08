@@ -15,7 +15,9 @@ public class Majestik {
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
 
   /**
-   * @param args
+   * The main entry point of the Majestik test application.
+   *
+   * @param args command-line arguments; expects a single Magik file to compile.
    */
   public static void main(String[] args) {
     LOGGER.log(Level.INFO, () -> "Majestik v0.0");

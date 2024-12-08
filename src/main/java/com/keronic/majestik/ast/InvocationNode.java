@@ -11,6 +11,13 @@ public class InvocationNode extends Node {
     this.arguments = Objects.requireNonNull(arguments);
   }
 
+  /**
+   * Compiles this invocation node into bytecode.
+   * Each argument is compiled first, followed by an invokedynamic call
+   * that sets up a dynamic call site for natural procedure invocation.
+   *
+   * @param cb The code builder to use for compilation
+   */
   @Override
   public void compileInto(CodeBuilder cb) {
     arguments.stream().forEach(a -> a.compileInto(cb));
@@ -22,7 +29,7 @@ public class InvocationNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
-      case InvocationNode other -> this.arguments.equals(other.arguments);
+      case InvocationNode other -> Objects.equals(this.arguments, other.arguments);
       default -> false;
     };
   }

@@ -25,9 +25,9 @@ public class CompoundNode extends Node {
   }
 
   public CompoundNode(CompoundNode comp, Node addition) {
+    Objects.requireNonNull(comp);
     this.children = Arrays.copyOf(comp.children, comp.children.length + 1);
     this.children[comp.children.length] = Objects.requireNonNull(addition);
-    ;
   }
 
   public void compileInto(CodeBuilder cb) {

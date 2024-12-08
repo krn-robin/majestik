@@ -1,6 +1,0 @@
-_block
-	groen << "groen"
-	blauw << groen
-	write(blauw)
-_endblock
-$
