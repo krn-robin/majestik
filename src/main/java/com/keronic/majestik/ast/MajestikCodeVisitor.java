@@ -10,7 +10,6 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
 
   final Map<String, Integer> varMap = new ConcurrentHashMap<>();
-  Node currentNode = new CompoundNode();
 
   /** Constructs a new MajestikCodeVisitor. */
   public MajestikCodeVisitor() {}
