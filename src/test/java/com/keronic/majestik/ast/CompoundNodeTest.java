@@ -28,7 +28,7 @@ class CompoundNodeTest {
     assertNotEquals(node1, node3);
 
     // Test inequality with null
-    assertNotEquals(node1, null);
+    assertNotEquals(null, node1);
 
     // Test inequality with different type
     assertNotEquals(node1, new NumberNode(5));
