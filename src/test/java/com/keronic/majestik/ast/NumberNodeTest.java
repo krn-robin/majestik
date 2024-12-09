@@ -15,7 +15,7 @@ class NumberNodeTest {
     var node3 = new NumberNode(10);
     assertNotEquals(node1, node3);
     var node4 = new NumberNode(0);
-    assertNotEquals(null, node4);
+    assertNotEquals(node4, null);
   }
 
   @Test

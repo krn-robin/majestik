@@ -37,7 +37,7 @@ public class CompoundNode extends Node {
   @Override
   public String toString() {
     var joiner = new StringJoiner("", " (", ")");
-    Arrays.stream(children).map(node -> "(" + node.toString() + ")").forEach(joiner::add);
+    this.stream().map(node -> "(" + node.toString() + ")").forEach(joiner::add);
     return super.toString() + joiner.toString();
   }
 

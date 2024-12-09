@@ -38,6 +38,7 @@ public class NumberNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
+      case null -> false;
       case NumberNode other -> Objects.equals(this.value, other.value);
       default -> false;
     };

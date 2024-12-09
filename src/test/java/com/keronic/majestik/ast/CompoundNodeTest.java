@@ -2,7 +2,7 @@ package com.keronic.majestik.ast;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -28,7 +28,7 @@ class CompoundNodeTest {
     assertNotEquals(node1, node3);
 
     // Test inequality with null
-    assertNotEquals(null, node1);
+    assertNotEquals(node1, null);
 
     // Test inequality with different type
     assertNotEquals(node1, new NumberNode(5));
@@ -63,5 +63,21 @@ class CompoundNodeTest {
         node1.hashCode(),
         node4.hashCode(),
         "Different number of children should likely have different hash codes");
+  }
+
+  @Test
+  void testToString() {
+    var node1 = new CompoundNode();
+    var node2 = new CompoundNode(node1, new CompoundNode());
+    var node3 = new CompoundNode(node2, new CompoundNode());
+
+    assertTrue(node1.toString().startsWith("com.keronic.majestik.ast.CompoundNode@"));
+    assertTrue(node1.toString().endsWith(" ()"));
+
+    assertTrue(node2.toString().startsWith("com.keronic.majestik.ast.CompoundNode@"));
+    assertTrue(node2.toString().endsWith(String.format(" ((%s))", node1.toString())));
+
+    assertTrue(node3.toString().startsWith("com.keronic.majestik.ast.CompoundNode@"));
+    assertTrue(node3.toString().endsWith(String.format(" ((%s)(%s))", node1.toString(), node1.toString())));
   }
 }
