@@ -3,57 +3,50 @@ package com.keronic;
 
 import module java.base;
 
-import com.keronic.antlr4.MajestikBaseVisitor;
-import com.keronic.antlr4.MajestikLexer;
-import com.keronic.antlr4.MajestikParser;
-import com.keronic.antlr4.MajestikParser.ProgContext;
 import com.keronic.majestik.MajestikRuntimeException;
+import com.keronic.majestik.ast.MajestikCodeVisitor;
 import java.lang.System.Logger.Level;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
+import nl.ramsolutions.sw.MagikToolsProperties;
+import nl.ramsolutions.sw.magik.MagikFile;
 
 /** */
 public class Majestik {
   private static final System.Logger LOGGER =
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * The main entry point of the Majestik test application.
+   *
+   * @param args command-line arguments; expects a single Magik file to compile.
+   */
+  public static void main(String[] args) {
     LOGGER.log(Level.INFO, () -> "Majestik v0.0");
 
-		try {
+    try {
       // FIXME: force load of stub sw:write proc
-			@SuppressWarnings("unused")
+      @SuppressWarnings("unused")
       var wp = Class.forName("com.keronic.majestik.runtime.WriteProcTemp");
-		} catch (Exception e) {
+    } catch (Exception e) {
       throw new MajestikRuntimeException(e);
-		}
+    }
 
     if (args.length == 0) LOGGER.log(Level.ERROR, () -> "Usage: majestik file.magik");
-		else
-			try {
+    else
+      try {
         LOGGER.log(Level.INFO, () -> String.format("Reading file: %s", args[0]));
-				CharStream in = CharStreams.fromFileName(args[0]);
-				MajestikLexer lexer = new MajestikLexer(in);
-				MajestikParser parser = new MajestikParser(new CommonTokenStream(lexer));
-				ProgContext tree = parser.prog(); // parse
-        MajestikBaseVisitor<Void> mbv =
-            new MajestikBaseVisitor<Void>(); // Yield unrecognized tokens early
-				mbv.visit(tree);
+        var mf = new MagikFile(MagikToolsProperties.DEFAULT_PROPERTIES, Path.of(args[0]));
 
         LOGGER.log(Level.INFO, () -> String.format("Compiling..."));
-				var baseName = PathUtils.getBaseName(args[0]);
+
+        var baseName = PathUtils.getBaseName(Paths.get(args[0]).getFileName().toString());
         Files.createDirectories(Path.of("majestik"));
 
-				var newFileName = "majestik/%s.class".formatted(baseName); // TODO: move to pathutils
-        LOGGER.log(Level.INFO, () -> String.format("Writing to classfile: %s%n", newFileName));
+        var newFileName = "majestik/%s.class".formatted(baseName); // TODO: move to pathutils
+        LOGGER.log(Level.INFO, () -> String.format("Writing to classfile: %s", newFileName));
         ClassFile.of()
             .buildTo(
                 Path.of(newFileName),
-						ClassDesc.of("majestik.%s".formatted(baseName)),
+                ClassDesc.of("majestik.%s".formatted(baseName)),
                 classBuilder ->
                     classBuilder
                         .withMethodBody(
@@ -66,25 +59,25 @@ public class Majestik {
                                     .invokespecial(
                                         ConstantDescs.CD_Object,
                                         ConstantDescs.INIT_NAME,
-														ConstantDescs.MTD_void)
-												.return_())
+                                        ConstantDescs.MTD_void)
+                                    .return_())
                         .withMethodBody(
                             ConstantDescs.CLASS_INIT_NAME,
                             ConstantDescs.MTD_void,
                             ClassFile.ACC_STATIC,
                             codeBuilder -> {
-											MajestikCodeVisitor mcv = new MajestikCodeVisitor(codeBuilder);
-											mcv.visit(tree);
-											codeBuilder.return_();
-										}));
-				var cl = new MajestikClassLoader();
+                              MajestikCodeVisitor mcv = new MajestikCodeVisitor();
+                              mcv.scanFile(mf).compileInto(codeBuilder);
+                              codeBuilder.return_();
+                            }));
+        var cl = new MajestikClassLoader();
 
         LOGGER.log(
             Level.INFO,
             () -> String.format("LOG: Loading compiled class: %s", Path.of(newFileName)));
-				cl.loadClass("majestik.%s".formatted(baseName)).getDeclaredConstructor().newInstance();
-			} catch (Exception e) {
+        cl.loadClass("majestik.%s".formatted(baseName)).getDeclaredConstructor().newInstance();
+      } catch (Exception e) {
         throw new MajestikRuntimeException(e);
-			}
-	}
+      }
+  }
 }
