@@ -27,12 +27,13 @@ public class AssignmentNode extends Node {
         .forEach(v -> v.compileIntoSet(cb));
   }
 
-    @Override
+  @Override
   public boolean equals(Object obj) {
     return switch (obj) {
       case null -> false;
-      case AssignmentNode other -> Objects.equals(this.lhs, other.lhs)
-          && Objects.equals(this.rhs, other.rhs);
+      case AssignmentNode other ->
+          Arrays.equals(
+              new CompoundNode[] {this.lhs, this.rhs}, new CompoundNode[] {other.lhs, other.rhs});
       default -> false;
     };
   }

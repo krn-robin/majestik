@@ -2,7 +2,7 @@ package com.keronic.majestik.ast;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 class AssignmentNodeTest {
@@ -12,6 +12,9 @@ class AssignmentNodeTest {
     var node2 = new AssignmentNode(new CompoundNode(), new CompoundNode());
 
     assertEquals(node1, node2);
+
+    assertNotEquals(node1, new CompoundNode());
+    assertNotEquals(node2, null);
   }
 
   @Test

@@ -26,6 +26,7 @@ public class IdentifierNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
+      case null -> false;
       case IdentifierNode other -> Objects.equals(this.value, other.value);
       default -> false;
     };
