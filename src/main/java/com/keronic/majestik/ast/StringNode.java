@@ -27,6 +27,7 @@ public class StringNode extends Node {
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
+      case null -> false;
       case StringNode other -> Objects.equals(this.value, other.value);
       default -> false;
     };

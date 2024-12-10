@@ -26,4 +26,19 @@ public class AssignmentNode extends Node {
         .map(VariableNode.class::cast)
         .forEach(v -> v.compileIntoSet(cb));
   }
+
+    @Override
+  public boolean equals(Object obj) {
+    return switch (obj) {
+      case null -> false;
+      case AssignmentNode other -> Objects.equals(this.lhs, other.lhs)
+          && Objects.equals(this.rhs, other.rhs);
+      default -> false;
+    };
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.lhs, this.rhs);
+  }
 }
