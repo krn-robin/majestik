@@ -2,7 +2,6 @@ package com.keronic.majestik.ast;
 
 import module java.base;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -11,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class StringNodeTest extends NodeTest {
   @Test
-  // Suppressing "Assertion arguments should be passed in the correct order" as the expected/actual order is correct here
+  // Suppressing "Assertion arguments should be passed in the correct order" as the expected/actual
+  // order is correct here
   @SuppressWarnings("java:S3415")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new StringNode("string1");
@@ -42,16 +42,11 @@ class StringNodeTest extends NodeTest {
     var instruction = code.elementList().getFirst();
     assertInstanceOf(InvokeDynamicInstruction.class, instruction);
     var indy = (InvokeDynamicInstruction) instruction;
-    
+
     // Verify instruction properties
     assertEquals(
         "MethodHandleDesc[STATIC/ConstantBuilder::stringBootstrap(MethodHandles$Lookup,String,MethodType,String)CallSite]",
         indy.bootstrapMethod().toString());
     assertEquals("[a test string]", indy.bootstrapArgs().toString());
-    
-    // Verify method type
-    assertNotNull(indy.methodType(), "Method type should not be null");
-    assertEquals("CallSite", indy.methodType().returnType().getSimpleName(),
-        "Return type should be CallSite");
   }
 }

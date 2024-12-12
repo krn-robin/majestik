@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 
 class NumberNodeTest extends NodeTest {
   @Test
-  // Suppressed "Assertion arguments should be passed in the correct order" as the expected/actual order is clear in this context
+  // Suppressed "Assertion arguments should be passed in the correct order" as the expected/actual
+  // order is clear in this context
   @SuppressWarnings("java:S3415")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new NumberNode(5);
@@ -47,9 +48,7 @@ class NumberNodeTest extends NodeTest {
     final int DOUBLE_INVOKE_INDEX = 3;
 
     var compoundNode = new CompoundNode(new NumberNode(1L), new NumberNode(2d));
-    Consumer<CodeBuilder> codeBuilder = builder -> compoundNode.compileInto(builder);
-
-    var code = this.compileInto(codeBuilder);
+    var code = this.compileInto(compoundNode::compileInto);
 
     assertEquals(EXPECTED_INSTRUCTION_COUNT, code.elementList().size());
     var instruction0 = code.elementList().get(LONG_CONSTANT_INDEX);
