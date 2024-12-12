@@ -7,11 +7,10 @@ import module java.base;
  * expressions where a value (rhs) is assigned to a target (lhs).
  *
  * @since 0.1
- * 
- * Example:
- * <pre>
- * var x = 42;  // AssignmentNode(VariableNode("x"), NumberNode(42))
- * </pre>
+ *     <p>Example:
+ *     <pre>
+ *     var x = 42;  // AssignmentNode(VariableNode("x"), NumberNode(42))
+ *     </pre>
  */
 public class AssignmentNode extends Node {
   /** The left-hand side (target) of the assignment */
@@ -45,15 +44,13 @@ public class AssignmentNode extends Node {
     return String.format("AssignmentNode{lhs=%s,rhs=%s}", this.lhs, this.rhs);
   }
 
-  @Override
-  @Override
   /**
-   * Compiles this assignment node into bytecode.
-   * First compiles the right-hand side expression, then compiles the assignment
-   * to each variable on the left-hand side.
+   * Compiles this assignment node into bytecode. First compiles the right-hand side expression,
+   * then compiles the assignment to each variable on the left-hand side.
    *
    * @param cb The code builder to use
    */
+  @Override
   protected void doCompileInto(CodeBuilder cb) {
     this.rhs.compileInto(cb);
     this.lhs.stream()
