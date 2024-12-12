@@ -36,17 +36,22 @@ class StringNodeTest extends NodeTest {
   void shouldGenerateInvokeDynamicInstruction() {
     var cnode = new CompoundNode(new StringNode("a test string"));
 
-    Consumer<CodeBuilder> cb = xb -> cnode.compileInto(xb);
-
-    var code = this.compileInto(cb);
+    var code = this.compileInto(cnode::compileInto);
 
     assertEquals(1, code.elementList().size());
     var instruction = code.elementList().getFirst();
     assertInstanceOf(InvokeDynamicInstruction.class, instruction);
     var indy = (InvokeDynamicInstruction) instruction;
+    
+    // Verify instruction properties
     assertEquals(
         "MethodHandleDesc[STATIC/ConstantBuilder::stringBootstrap(MethodHandles$Lookup,String,MethodType,String)CallSite]",
         indy.bootstrapMethod().toString());
     assertEquals("[a test string]", indy.bootstrapArgs().toString());
+    
+    // Verify method type
+    assertNotNull(indy.methodType(), "Method type should not be null");
+    assertEquals("CallSite", indy.methodType().returnType().getSimpleName(),
+        "Return type should be CallSite");
   }
 }
