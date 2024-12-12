@@ -29,7 +29,20 @@ class StringNodeTest extends NodeTest {
 
   @Test
   void shouldHaveSameHashCodeWhenValuesAreEqual() {
-    assertEquals(new StringNode("string2").hashCode(), new StringNode("string2").hashCode());
+    var node1 = new StringNode("string2");
+    var node2 = new StringNode("string2");
+    
+    // Test consistency
+    int hash1 = node1.hashCode();
+    assertEquals(hash1, node1.hashCode(), "hashCode should be consistent");
+    
+    // Test equality contract
+    assertEquals(node1.hashCode(), node2.hashCode(), "Equal objects should have equal hashCodes");
+    
+    // Verify hashCode/equals consistency
+    if (node1.equals(node2)) {
+        assertEquals(node1.hashCode(), node2.hashCode(), "Equal objects must have equal hashCodes");
+    }
   }
 
   @Test

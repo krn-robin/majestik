@@ -43,11 +43,21 @@ public class BlockNode extends Node {
     };
   }
 
+  /**
+   * Returns a hash code value for this block node.
+   *
+   * @return a hash code value for this object
+   */
   @Override
   public int hashCode() {
     return Objects.hashCode(this.children);
   }
 
+  /**
+   * Returns a string representation of this block node.
+   *
+   * @return a string representation of this object
+   */
   @Override
   public String toString() {
     return String.format("BlockNode{children=%s}", this.children);
