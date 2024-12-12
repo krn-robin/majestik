@@ -22,7 +22,11 @@ public class Invoker {
 		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
     ProcImpl proc = (ProcImpl) o;
 		try {
-      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("Invoking procedure: %s with type: %s", o, o.getClass().getName()));
+      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("Invoking procedure: %s [id=%d] with type: %s on thread: %s",
+          o,
+          System.identityHashCode(o),
+          o.getClass().getName(),
+          Thread.currentThread().getName()));
 			proc.invoke(o);
 		} catch (Throwable e) {
       throw new MajestikRuntimeException(e);

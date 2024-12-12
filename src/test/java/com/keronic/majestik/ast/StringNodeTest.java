@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class StringNodeTest extends NodeTest {
   @Test
+  // Suppressing "Assertion arguments should be passed in the correct order" as the expected/actual order is correct here
   @SuppressWarnings("java:S3415")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new StringNode("string1");
@@ -32,7 +33,7 @@ class StringNodeTest extends NodeTest {
   }
 
   @Test
-  void testCompileInto() {
+  void shouldGenerateInvokeDynamicInstruction() {
     var cnode = new CompoundNode(new StringNode("a test string"));
 
     Consumer<CodeBuilder> cb = xb -> cnode.compileInto(xb);

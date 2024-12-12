@@ -34,6 +34,12 @@ public class VariableNode extends Node {
     cb.astore(this.varIndex);
   }
 
+  /**
+   * Determines whether this VariableNode is equal to another object.
+   *
+   * @param obj the object to compare with
+   * @return true if the other object is a VariableNode with the same varIndex
+   */
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {
@@ -43,11 +49,21 @@ public class VariableNode extends Node {
     };
   }
 
+  /**
+   * Computes the hash code for this VariableNode.
+   *
+   * @return the hash code based on varIndex
+   */
   @Override
   public int hashCode() {
     return Objects.hashCode(this.varIndex);
   }
 
+  /**
+   * Returns a string representation of this VariableNode.
+   *
+   * @return a string in the format VariableNode{idx=varIndex}
+   */
   @Override
   public String toString() {
     return String.format("VariableNode{idx=%s}", this.varIndex);

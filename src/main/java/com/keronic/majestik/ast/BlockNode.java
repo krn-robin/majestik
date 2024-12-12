@@ -27,6 +27,13 @@ public class BlockNode extends Node {
     children.compileInto(Objects.requireNonNull(cb));
   }
 
+  /**
+   * Checks if this block node equals another object.
+   * Two block nodes are equal if they have equal children.
+   *
+   * @param obj the object to compare with
+   * @return true if the objects are equal, false otherwise
+   */
   @Override
   public boolean equals(Object obj) {
     return switch (obj) {

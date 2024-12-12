@@ -42,15 +42,18 @@ public class AssignmentNode extends Node {
 
   @Override
   public String toString() {
-    return new StringBuilder("AssignmentNode{lhs=")
-        .append(this.lhs)
-        .append(",rhs=")
-        .append(this.rhs)
-        .append('}')
-        .toString();
+    return String.format("AssignmentNode{lhs=%s,rhs=%s}", this.lhs, this.rhs);
   }
 
   @Override
+  @Override
+  /**
+   * Compiles this assignment node into bytecode.
+   * First compiles the right-hand side expression, then compiles the assignment
+   * to each variable on the left-hand side.
+   *
+   * @param cb The code builder to use
+   */
   protected void doCompileInto(CodeBuilder cb) {
     this.rhs.compileInto(cb);
     this.lhs.stream()

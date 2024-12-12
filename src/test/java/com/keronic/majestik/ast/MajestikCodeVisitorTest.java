@@ -58,16 +58,20 @@ class MajestikCodeVisitorTest {
     var mf = new MagikFile(MagikFile.DEFAULT_URI, ("write(0)%n").formatted());
 
     // Execute
-    var n = (CompoundNode) mcv.scanFile(mf);
+    var node = mcv.scanFile(mf);
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var n = (CompoundNode) node;
 
     // Verify
-    assertEquals(1, n.getChildCount());
+    assertEquals(1, n.getChildCount(), "Expected one child node");
     n = (CompoundNode) n.getChild(0);
-    assertEquals(new IdentifierNode("write"), n.getChild(0));
+    assertEquals(new IdentifierNode("write"), n.getChild(0), "Expected write identifier");
 
-    // FIXME: Assert on the hashCode now; direct equality does not work
-    assertEquals(
-        new InvocationNode(new CompoundNode(new NumberNode(0))).hashCode(),
-        n.getChild(1).hashCode());
+    var expectedInvocation = new InvocationNode(new CompoundNode(new NumberNode(0)));
+    var actualInvocation = n.getChild(1);
+    assertInstanceOf(InvocationNode.class, actualInvocation, "Expected InvocationNode");
+    assertEquals(expectedInvocation.hashCode(), actualInvocation.hashCode(), 
+        "Expected matching invocation nodes");
   }
 }
