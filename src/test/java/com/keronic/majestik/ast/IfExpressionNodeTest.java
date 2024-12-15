@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 class IfExpressionNodeTest extends NodeTest {
+  @Test
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new IfExpressionNode(new BooleanNode(true), new CompoundNode(), new CompoundNode());
     var node2 = new IfExpressionNode(new BooleanNode(true), new CompoundNode(), new CompoundNode());
