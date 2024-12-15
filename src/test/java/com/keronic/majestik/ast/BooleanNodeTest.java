@@ -67,4 +67,10 @@ class BooleanNodeTest extends NodeTest {
     assertEquals("java/lang/Boolean", falsefis.owner().name().toString());
     assertEquals("FALSE", falsefis.name().toString());
   }
+
+  @Test
+  void testToString() {
+    assertEquals("BooleanNode{value=true}", new BooleanNode(true).toString());
+    assertEquals("BooleanNode{value=false}", new BooleanNode(false).toString());
+  }
 }

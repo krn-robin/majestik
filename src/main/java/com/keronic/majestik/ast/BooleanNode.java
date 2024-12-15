@@ -27,7 +27,7 @@ public class BooleanNode extends Node {
 
   @Override
   public String toString() {
-    return String.format("BooleanNode{value='%s'}", value);
+    return String.format("BooleanNode{value=%s}", value);
   }
 
   @Override
