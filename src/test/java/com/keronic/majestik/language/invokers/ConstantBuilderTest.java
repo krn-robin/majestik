@@ -4,7 +4,8 @@ import module java.base;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.majestik.runtime.internal.ProcImpl;

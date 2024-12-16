@@ -1,6 +1,8 @@
 package com.keronic.majestik.language;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,19 +12,19 @@ class ResultTupleTest {
   private Object[] elems = new Object[] {"Str", "ing"};
 
   @Test
-  void testEquals() throws Throwable {
+  void testEquals() {
     assertEquals(rs1, rs2);
     assertNotEquals(rs1, elems);
   }
 
   @Test
-  void testHashcode() throws Throwable {
+  void testHashcode() {
     assertEquals(rs1.hashCode(), rs2.hashCode());
     assertNotEquals(rs1.hashCode(), elems.hashCode());
   }
 
   @Test
-  void testEmptyTuple() throws Throwable {
+  void testEmptyTuple() {
     assertSame(ResultTuple.create(), ResultTuple.create());
   }
 }

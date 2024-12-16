@@ -4,7 +4,7 @@ import module java.base;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.majestik.runtime.objects.Package;
@@ -60,11 +60,9 @@ class ProcInvokerTest {
   /**
    * Cleans up resources after each test by removing the dynamically registered class from the
    * package.
-   *
-   * @throws Throwable if an error occurs during teardown.
    */
   @AfterEach
-  void tearDown() throws Throwable {
+  void tearDown() {
     Package.put("sw", "run_test", null);
   }
 

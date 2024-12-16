@@ -1,13 +1,13 @@
 /** */
 package com.keronic;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for the PathUtils class, focusing on path manipulation
- * and file extension handling functionality.
+ * Unit tests for the PathUtils class, focusing on path manipulation and file extension handling
+ * functionality.
  */
 class PathUtilsTest {
   @Test
