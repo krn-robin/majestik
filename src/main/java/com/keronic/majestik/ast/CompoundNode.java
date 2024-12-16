@@ -79,6 +79,6 @@ public class CompoundNode extends Node {
   }
 
   protected void doCompileInto(CodeBuilder cb) {
-    Arrays.stream(children).forEach(node -> node.compileInto(cb));
+    this.forEach(node -> node.compileInto(cb));
   }
 }

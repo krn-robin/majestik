@@ -53,6 +53,25 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitIfExpression() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("_if _true _then _else _endif%n").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+    assertEquals(1, cnode.getChildCount(), "Expected one branch node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(IfExpressionNode.class, child0, "First child should be IfExpressionNode");
+  }
+
+
+  @Test
   void testVisitInvoke() {
     var mcv = new MajestikCodeVisitor();
     var mf = new MagikFile(MagikFile.DEFAULT_URI, ("write(0)%n").formatted());

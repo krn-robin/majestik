@@ -12,8 +12,8 @@ public class IfExpressionNode extends Node {
 
   public IfExpressionNode(Node condition, Node body, Node elseBody) {
     this.condition = Objects.requireNonNull(condition);
-    this.body = Objects.requireNonNull(body);
-    this.elseBody = Objects.requireNonNull(elseBody);
+    this.body = body != null ? body : new CompoundNode();
+    this.elseBody = elseBody != null ? elseBody : new CompoundNode();
   }
 
   @Override
