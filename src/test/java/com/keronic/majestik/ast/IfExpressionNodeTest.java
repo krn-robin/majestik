@@ -1,6 +1,9 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -45,5 +48,43 @@ class IfExpressionNodeTest extends NodeTest {
 
     // Test inequality
     assertNotEquals(node1.hashCode(), node3.hashCode());
+  }
+
+  @Test
+  void testToString() {
+    var node = new IfExpressionNode(new BooleanNode(true), new CompoundNode(), new CompoundNode());
+    assertEquals(
+        "IfExpressionNode{condition=BooleanNode{value=true},body=CompoundNode{children=[]},else=CompoundNode{children=[]}}",
+        node.toString());
+  }
+
+  @Test
+  void shouldGenerateBranchInstructions() {
+    var nnode = new NoOperationNode();
+    var node = new IfExpressionNode(new BooleanNode(true), nnode, nnode);
+    var cnode = new CompoundNode(node, nnode);
+    var code = this.compileInto(cnode::compileInto);
+
+    assertEquals(9, code.elementList().size());
+    var cel = code.elementList().toArray(new CodeElement[0]);
+
+    assertInstanceOf(FieldInstruction.class, cel[0]);
+    assertInstanceOf(InvokeInstruction.class, cel[1]);
+    assertInstanceOf(BranchInstruction.class, cel[2]);
+    assertInstanceOf(NopInstruction.class, cel[3]);
+    assertInstanceOf(BranchInstruction.class, cel[4]);
+    assertInstanceOf(LabelTarget.class, cel[5]);
+    assertInstanceOf(NopInstruction.class, cel[6]);
+    assertInstanceOf(LabelTarget.class, cel[7]);
+    assertInstanceOf(NopInstruction.class, cel[8]);
+
+    var invoke = (InvokeInstruction) cel[1];
+    assertEquals("should_be_boolean", invoke.name().toString());
+
+    var branch0 = (BranchInstruction) cel[2];
+    assertEquals(cel[5], branch0.target());
+
+    var branch1 = (BranchInstruction) cel[4];
+    assertEquals(cel[7], branch1.target());
   }
 }

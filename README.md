@@ -10,7 +10,7 @@ Components
 Majestik is composed of two core components:
 1. Compiler: This component translates the AST produced by Magik-Tools' Magik-Squid into JVM bytecode using the Class-File API.
 
-   Currently, only supports literal types `boolean`, `string`, `integer` and `float`; as well as the `invoke` expressions.
+   Currently, only supports literal types `boolean`, `string`, `integer` and `float`; as well as the `invoke` and the `if`/`then`/`else` expressions.
 2. Runtime: provides a standard library with basic functionality to run a Magik program.
 
    As of now, only the `write` variable in the `sw` package has a barebones implementation.
@@ -32,8 +32,13 @@ _block
   flt << 5.4321
   write(flt)
 
-  bool << _true
-  write(bool)
+  bool << _false
+  _if bool
+  _then
+    write("fail")
+  _else
+    write("success")
+  _endif
 _endblock
 ```
 
