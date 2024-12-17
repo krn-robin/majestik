@@ -1,16 +1,20 @@
-package com.keronic.language.invokers;
+package com.keronic.majestik.language.invokers;
 
 import module java.base;
 
 import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import com.keronic.majestik.runtime.internal.ProcImpl;
 import org.junit.jupiter.api.Test;
 
 public class ConstantBuilderTest {
+  private static final String TEST_PACKAGE = ConstantBuilderTest.class.getPackageName();
+  private static final String TEST_CLASS = TEST_PACKAGE + ".C";
+
   public static Object testM() {
     return Integer.valueOf(12345);
   }
@@ -36,7 +40,7 @@ public class ConstantBuilderTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                ClassDesc.of(TEST_CLASS),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });
@@ -76,7 +80,7 @@ public class ConstantBuilderTest {
     var bytes =
         ClassFile.of()
             .build(
-                ClassDesc.of(this.getClass().getPackageName() + ".C"),
+                ClassDesc.of(TEST_CLASS),
                 clb -> {
                   clb.withMethodBody("m", mtd, ACC_PUBLIC | ACC_STATIC, cb);
                 });

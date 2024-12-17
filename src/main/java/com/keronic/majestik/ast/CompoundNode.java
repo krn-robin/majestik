@@ -74,7 +74,11 @@ public class CompoundNode extends Node {
     this.stream().forEach(action);
   }
 
+  public boolean isEmpty() {
+    return this.children.length == 0;
+  }
+
   protected void doCompileInto(CodeBuilder cb) {
-    Arrays.stream(children).forEach(node -> node.compileInto(cb));
+    this.forEach(node -> node.compileInto(cb));
   }
 }

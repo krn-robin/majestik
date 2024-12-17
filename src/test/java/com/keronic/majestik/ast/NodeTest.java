@@ -6,9 +6,18 @@ import static java.lang.classfile.ClassFile.ACC_PUBLIC;
 import static java.lang.classfile.ClassFile.ACC_STATIC;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
- * Provides utility methods for testing AST node compilation into bytecode.
+ * Base test class providing common utilities and assertions for AST node tests.
+ *
+ * <p>The {@code NodeTest} class offers shared helper methods and custom assertion utilities that
+ * are used across various AST node test cases. By extending this class, individual node test
+ * classes can leverage common functionality, ensure consistency, and reduce code duplication in
+ * tests.
+ *
+ * <p>Notably, this class includes methods like {@link #assertNotEqualsNull(Object)}, which provides
+ * a standardized way to assert that objects are not equal to {@code null}.
  */
 abstract class NodeTest {
   /**
@@ -38,5 +47,15 @@ abstract class NodeTest {
     var code = cm.methods().getFirst().code().orElseThrow();
     assertInstanceOf(CodeModel.class, code, "Generated code should be an instance of CodeModel");
     return code;
+  }
+
+  /**
+   * Asserts that the provided object is not equal to null.
+   *
+   * @param actual the object to test
+   * @throws AssertionError if actual equals null
+   */
+  public static void assertNotEqualsNull(Object actual) {
+    assertNotEquals(actual, null);
   }
 }

@@ -4,6 +4,7 @@ import module java.base;
 
 import com.sonar.sslr.api.AstNode;
 import java.lang.System.Logger.Level;
+import nl.ramsolutions.sw.magik.api.MagikGrammar;
 
 public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   private static final System.Logger LOGGER =
@@ -28,10 +29,25 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitFalse(final AstNode node) {
+    return new BooleanNode(false);
+  }
+
+  @Override
   protected Node visitIdentifier(final AstNode node) {
     var varname = node.getTokenValue();
     var varidx = this.varMap.get(varname);
     return varidx == null ? new IdentifierNode(varname) : new VariableNode(varidx);
+  }
+
+  @Override
+  protected Node visitIfExpression(final AstNode node) {
+    var expression = this.visit(node.getFirstChild(MagikGrammar.CONDITIONAL_EXPRESSION));
+
+    var ifbody = this.visit(node.getFirstChild(MagikGrammar.BODY));
+    var elsebody = this.visit(node.getFirstChild(MagikGrammar.ELSE));
+
+    return new IfExpressionNode(expression, ifbody, elsebody);
   }
 
   @Override
@@ -56,7 +72,9 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
       var number = NumberFormat.getInstance(Locale.ROOT).parse(numberString);
       return new NumberNode(number);
     } catch (ParseException e) {
-      LOGGER.log(Level.ERROR, () -> String.format("Error parsing number '%s': %s", numberString, e.getMessage()));
+      LOGGER.log(
+          Level.ERROR,
+          () -> String.format("Error parsing number '%s': %s", numberString, e.getMessage()));
       throw new RuntimeException("Failed to parse number: " + numberString, e);
     }
   }
@@ -102,5 +120,10 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
       throw new IllegalArgumentException("String is not properly quoted.");
 
     return quotedString.substring(1, quotedString.length() - 1);
+  }
+
+  @Override
+  protected Node visitTrue(final AstNode node) {
+    return new BooleanNode(true);
   }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-class AssignmentNodeTest {
+class AssignmentNodeTest extends NodeTest {
   @Test
   void testEquals() {
     var node1 = new AssignmentNode(new CompoundNode(), new CompoundNode());
@@ -14,7 +14,7 @@ class AssignmentNodeTest {
     assertEquals(node1, node2);
 
     assertNotEquals(node1, new CompoundNode());
-    assertNotEquals(node2, null);
+    assertNotEqualsNull(node2);
   }
 
   @Test

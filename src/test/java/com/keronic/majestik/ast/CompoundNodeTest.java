@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * Unit tests for CompoundNode class, verifying equality and hash code functionality for AST
  * compound nodes.
  */
-class CompoundNodeTest {
+class CompoundNodeTest extends NodeTest {
   @Test
   void testEquals() {
     // Test empty nodes
@@ -44,7 +44,7 @@ class CompoundNodeTest {
     assertNotEquals(node1, node3);
 
     // Test inequality with null
-    assertNotEquals(node1, null);
+    assertNotEqualsNull(node1);
 
     // Test inequality with different type
     assertNotEquals(node1, new NumberNode(5));

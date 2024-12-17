@@ -8,11 +8,13 @@ public final class ConstantDescs {
   // @see java.base/java.lang.constant.ConstantDescs#CLASS_INIT_NAME
   public static final String CLASS_INIT_NAME = java.lang.constant.ConstantDescs.CLASS_INIT_NAME;
 
+  public static final ClassDesc CD_boolean = java.lang.constant.ConstantDescs.CD_boolean;
 	public static final ClassDesc CD_double = java.lang.constant.ConstantDescs.CD_double;
   public static final ClassDesc CD_int = java.lang.constant.ConstantDescs.CD_int;
 	public static final ClassDesc CD_long = java.lang.constant.ConstantDescs.CD_long;
   public static final ClassDesc CD_void = java.lang.constant.ConstantDescs.CD_void;
 
+  public static final ClassDesc CD_Boolean = java.lang.constant.ConstantDescs.CD_Boolean;
 	public static final ClassDesc CD_CallSite = java.lang.constant.ConstantDescs.CD_CallSite;
   public static final ClassDesc CD_Class = java.lang.constant.ConstantDescs.CD_Class;
 	public static final ClassDesc CD_Double = java.lang.constant.ConstantDescs.CD_Double;
@@ -31,18 +33,19 @@ public final class ConstantDescs {
       ClassDesc.of("com.keronic.majestik.language.invokers.DynamicAccessor");
   public static final ClassDesc CD_GlobalAccessor =
       ClassDesc.of("com.keronic.majestik.language.invokers.GlobalAccessor");
+  public static final ClassDesc CD_MagikObjectUtils =
+      ClassDesc.of("com.keronic.majestik.language.utils.MagikObjectUtils");
   public static final ClassDesc CD_ProcInvoker =
       ClassDesc.of("com.keronic.majestik.language.invokers.ProcInvoker");
   public static final ClassDesc CD_TupleBuilder =
       ClassDesc.of("com.keronic.majestik.language.invokers.TupleBuilder");
 
-  public static final DirectMethodHandleDesc DYNAMIC_STORER_BSM =
-      java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
-          CD_DynamicAccessor, "bootstrapStorer", CD_CallSite, CD_String);
-
   public static final DirectMethodHandleDesc BSM_BINARY_DISPATCHER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_BinaryDispatcher, "bootstrap", CD_CallSite);
+  public static final DirectMethodHandleDesc BSM_DYNAMIC_STORER =
+      java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
+          CD_DynamicAccessor, "bootstrapStorer", CD_CallSite, CD_String);
   public static final DirectMethodHandleDesc BSM_GLOBAL_FETCHER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_GlobalAccessor, "bootstrapFetcher2", CD_CallSite, CD_String, CD_String);
@@ -73,6 +76,8 @@ public final class ConstantDescs {
 
   public static final MethodTypeDesc MTD_void = java.lang.constant.ConstantDescs.MTD_void;
 
+  public static final MethodTypeDesc MTD_booleanObject =
+      MethodTypeDesc.of(ConstantDescs.CD_boolean, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_Doubledouble =
       MethodTypeDesc.of(ConstantDescs.CD_Double, ConstantDescs.CD_double);
   public static final MethodTypeDesc MTD_Longlong =

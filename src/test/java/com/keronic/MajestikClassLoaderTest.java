@@ -2,7 +2,9 @@ package com.keronic;
 
 import module java.base;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.keronic.majestik.constant.ConstantDescs;
 import org.junit.jupiter.api.AfterEach;
@@ -35,11 +37,11 @@ class MajestikClassLoaderTest {
             clb ->
                 clb.withMethodBody(
                     ConstantDescs.INIT_NAME,
-                        ConstantDescs.MTD_void,
-                        ClassFile.ACC_PUBLIC,
-                        cb ->
-                            cb.aload(0)
-                                .invokespecial(
+                    ConstantDescs.MTD_void,
+                    ClassFile.ACC_PUBLIC,
+                    cb ->
+                        cb.aload(0)
+                            .invokespecial(
                                 ConstantDescs.CD_Object,
                                 ConstantDescs.INIT_NAME,
                                 ConstantDescs.MTD_void)
@@ -69,9 +71,9 @@ class MajestikClassLoaderTest {
           classLoader.findClass("magik.Q.NonExistingClass");
         });
     assertThrows(
-	    ClassNotFoundException.class,
-	    () -> {
-	      classLoader.findClass("com.example.NonExistingClass");
+        ClassNotFoundException.class,
+        () -> {
+          classLoader.findClass("com.example.NonExistingClass");
         });
   }
 }

@@ -34,11 +34,14 @@ public abstract class MajestikAbstractVisitor<T> {
     if (nodeType instanceof MagikGrammar type) {
       return switch (type) {
         case ASSIGNMENT_EXPRESSION -> visitAssignmentExpression(node);
+        case FALSE -> visitFalse(node);
         case IDENTIFIER -> visitIdentifier(node);
+        case IF -> visitIfExpression(node);
         case MAGIK -> visitMagik(node);
         case NUMBER -> visitNumber(node);
         case PROCEDURE_INVOCATION -> visitProcedureInvocation(node);
         case STRING -> visitString(node);
+        case TRUE -> visitTrue(node);
         default -> visitDefault(node);
       };
     }
@@ -83,12 +86,32 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   /**
+   * Visits a false literal node.
+   *
+   * @param node the AST node representing the false literal
+   * @return result of the visit operation
+   */
+  protected T visitFalse(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  /**
    * Visits an identifier node.
    *
    * @param node the AST node representing the identifier
    * @return result of the visit operation
    */
   protected T visitIdentifier(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  /**
+   * Visits an if expression node.
+   *
+   * @param node the AST node representing the if expression
+   * @return result of the visit operation
+   */
+  protected T visitIfExpression(final AstNode node) {
     return this.visitDefault(node);
   }
 
@@ -105,6 +128,16 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   protected T visitString(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  /**
+   * Visits a true literal node.
+   *
+   * @param node the AST node representing the true literal
+   * @return result of the visit operation
+   */
+  protected T visitTrue(final AstNode node) {
     return this.visitDefault(node);
   }
 }
