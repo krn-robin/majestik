@@ -46,6 +46,14 @@ class BooleanNodeTest extends NodeTest {
     var node1 = new BooleanNode(true);
     var node2 = new BooleanNode(true);
     var node3 = new BooleanNode(false);
+
+    // Test consistency
+    assertEquals(node1.hashCode(), node1.hashCode(), "Hash code should be consistent");
+
+    // Test with compound expression
+    var compound = new CompoundNode(node1, node2);
+    assertNotEquals(node1.hashCode(), compound.hashCode());
+
     assertEquals(node1.hashCode(), node2.hashCode());
 
     // Test inequality
