@@ -21,7 +21,7 @@ public class NoOperationNode extends Node {
 
   @Override
   public int hashCode() {
-    return HASHCODE;
+    return NO_OPERATION_HASH;
   }
 
   @Override

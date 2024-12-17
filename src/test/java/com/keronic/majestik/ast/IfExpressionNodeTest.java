@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class IfExpressionNodeTest extends NodeTest {
-  @Test
   @Test
   @DisplayName("If expression node equality tests")
   void shouldBeEqualWhenValuesAreTheSame() {
