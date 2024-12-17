@@ -10,6 +10,9 @@ import com.keronic.majestik.constant.ConstantDescs;
 import org.junit.jupiter.api.Test;
 
 /** */
+/**
+ * Tests for the GlobalAccessor class which handles global variable storage and retrieval.
+ */
 class GlobalAccessorTest {
   private static final String TEST_PACKAGE = GlobalAccessorTest.class.getPackageName();
   private static final String TEST_CLASS = TEST_PACKAGE + ".C";

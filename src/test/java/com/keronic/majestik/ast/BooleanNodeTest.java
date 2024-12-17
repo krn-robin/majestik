@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class BooleanNodeTest extends NodeTest {
   @Test
+  @DisplayName("Boolean node equality tests")
   void shouldBeEqualWhenValuesAreTheSame() {
     var node1 = new BooleanNode(true);
     var node2 = new BooleanNode(true);
@@ -68,9 +69,12 @@ class BooleanNodeTest extends NodeTest {
     assertEquals("FALSE", falsefis.name().toString());
   }
 
-  @Test
-  void testToString() {
-    assertEquals("BooleanNode{value=true}", new BooleanNode(true).toString());
-    assertEquals("BooleanNode{value=false}", new BooleanNode(false).toString());
+  @ParameterizedTest
+  @CsvSource({
+      "true,  BooleanNode{value=true}",
+      "false, BooleanNode{value=false}"
+  })
+  void testToString(boolean input, String expected) {
+      assertEquals(expected, new BooleanNode(input).toString());
   }
 }

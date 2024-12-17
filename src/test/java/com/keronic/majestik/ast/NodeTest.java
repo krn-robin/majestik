@@ -39,6 +39,12 @@ abstract class NodeTest {
     return code;
   }
 
+  /**
+   * Asserts that the provided object is not equal to null.
+   *
+   * @param actual the object to test
+   * @throws AssertionError if actual equals null
+   */
   public static void assertNotEqualsNull(Object actual) {
     assertNotEquals(actual, null);
   }

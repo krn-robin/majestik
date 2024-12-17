@@ -83,8 +83,10 @@ class IfExpressionNodeTest extends NodeTest {
 
     var branch0 = (BranchInstruction) cel[2];
     assertEquals(cel[5], branch0.target());
+    assertEquals(Opcode.IFEQ, branch0.opcode());
 
     var branch1 = (BranchInstruction) cel[4];
     assertEquals(cel[7], branch1.target());
+    assertEquals(Opcode.GOTO, branch1.opcode());
   }
 }

@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for {@link NoOperationNode} class.
+ */
 class NoOperationNodeTest extends NodeTest {
   @Test
   void shouldBeEqualWhenValuesAreTheSame() {

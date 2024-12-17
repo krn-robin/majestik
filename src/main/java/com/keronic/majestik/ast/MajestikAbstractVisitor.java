@@ -85,6 +85,12 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visitDefault(node);
   }
 
+  /**
+   * Visits a false literal node.
+   *
+   * @param node the AST node representing the false literal
+   * @return result of the visit operation
+   */
   protected T visitFalse(final AstNode node) {
     return this.visitDefault(node);
   }
@@ -99,6 +105,12 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visitDefault(node);
   }
 
+  /**
+   * Visits an if expression node.
+   *
+   * @param node the AST node representing the if expression
+   * @return result of the visit operation
+   */
   protected T visitIfExpression(final AstNode node) {
     return this.visitDefault(node);
   }
@@ -119,6 +131,12 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visitDefault(node);
   }
 
+  /**
+   * Visits a true literal node.
+   *
+   * @param node the AST node representing the true literal
+   * @return result of the visit operation
+   */
   protected T visitTrue(final AstNode node) {
     return this.visitDefault(node);
   }

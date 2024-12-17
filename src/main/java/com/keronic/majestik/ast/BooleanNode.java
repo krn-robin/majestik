@@ -7,6 +7,11 @@ import com.keronic.majestik.constant.ConstantDescs;
 public class BooleanNode extends Node {
   private final boolean value;
 
+  /**
+   * Creates a new BooleanNode with the specified value.
+   *
+   * @param value the boolean value to be represented by this node
+   */
   public BooleanNode(boolean value) {
     this.value = value;
   }

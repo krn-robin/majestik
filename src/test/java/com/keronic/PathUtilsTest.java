@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for the PathUtils class, focusing on path manipulation and file extension handling
- * functionality.
+ * functionality (e.g., extracting base names from files with single/double extensions,
+ * handling special cases like empty strings and spaces).
  */
 class PathUtilsTest {
   @Test
