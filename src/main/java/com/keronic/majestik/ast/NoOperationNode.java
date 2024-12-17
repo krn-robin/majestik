@@ -10,7 +10,7 @@ import module java.base;
  * deliberately left empty.
  */
 public class NoOperationNode extends Node {
-  private final int HASHCODE = Objects.hashCode("nop");
+  private static final int NO_OPERATION_HASH = Objects.hashCode("nop");
 
   public NoOperationNode() {}
 
@@ -26,7 +26,7 @@ public class NoOperationNode extends Node {
 
   @Override
   public String toString() {
-    return String.format("NoOperationNode{}");
+    return "NoOperationNode{}";
   }
 
   @Override
