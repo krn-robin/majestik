@@ -44,10 +44,15 @@ class IfExpressionNodeTest extends NodeTest {
     var node2 = new IfExpressionNode(new BooleanNode(true), new CompoundNode(), new CompoundNode());
     var node3 =
         new IfExpressionNode(new BooleanNode(false), new CompoundNode(), new CompoundNode());
+    var node4 =
+        new IfExpressionNode(new BooleanNode(true), new NumberNode(42), new StringNode("else"));
     assertEquals(node1.hashCode(), node2.hashCode());
 
     // Test inequality
     assertNotEquals(node1.hashCode(), node3.hashCode());
+
+    // Test hash code consistency
+    assertEquals(node4.hashCode(), node4.hashCode(), "Hash code should be consistent");
   }
 
   @Test

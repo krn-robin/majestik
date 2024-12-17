@@ -8,6 +8,7 @@ Components
 
 ----------
 Majestik is composed of two core components:
+
 1. Compiler: This component translates the AST produced by Magik-Tools' Magik-Squid into JVM bytecode using the Class-File API.
 
    Currently, only supports literal types `boolean`, `string`, `integer` and `float`; as well as the `invoke` and the `if`/`then`/`else` expressions.
