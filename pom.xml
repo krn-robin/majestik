@@ -7,6 +7,7 @@
   <name>majestik</name>
   <url>http://www.keronic.com</url>
   <properties>
+    <dependency.junit.version>5.11.3</dependency.junit.version>
     <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
     <maven.compiler.source>23</maven.compiler.source>
     <maven.compiler.target>23</maven.compiler.target>
@@ -23,14 +24,8 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.11.3</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>5.14.2</version>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${dependency.junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

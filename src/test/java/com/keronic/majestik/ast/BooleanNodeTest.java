@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class BooleanNodeTest extends NodeTest {
   @Test
@@ -70,11 +72,8 @@ class BooleanNodeTest extends NodeTest {
   }
 
   @ParameterizedTest
-  @CsvSource({
-      "true,  BooleanNode{value=true}",
-      "false, BooleanNode{value=false}"
-  })
+  @CsvSource({"true,  BooleanNode{value=true}", "false, BooleanNode{value=false}"})
   void testToString(boolean input, String expected) {
-      assertEquals(expected, new BooleanNode(input).toString());
+    assertEquals(expected, new BooleanNode(input).toString());
   }
 }
