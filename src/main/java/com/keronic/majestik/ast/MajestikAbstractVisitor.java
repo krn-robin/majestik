@@ -33,6 +33,7 @@ public abstract class MajestikAbstractVisitor<T> {
     final var nodeType = Objects.requireNonNull(node).getType();
     if (nodeType instanceof MagikGrammar type) {
       return switch (type) {
+        case ADDITIVE_EXPRESSION -> visitAdditiveExpression(node);
         case ASSIGNMENT_EXPRESSION -> visitAssignmentExpression(node);
         case FALSE -> visitFalse(node);
         case IDENTIFIER -> visitIdentifier(node);
@@ -82,6 +83,10 @@ public abstract class MajestikAbstractVisitor<T> {
    * @return result of the visit operation
    */
   protected T visitAssignmentExpression(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  protected T visitAdditiveExpression(final AstNode node) {
     return this.visitDefault(node);
   }
 

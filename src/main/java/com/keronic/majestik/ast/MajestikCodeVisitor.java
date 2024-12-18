@@ -17,13 +17,20 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   public MajestikCodeVisitor() {}
 
   @Override
+  protected Node visitAdditiveExpression(final AstNode node) {
+    var lhs = this.visit(node.getChildren().getFirst());
+    var rhs = this.visit(node.getChildren().getLast());
+    return new AdditiveExpressionNode(lhs, rhs);
+  }
+
+  @Override
   protected Node visitAssignmentExpression(final AstNode node) {
     var varname = node.getChildren().getFirst().getTokenValue();
     if (!this.varMap.containsKey(varname)) this.varMap.put(varname, this.varMap.size());
     var varidx = this.varMap.get(varname);
 
-    var lhs = new CompoundNode(new VariableNode(varidx));
-    var rhs = new CompoundNode(this.visit(node.getChildren().getLast()));
+    var lhs = new VariableNode(varidx);
+    var rhs = this.visit(node.getChildren().getLast());
 
     return new AssignmentNode(lhs, rhs);
   }
