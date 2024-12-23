@@ -1,0 +1,8 @@
+_block
+	_if 987 _is 987
+	_then
+		write("success")
+	_else
+		write("FAIL")
+	_endif
+_endblock

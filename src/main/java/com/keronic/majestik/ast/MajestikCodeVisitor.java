@@ -36,6 +36,19 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitEqualityExpression(final AstNode node) {
+    var lhs = this.visit(node.getChildren().getFirst());
+    var rhs = this.visit(node.getChildren().getLast());
+    var operator = node.getChildren().get(1).getTokenValue();
+
+    if (!"_is".equals(operator))
+      throw new UnsupportedOperationException(
+          String.format("Not implemented: operator %s ", operator));
+
+    return new IdentityExpressionNode(lhs, rhs);
+  }
+
+  @Override
   protected Node visitFalse(final AstNode node) {
     return new BooleanNode(false);
   }
@@ -52,7 +65,9 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     var expression = this.visit(node.getFirstChild(MagikGrammar.CONDITIONAL_EXPRESSION));
 
     var ifbody = this.visit(node.getFirstChild(MagikGrammar.BODY));
-    var elsebody = this.visit(node.getFirstChild(MagikGrammar.ELSE));
+
+    var elsechild = node.getFirstChild(MagikGrammar.ELSE);
+    var elsebody = elsechild != null ? this.visit(elsechild) : null;
 
     return new IfExpressionNode(expression, ifbody, elsebody);
   }

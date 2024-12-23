@@ -10,10 +10,12 @@ public class IfExpressionNode extends Node {
   private final Node body;
   private final Node elseBody;
 
+  static final Node EMPTYCOMPOUNDNODE = new CompoundNode();
+
   public IfExpressionNode(Node condition, Node body, Node elseBody) {
     this.condition = Objects.requireNonNull(condition);
-    this.body = body != null ? body : new CompoundNode();
-    this.elseBody = elseBody != null ? elseBody : new CompoundNode();
+    this.body = body != null ? body : EMPTYCOMPOUNDNODE;
+    this.elseBody = elseBody != null ? elseBody : EMPTYCOMPOUNDNODE;
   }
 
   @Override

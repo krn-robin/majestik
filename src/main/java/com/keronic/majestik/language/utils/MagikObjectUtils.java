@@ -16,6 +16,15 @@ public class MagikObjectUtils {
     }
   }
 
+  public static boolean is(Object obj1, Object obj2) {
+    if (obj2 == null) return obj1 == obj2;
+    return switch (obj1) {
+      case null -> obj1 == obj2;
+      case Number num -> num.equals(obj2);
+      default -> false;
+    };
+  }
+
   /** Private constructor to prevent instantiation. */
   private MagikObjectUtils() {}
 }
