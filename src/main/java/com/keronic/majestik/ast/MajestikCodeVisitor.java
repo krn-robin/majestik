@@ -100,6 +100,15 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitCharacter(final AstNode node) {
+    LOGGER.log(
+      Level.TRACE,
+      () -> String.format("Visiting Character node: %s %s", node.getType(), node.getTokenValue()));
+
+    return new CharacterNode(node.getTokenValue().charAt(0));
+  }
+
+  @Override
   protected Node mergeResults(final Node first, final Node second) {
     if (second == null) return first;
     if (first == null) return second;

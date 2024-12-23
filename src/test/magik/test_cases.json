@@ -21,6 +21,11 @@
             "expected": "Hello\nWorld!"
         },
         {
+            "file": "write_character.magik",
+            "description": "Test character output",
+            "expected": "a\nß\n "
+        },
+        {
             "file": "ifexpression.magik",
             "description": "Test if expression",
             "expected": "success"
