@@ -9,7 +9,7 @@ public class Utils {
 
   public static MethodHandle findStatic(Class<?> refc, String name, MethodType type) {
     try {
-			return MethodHandles.lookup().findStatic(refc, name, type);
+      return MethodHandles.lookup().findStatic(refc, name, type);
     } catch (Exception e) {
       throw new MajestikRuntimeException(e);
     }

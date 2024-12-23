@@ -14,9 +14,9 @@ public class DynamicAccessor {
   /**
    * @param o
    */
-	public static void todo(Object o) {
-		// TODO: implement lookup of dynamic variables
-	}
+  public static void todo(Object o) {
+    // TODO: implement lookup of dynamic variables
+  }
 
   /**
    * @param lookup
@@ -29,8 +29,8 @@ public class DynamicAccessor {
   public static CallSite bootstrapStorer(
       MethodHandles.Lookup lookup, String name, MethodType type, String packageName) {
     // System.out.format("\n\n--> %s, %s, %s, %s\n", lookup, name, type, packageName);
-        return new ConstantCallSite(todo);
-    }
+    return new ConstantCallSite(todo);
+  }
 
   /** Private constructor to prevent instantiation. */
   private DynamicAccessor() {}

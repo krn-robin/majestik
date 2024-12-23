@@ -16,7 +16,7 @@ public class TupleBuilder {
   public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
     return new ConstantCallSite(
         tuplecreator.asCollector(Object.class.arrayType(), type.parameterCount()));
-    }
+  }
 
   /** Private constructor to prevent instantiation. */
   private TupleBuilder() {}
