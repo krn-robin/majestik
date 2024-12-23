@@ -21,6 +21,11 @@
             "expected": "Hello\nWorld!"
         },
         {
+	    "file": "addition.magik",
+	    "description": "Test addition",
+	    "expected": "66666"
+	},
+        {
             "file": "ifexpression.magik",
             "description": "Test if expression",
             "expected": "success"
