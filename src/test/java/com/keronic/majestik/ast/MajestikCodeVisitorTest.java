@@ -70,7 +70,6 @@ class MajestikCodeVisitorTest {
     assertInstanceOf(IfExpressionNode.class, child0, "First child should be IfExpressionNode");
   }
 
-
   @Test
   void testVisitInvoke() {
     var mcv = new MajestikCodeVisitor();

@@ -11,7 +11,7 @@ public class ProcImpl implements Proc {
   private static final System.Logger LOGGER =
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
 
-	public MethodHandle methodHandle;
+  public MethodHandle methodHandle;
 
   /**
    * Constructs a ProcImpl with the specified parameters.
@@ -44,18 +44,18 @@ public class ProcImpl implements Proc {
             : MethodType.genericMethodType(numArgs);
 
     this.methodHandle = Utils.findStatic(aClass, jMethodName, mt);
-	}
+  }
 
   public ProcImpl(
       Class<?> aClass, String jMethodName, String magikMethodName, int numArgs, int mandatoryArgs) {
-		this(aClass, jMethodName, magikMethodName, numArgs, mandatoryArgs, false);
-	}
+    this(aClass, jMethodName, magikMethodName, numArgs, mandatoryArgs, false);
+  }
 
   public ProcImpl(Class<?> aClass, String jMethodName, String magikMethodName, int numArgs) {
-		this(aClass, jMethodName, magikMethodName, numArgs, numArgs);
-	}
+    this(aClass, jMethodName, magikMethodName, numArgs, numArgs);
+  }
 
   public Object invoke(Object... arguments) throws Throwable {
-		return methodHandle.invokeWithArguments(arguments);
-    }
+    return methodHandle.invokeWithArguments(arguments);
+  }
 }
