@@ -1,0 +1,3 @@
+_block
+	write(54321+12345)
+_endblock
