@@ -1,0 +1,5 @@
+_block
+    write(%a)
+	write(%u00df)
+	write(%space)
+_endblock

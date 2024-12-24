@@ -42,6 +42,7 @@ public abstract class MajestikAbstractVisitor<T> {
         case NUMBER -> visitNumber(node);
         case PROCEDURE_INVOCATION -> visitProcedureInvocation(node);
         case STRING -> visitString(node);
+        case CHARACTER -> visitCharacter(node);
         case TRUE -> visitTrue(node);
         default -> visitDefault(node);
       };
@@ -133,6 +134,10 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   protected T visitString(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  protected T visitCharacter(final AstNode node) {
     return this.visitDefault(node);
   }
 
