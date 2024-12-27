@@ -1,6 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
 import java.lang.classfile.CodeBuilder;
 import java.util.Objects;
 
@@ -39,7 +38,7 @@ public class CharacterNode extends Node {
 
   @Override
   protected void doCompileInto(CodeBuilder cb) {
-    cb.loadConstant((int)value);
+    cb.loadConstant((int) value);
     cb.invokestatic(ConstantDescs.CD_Character, "valueOf", ConstantDescs.MTD_Characterchar);
   }
 }

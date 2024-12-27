@@ -71,6 +71,25 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitCharacter() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("%%a").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+    assertEquals(1, cnode.getChildCount(), "Expected one character node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(CharacterNode.class, child0, "First child should be CharacterNode");
+    assertEquals(new CharacterNode('a'), child0);
+  }
+
+  @Test
   void testVisitIfExpression() {
     // Test input
     var mcv = new MajestikCodeVisitor();
@@ -134,24 +153,5 @@ class MajestikCodeVisitorTest {
     assertInstanceOf(StringNode.class, child1, "Second child should be StringNode");
     assertEquals(new StringNode("string1"), child0);
     assertEquals(new StringNode("string2"), child1);
-  }
-
-  @Test
-  void testVisitCharacter() {
-    // Test input
-    var mcv = new MajestikCodeVisitor();
-    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("write(%%a)").formatted());
-
-    // Execute
-    var node = mcv.scanFile(mf);
-
-    // Verify
-    assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
-    assertEquals(1, cnode.getChildCount(), "Expected one character node");
-    var child0 = cnode.getChild(0);
-    assertInstanceOf(CharacterNode.class, child0, "First child should be CharacterNode");
-    assertEquals(new CharacterNode('a'), child0);
   }
 }
