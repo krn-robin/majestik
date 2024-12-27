@@ -20,25 +20,20 @@
             "description": "Test string output with newline",
             "expected": "Hello\nWorld!"
         },
-	{
-	    "file": "addition.magik",
-	    "description": "Test addition",
-	    "expected": "66666"
-	},
         {
-	    "file": "addition.magik",
-	    "description": "Test addition",
-	    "expected": "66666"
-	},
+            "file": "addition.magik",
+            "description": "Test addition",
+            "expected": "66666"
+        },
         {
             "file": "ifexpression.magik",
             "description": "Test if expression",
             "expected": "success"
         },
-	{
-	    "file": "identity_comparison.magik",
-	    "description": "Test if expression",
-	    "expected": "success"
-	}
+        {
+            "file": "identity_comparison.magik",
+            "description": "Test if expression",
+            "expected": "success"
+        }
     ]
 }
