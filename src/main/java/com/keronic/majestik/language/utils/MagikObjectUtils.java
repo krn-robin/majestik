@@ -21,7 +21,7 @@ public class MagikObjectUtils {
     return switch (obj1) {
       case null -> obj1 == obj2;
       case Number num -> num.equals(obj2);
-      default -> false;
+      default -> obj1 == obj2;
     };
   }
 
