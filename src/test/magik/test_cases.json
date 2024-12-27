@@ -32,7 +32,7 @@
         },
         {
             "file": "identity_comparison.magik",
-            "description": "Test if expression",
+            "description": "Test identity comparison using _is operator",
             "expected": "success"
         }
     ]
