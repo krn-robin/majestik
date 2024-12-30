@@ -34,6 +34,11 @@
             "file": "ifexpression.magik",
             "description": "Test if expression",
             "expected": "success"
+        },
+        {
+            "file": "identity_comparison.magik",
+            "description": "Test identity comparison using _is operator",
+            "expected": "success"
         }
     ]
 }
