@@ -92,6 +92,10 @@ public abstract class MajestikAbstractVisitor<T> {
     return this.visitDefault(node);
   }
 
+  protected T visitCharacter(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
   protected T visitEqualityExpression(final AstNode node) {
     return this.visitDefault(node);
   }
@@ -139,10 +143,6 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   protected T visitString(final AstNode node) {
-    return this.visitDefault(node);
-  }
-
-  protected T visitCharacter(final AstNode node) {
     return this.visitDefault(node);
   }
 
