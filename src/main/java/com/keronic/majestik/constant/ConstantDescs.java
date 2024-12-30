@@ -20,10 +20,10 @@ public final class ConstantDescs {
   public static final ClassDesc CD_Boolean = java.lang.constant.ConstantDescs.CD_Boolean;
   public static final ClassDesc CD_CallSite = java.lang.constant.ConstantDescs.CD_CallSite;
   public static final ClassDesc CD_Class = java.lang.constant.ConstantDescs.CD_Class;
-	public static final ClassDesc CD_Double = java.lang.constant.ConstantDescs.CD_Double;
-	public static final ClassDesc CD_Long = java.lang.constant.ConstantDescs.CD_Long;
-	public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
-	public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
+  public static final ClassDesc CD_Double = java.lang.constant.ConstantDescs.CD_Double;
+  public static final ClassDesc CD_Long = java.lang.constant.ConstantDescs.CD_Long;
+  public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
+  public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
   public static final ClassDesc CD_Character = java.lang.constant.ConstantDescs.CD_Character;
   public static final ClassDesc CD_char = java.lang.constant.ConstantDescs.CD_char;
 
