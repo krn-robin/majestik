@@ -72,6 +72,26 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitCharacter() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("%%a").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+
+    assertEquals(1, cnode.getChildCount(), "Expected one character node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(CharacterNode.class, child0, "First child should be CharacterNode");
+    assertEquals(new CharacterNode('a'), child0);
+  }
+
+  @Test
   void testVisitEqualityExpression() {
     // Test input
     var mcv = new MajestikCodeVisitor();
@@ -84,6 +104,7 @@ class MajestikCodeVisitorTest {
     assertNotNull(node, "Result should not be null");
     assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
     var cnode = (CompoundNode) node;
+
     assertEquals(1, cnode.getChildCount(), "Expected one equality expression node");
     var child0 = cnode.getChild(0);
     assertInstanceOf(

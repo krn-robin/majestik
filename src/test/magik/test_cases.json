@@ -21,6 +21,11 @@
             "expected": "Hello\nWorld!"
         },
         {
+            "file": "write_character.magik",
+            "description": "Test character output",
+            "expected": "a"
+        },
+        {
             "file": "addition.magik",
             "description": "Test addition",
             "expected": "66666"

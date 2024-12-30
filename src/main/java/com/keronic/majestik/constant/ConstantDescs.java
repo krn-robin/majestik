@@ -1,6 +1,9 @@
 package com.keronic.majestik.constant;
 
 import module java.base;
+import java.lang.constant.ClassDesc;
+import java.lang.constant.DirectMethodHandleDesc;
+import java.lang.constant.MethodTypeDesc;
 
 public final class ConstantDescs {
   // @see java.base/java.lang.constant.ConstantDescs#INIT_NAME
@@ -21,6 +24,8 @@ public final class ConstantDescs {
   public static final ClassDesc CD_Long = java.lang.constant.ConstantDescs.CD_Long;
   public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
   public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
+  public static final ClassDesc CD_Character = java.lang.constant.ConstantDescs.CD_Character;
+  public static final ClassDesc CD_char = java.lang.constant.ConstantDescs.CD_char;
 
   public static final ClassDesc CD_ResultTuple =
       ClassDesc.of("com.keronic.majestik.language.ResultTuple");
@@ -112,4 +117,5 @@ public final class ConstantDescs {
           ConstantDescs.CD_int);
   public static final MethodTypeDesc MTD_voidString =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_String);
+  public static final MethodTypeDesc MTD_Characterchar = MethodTypeDesc.of(ConstantDescs.CD_Character, ConstantDescs.CD_char);
 }

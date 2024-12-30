@@ -36,6 +36,18 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitCharacter(final AstNode node) {
+    LOGGER.log(
+        Level.TRACE,
+        () ->
+            String.format("Visiting Character node: %s %s", node.getType(), node.getTokenValue()));
+
+    String charString = node.getTokenValue();
+    char pureCharacter = this.normalizeCharacter(charString);
+    return new CharacterNode(pureCharacter);
+  }
+
+  @Override
   protected Node visitEqualityExpression(final AstNode node) {
     var lhs = this.visit(node.getChildren().getFirst());
     var rhs = this.visit(node.getChildren().getLast());
@@ -122,6 +134,11 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitTrue(final AstNode node) {
+    return new BooleanNode(true);
+  }
+
+  @Override
   protected Node mergeResults(final Node first, final Node second) {
     if (second == null) return first;
     if (first == null) return second;
@@ -144,8 +161,14 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     return quotedString.substring(1, quotedString.length() - 1);
   }
 
-  @Override
-  protected Node visitTrue(final AstNode node) {
-    return new BooleanNode(true);
+  private char normalizeCharacter(final String characterString) {
+    if (characterString.length() < 2 || characterString.charAt(0) != '%')
+      throw new IllegalArgumentException("String length is too short to be valid.");
+
+    if (characterString.length() > 2)
+      throw new UnsupportedOperationException(
+          String.format("Not implemented: character %s ", characterString));
+
+    return characterString.charAt(1);
   }
 }
