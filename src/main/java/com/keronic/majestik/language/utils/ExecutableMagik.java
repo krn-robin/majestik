@@ -3,7 +3,7 @@ package com.keronic.majestik.language.utils;
 
 /** */
 public interface ExecutableMagik {
-	Object execute();
+  Object execute();
 
   default void preload() {}
 }
