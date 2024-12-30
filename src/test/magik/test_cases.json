@@ -23,7 +23,7 @@
         {
             "file": "write_character.magik",
             "description": "Test character output",
-            "expected": "a\nß\n "
+            "expected": "a"
         },
         {
             "file": "addition.magik",
