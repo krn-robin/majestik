@@ -21,7 +21,6 @@ public final class ConstantDescs {
   public static final ClassDesc CD_Long = java.lang.constant.ConstantDescs.CD_Long;
   public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
   public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
-  public static final ClassDesc CD_Character = java.lang.constant.ConstantDescs.CD_Character;
 
   public static final ClassDesc CD_ResultTuple =
       ClassDesc.of("com.keronic.majestik.language.ResultTuple");
@@ -71,9 +70,6 @@ public final class ConstantDescs {
   public static final DirectMethodHandleDesc BSM_STRING_BUILDER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_ConstantBuilder, "stringBootstrap", CD_CallSite, CD_String);
-  public static final DirectMethodHandleDesc BSM_CHARACTER_BUILDER =
-      java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
-          CD_ConstantBuilder, "characterBootstrap", CD_CallSite, CD_Character);
   public static final DirectMethodHandleDesc BSM_TUPLE_BUILDER =
       java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
           CD_TupleBuilder, "bootstrap", CD_CallSite);
@@ -82,6 +78,8 @@ public final class ConstantDescs {
 
   public static final MethodTypeDesc MTD_booleanObject =
       MethodTypeDesc.of(ConstantDescs.CD_boolean, ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_booleanObjectObject =
+      MethodTypeDesc.of(ConstantDescs.CD_boolean, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_Doubledouble =
       MethodTypeDesc.of(ConstantDescs.CD_Double, ConstantDescs.CD_double);
   public static final MethodTypeDesc MTD_Longlong =
@@ -93,6 +91,8 @@ public final class ConstantDescs {
       MethodTypeDesc.of(ConstantDescs.CD_Object, ConstantDescs.CD_Object, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_ResultTupleObject =
       MethodTypeDesc.of(ConstantDescs.CD_ResultTuple, ConstantDescs.CD_Object);
+  public static final MethodTypeDesc MTD_voidboolean =
+      MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_boolean);
   public static final MethodTypeDesc MTD_voidObject =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_Object);
   public static final MethodTypeDesc MTD_voidObjectObject =

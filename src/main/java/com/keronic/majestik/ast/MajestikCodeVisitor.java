@@ -17,15 +17,35 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   public MajestikCodeVisitor() {}
 
   @Override
+  protected Node visitAdditiveExpression(final AstNode node) {
+    var lhs = this.visit(node.getChildren().getFirst());
+    var rhs = this.visit(node.getChildren().getLast());
+    return new AdditiveExpressionNode(lhs, rhs);
+  }
+
+  @Override
   protected Node visitAssignmentExpression(final AstNode node) {
     var varname = node.getChildren().getFirst().getTokenValue();
     if (!this.varMap.containsKey(varname)) this.varMap.put(varname, this.varMap.size());
     var varidx = this.varMap.get(varname);
 
-    var lhs = new CompoundNode(new VariableNode(varidx));
-    var rhs = new CompoundNode(this.visit(node.getChildren().getLast()));
+    var lhs = new VariableNode(varidx);
+    var rhs = this.visit(node.getChildren().getLast());
 
     return new AssignmentNode(lhs, rhs);
+  }
+
+  @Override
+  protected Node visitEqualityExpression(final AstNode node) {
+    var lhs = this.visit(node.getChildren().getFirst());
+    var rhs = this.visit(node.getChildren().getLast());
+    var operator = node.getChildren().get(1).getTokenValue();
+
+    if (!"_is".equals(operator))
+      throw new UnsupportedOperationException(
+          String.format("Not implemented: operator %s ", operator));
+
+    return new IdentityExpressionNode(lhs, rhs);
   }
 
   @Override
@@ -45,7 +65,9 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     var expression = this.visit(node.getFirstChild(MagikGrammar.CONDITIONAL_EXPRESSION));
 
     var ifbody = this.visit(node.getFirstChild(MagikGrammar.BODY));
-    var elsebody = this.visit(node.getFirstChild(MagikGrammar.ELSE));
+
+    var elsechild = node.getFirstChild(MagikGrammar.ELSE);
+    var elsebody = elsechild != null ? this.visit(elsechild) : null;
 
     return new IfExpressionNode(expression, ifbody, elsebody);
   }

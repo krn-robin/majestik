@@ -35,6 +35,25 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitAdditiveExpression() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("1 + 1%n").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+    assertEquals(1, cnode.getChildCount(), "Expected one addtive node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(
+        AdditiveExpressionNode.class, child0, "First child should be AdditiveExpressionNode");
+  }
+
+  @Test
   void testVisitAssignmentExpression() {
     // Test input
     var mcv = new MajestikCodeVisitor();
@@ -50,6 +69,25 @@ class MajestikCodeVisitorTest {
     assertEquals(1, cnode.getChildCount(), "Expected one assignment node");
     var child0 = cnode.getChild(0);
     assertInstanceOf(AssignmentNode.class, child0, "First child should be AssignmentNode");
+  }
+
+  @Test
+  void testVisitEqualityExpression() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("1 _is _true%n").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+    assertEquals(1, cnode.getChildCount(), "Expected one equality expression node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(
+        IdentityExpressionNode.class, child0, "First child should be IdentityExpressionNode");
   }
 
   @Test

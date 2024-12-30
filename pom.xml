@@ -39,7 +39,7 @@
           <configuration>
             <java>
               <googleJavaFormat>
-                <version>1.25.0</version>
+                <version>1.25.2</version>
                 <style>GOOGLE</style>
               </googleJavaFormat>
             </java>
