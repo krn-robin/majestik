@@ -1,9 +1,6 @@
 package com.keronic.majestik.constant;
 
 import module java.base;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.DirectMethodHandleDesc;
-import java.lang.constant.MethodTypeDesc;
 
 public final class ConstantDescs {
   // @see java.base/java.lang.constant.ConstantDescs#INIT_NAME
@@ -12,6 +9,7 @@ public final class ConstantDescs {
   public static final String CLASS_INIT_NAME = java.lang.constant.ConstantDescs.CLASS_INIT_NAME;
 
   public static final ClassDesc CD_boolean = java.lang.constant.ConstantDescs.CD_boolean;
+  public static final ClassDesc CD_char = java.lang.constant.ConstantDescs.CD_char;
   public static final ClassDesc CD_double = java.lang.constant.ConstantDescs.CD_double;
   public static final ClassDesc CD_int = java.lang.constant.ConstantDescs.CD_int;
   public static final ClassDesc CD_long = java.lang.constant.ConstantDescs.CD_long;
@@ -19,13 +17,12 @@ public final class ConstantDescs {
 
   public static final ClassDesc CD_Boolean = java.lang.constant.ConstantDescs.CD_Boolean;
   public static final ClassDesc CD_CallSite = java.lang.constant.ConstantDescs.CD_CallSite;
+  public static final ClassDesc CD_Character = java.lang.constant.ConstantDescs.CD_Character;
   public static final ClassDesc CD_Class = java.lang.constant.ConstantDescs.CD_Class;
   public static final ClassDesc CD_Double = java.lang.constant.ConstantDescs.CD_Double;
   public static final ClassDesc CD_Long = java.lang.constant.ConstantDescs.CD_Long;
   public static final ClassDesc CD_Object = java.lang.constant.ConstantDescs.CD_Object;
   public static final ClassDesc CD_String = java.lang.constant.ConstantDescs.CD_String;
-  public static final ClassDesc CD_Character = java.lang.constant.ConstantDescs.CD_Character;
-  public static final ClassDesc CD_char = java.lang.constant.ConstantDescs.CD_char;
 
   public static final ClassDesc CD_ResultTuple =
       ClassDesc.of("com.keronic.majestik.language.ResultTuple");
@@ -117,5 +114,6 @@ public final class ConstantDescs {
           ConstantDescs.CD_int);
   public static final MethodTypeDesc MTD_voidString =
       MethodTypeDesc.of(ConstantDescs.CD_void, ConstantDescs.CD_String);
-  public static final MethodTypeDesc MTD_Characterchar = MethodTypeDesc.of(ConstantDescs.CD_Character, ConstantDescs.CD_char);
+  public static final MethodTypeDesc MTD_Characterchar =
+      MethodTypeDesc.of(ConstantDescs.CD_Character, ConstantDescs.CD_char);
 }

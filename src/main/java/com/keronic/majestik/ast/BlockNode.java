@@ -18,6 +18,17 @@ public class BlockNode extends Node {
   }
 
   /**
+   * Creates a new block node with the given node.
+   *
+   * @param child The node containing the block's statement
+   * @throws IllegalArgumentException if children is null
+   */
+  public BlockNode(Node child) {
+    var children = new CompoundNode(Objects.requireNonNull(child));
+    this(children);
+  }
+
+  /**
    * Compiles this block node into the given code builder.
    *
    * @param cb The code builder to compile into
@@ -28,8 +39,8 @@ public class BlockNode extends Node {
   }
 
   /**
-   * Checks if this block node equals another object.
-   * Two block nodes are equal if they have equal children.
+   * Checks if this block node equals another object. Two block nodes are equal if they have equal
+   * children.
    *
    * @param obj the object to compare with
    * @return true if the objects are equal, false otherwise

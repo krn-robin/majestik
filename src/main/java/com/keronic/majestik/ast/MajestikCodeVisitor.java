@@ -11,10 +11,16 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
   private static final String ALLOWED_QUOTES = "\"'";
 
-  final Map<String, Integer> varMap = new ConcurrentHashMap<>();
+  final Map<String, Integer> varMap;
 
   /** Constructs a new MajestikCodeVisitor. */
-  public MajestikCodeVisitor() {}
+  public MajestikCodeVisitor() {
+    this(Collections.emptyMap());
+  }
+
+  private MajestikCodeVisitor(final Map<String, Integer> variableMap) {
+    this.varMap = new ConcurrentHashMap<>(variableMap);
+  }
 
   @Override
   protected Node visitAdditiveExpression(final AstNode node) {
@@ -33,6 +39,15 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     var rhs = this.visit(node.getChildren().getLast());
 
     return new AssignmentNode(lhs, rhs);
+  }
+
+  @Override
+  protected Node visitBlock(final AstNode node) {
+    LOGGER.log(Level.TRACE, () -> String.format("Visiting BLOCK node."));
+
+    var sub = new MajestikCodeVisitor(this.varMap);
+    var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
+    return new BlockNode(body);
   }
 
   @Override

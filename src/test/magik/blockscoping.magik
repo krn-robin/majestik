@@ -1,0 +1,9 @@
+_block
+	_block
+		a << 1
+		write(a)
+	_endblock
+	_block
+		write(a)
+	_endblock
+_endblock

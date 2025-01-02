@@ -35,6 +35,8 @@ public abstract class MajestikAbstractVisitor<T> {
       return switch (type) {
         case ADDITIVE_EXPRESSION -> visitAdditiveExpression(node);
         case ASSIGNMENT_EXPRESSION -> visitAssignmentExpression(node);
+        case BLOCK -> visitBlock(node);
+        case CHARACTER -> visitCharacter(node);
         case EQUALITY_EXPRESSION -> visitEqualityExpression(node);
         case FALSE -> visitFalse(node);
         case IDENTIFIER -> visitIdentifier(node);
@@ -43,7 +45,6 @@ public abstract class MajestikAbstractVisitor<T> {
         case NUMBER -> visitNumber(node);
         case PROCEDURE_INVOCATION -> visitProcedureInvocation(node);
         case STRING -> visitString(node);
-        case CHARACTER -> visitCharacter(node);
         case TRUE -> visitTrue(node);
         default -> visitDefault(node);
       };
@@ -89,6 +90,10 @@ public abstract class MajestikAbstractVisitor<T> {
   }
 
   protected T visitAdditiveExpression(final AstNode node) {
+    return this.visitDefault(node);
+  }
+
+  protected T visitBlock(final AstNode node) {
     return this.visitDefault(node);
   }
 

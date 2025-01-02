@@ -26,6 +26,11 @@
             "expected": "a"
         },
         {
+            "file": "blockscoping.magik",
+            "description": "Test scoping of blocks",
+            "expected": "1\nnull"
+        },
+        {
             "file": "addition.magik",
             "description": "Test addition",
             "expected": "66666"
