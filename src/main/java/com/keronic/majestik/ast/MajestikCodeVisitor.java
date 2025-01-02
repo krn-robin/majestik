@@ -43,11 +43,10 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
 
   @Override
   protected Node visitBlock(final AstNode node) {
-    LOGGER.log(Level.TRACE, () -> String.format("Visiting BLOCK node."));
-
     var sub = new MajestikCodeVisitor(this.varMap);
     var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
-    return new BlockNode(body);
+    if (body != null) return new BlockNode(body);
+    else return new BlockNode();
   }
 
   @Override
