@@ -45,8 +45,11 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   protected Node visitBlock(final AstNode node) {
     var sub = new MajestikCodeVisitor(this.varMap);
     var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
-    if (body != null) return new BlockNode(body);
-    else return new BlockNode();
+    return switch (body) {
+      case null -> new BlockNode();
+      case CompoundNode n -> new BlockNode(n);
+      case Node n -> new BlockNode(n);
+    };
   }
 
   @Override
