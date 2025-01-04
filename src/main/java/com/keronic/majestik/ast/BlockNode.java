@@ -21,7 +21,7 @@ public class BlockNode extends CompoundNode {
    * Creates a new block node with the given node.
    *
    * @param child The node containing the block's statement
-   * @throws IllegalArgumentException if children is null
+   * @throws IllegalArgumentException if child is null
    */
   public BlockNode(Node child) {
     super(child);

@@ -10,7 +10,7 @@ import module java.base;
  * @see Node
  */
 public class CompoundNode extends Node {
-  final String CLASSNAME = this.getClass().getSimpleName();
+  private final String CLASSNAME = this.getClass().getSimpleName();
 
   /** The nodes containing this block's statements. */
   private final Node[] children;
@@ -94,7 +94,7 @@ public class CompoundNode extends Node {
    * Compiles this compound node into the given code builder.
    *
    * @param cb The code builder to compile into
-   * @throws IllegalArgumentException if cb is null
+   * @throws NullPointerException if cb is null
    */
   protected void doCompileInto(CodeBuilder cb) {
     this.forEach(node -> node.compileInto(cb));
