@@ -10,6 +10,9 @@ import module java.base;
  * @see Node
  */
 public class CompoundNode extends Node {
+  private final String CLASSNAME = this.getClass().getSimpleName();
+
+  /** The nodes containing this block's statements. */
   private final Node[] children;
 
   public CompoundNode() {
@@ -31,11 +34,14 @@ public class CompoundNode extends Node {
     this.children[comp.children.length] = Objects.requireNonNull(addition);
   }
 
+  /**
+   * Returns a string representation of this node.
+   *
+   * @return a string representation of this object
+   */
   @Override
   public String toString() {
-    var joiner = new StringJoiner(",");
-    this.stream().map(node -> node.toString()).forEach(joiner::add);
-    return String.format("CompoundNode{children=[%s]}", joiner.toString());
+    return String.format("%s{children=[%s]}", CLASSNAME, this.childrenString());
   }
 
   public int getChildCount() {
@@ -78,6 +84,18 @@ public class CompoundNode extends Node {
     return this.children.length == 0;
   }
 
+  protected String childrenString() {
+    var joiner = new StringJoiner(",");
+    this.stream().map(node -> node.toString()).forEach(joiner::add);
+    return joiner.toString();
+  }
+
+  /**
+   * Compiles this compound node into the given code builder.
+   *
+   * @param cb The code builder to compile into
+   * @throws NullPointerException if cb is null
+   */
   protected void doCompileInto(CodeBuilder cb) {
     this.forEach(node -> node.compileInto(cb));
   }

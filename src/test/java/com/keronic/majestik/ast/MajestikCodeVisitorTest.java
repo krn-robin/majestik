@@ -72,10 +72,30 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitBlock() {
+    // Test input
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("_block%n_endblock%n").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+
+    // Verify
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
+    var cnode = (CompoundNode) node;
+
+    assertEquals(1, cnode.getChildCount(), "Expected one block node");
+    var child0 = cnode.getChild(0);
+    assertInstanceOf(BlockNode.class, child0, "First child should be BlockNode");
+    assertEquals(new BlockNode(), child0);
+  }
+
+  @Test
   void testVisitCharacter() {
     // Test input
     var mcv = new MajestikCodeVisitor();
-    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("%%a").formatted());
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("%%a%n").formatted());
 
     // Execute
     var node = mcv.scanFile(mf);
