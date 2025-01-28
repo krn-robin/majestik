@@ -47,8 +47,8 @@ public class StringNode extends Node {
   }
 
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    cb.invokedynamic(
+  protected void doCompileInto(final CompilationContext cc) {
+    cc.codeBuilder().invokedynamic(
         DynamicCallSiteDesc.of(
             ConstantDescs.BSM_STRING_BUILDER, "string", ConstantDescs.MTD_Object, this.value));
   }

@@ -102,6 +102,32 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitLeaveExpression(AstNode node) {
+    var label = node.getFirstChild(MagikGrammar.LABEL);
+    return switch (label) {
+      case AstNode n -> new LeaveNode(n.getTokenValue());
+      case null -> LeaveNode.unnamed;
+    };
+  }
+
+  @Override
+  protected Node visitLoopExpression(final AstNode node) {
+    var sub = new MajestikCodeVisitor(this.varMap);
+    var label = node.getFirstChild(MagikGrammar.LABEL);
+    var labeltext = switch (label) {
+      case AstNode n -> n.getTokenValue();
+      case null -> String.valueOf(node.hashCode());
+    };
+    var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
+    var result =  switch (body) {
+      case null -> new LoopNode(labeltext);
+      case CompoundNode n -> new LoopNode(labeltext, n);
+      case Node n -> new LoopNode(labeltext, n);
+    };
+    return result;
+  }
+
+  @Override
   protected Node visitMagik(final AstNode node) {
     LOGGER.log(
         Level.TRACE,

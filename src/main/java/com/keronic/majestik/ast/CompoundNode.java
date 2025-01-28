@@ -96,7 +96,7 @@ public class CompoundNode extends Node {
    * @param cb The code builder to compile into
    * @throws NullPointerException if cb is null
    */
-  protected void doCompileInto(CodeBuilder cb) {
-    this.forEach(node -> node.compileInto(cb));
+  protected void doCompileInto(final CompilationContext cc) {
+    this.forEach(node -> node.compileInto(cc));
   }
 }

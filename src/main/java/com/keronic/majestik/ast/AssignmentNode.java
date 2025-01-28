@@ -25,9 +25,9 @@ public class AssignmentNode extends BinaryOperatorNode {
    * @param cb The code builder to use
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    this.rhs.compileInto(cb);
+  protected void doCompileInto(final CompilationContext cc) {
+    this.rhs.compileInto(cc);
     var vnode = (VariableNode) this.lhs;
-    vnode.compileIntoSet(cb);
+    vnode.compileIntoSet(cc.codeBuilder());
   }
 }

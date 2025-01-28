@@ -4,6 +4,7 @@ package com.keronic;
 import module java.base;
 
 import com.keronic.majestik.MajestikRuntimeException;
+import com.keronic.majestik.ast.CompilationContext;
 import com.keronic.majestik.ast.MajestikCodeVisitor;
 import java.lang.System.Logger.Level;
 import nl.ramsolutions.sw.MagikToolsProperties;
@@ -67,7 +68,7 @@ public class Majestik {
                             ClassFile.ACC_STATIC,
                             codeBuilder -> {
                               MajestikCodeVisitor mcv = new MajestikCodeVisitor();
-                              mcv.scanFile(mf).compileInto(codeBuilder);
+                              mcv.scanFile(mf).compileInto(new CompilationContext(codeBuilder));
                               codeBuilder.return_();
                             }));
         var cl = new MajestikClassLoader();

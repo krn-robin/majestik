@@ -6,7 +6,9 @@ import module java.base;
 import com.keronic.majestik.internal.Utils;
 
 /** */
-public class DynamicAccessor {
+public enum DynamicAccessor {
+  INSTANCE;
+
   private static MethodHandle todo =
       Utils.findStatic(
           DynamicAccessor.class, "todo", MethodType.methodType(void.class, Object.class));
@@ -31,7 +33,4 @@ public class DynamicAccessor {
     // System.out.format("\n\n--> %s, %s, %s, %s\n", lookup, name, type, packageName);
         return new ConstantCallSite(todo);
     }
-
-  /** Private constructor to prevent instantiation. */
-  private DynamicAccessor() {}
 }

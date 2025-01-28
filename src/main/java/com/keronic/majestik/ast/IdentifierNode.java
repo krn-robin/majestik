@@ -22,9 +22,9 @@ public class IdentifierNode extends Node {
    * @param cb The code builder to emit bytecode into
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
+  protected void doCompileInto(final CompilationContext cc) {
     // TODO: Fix hardcoded "sw" package variable
-    cb.invokedynamic(
+    cc.codeBuilder().invokedynamic(
         DynamicCallSiteDesc.of(
             ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", this.value));
   }

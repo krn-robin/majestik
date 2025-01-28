@@ -77,8 +77,7 @@ public class VariableNode extends Node {
    * @throws NullPointerException if cb is null
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    Objects.requireNonNull(cb, "CodeBuilder cannot be null");
-    cb.aload(this.varIndex);
+  protected void doCompileInto(final CompilationContext cc) {
+    cc.codeBuilder().aload(this.varIndex);
   }
 }

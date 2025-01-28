@@ -7,7 +7,9 @@ import com.keronic.majestik.internal.Utils;
 import com.keronic.majestik.runtime.internal.ProcImpl;
 
 /** */
-public class Invoker {
+public enum Invoker {
+  INSTANCE;
+
   private static final System.Logger LOGGER =
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
   private static MethodHandle todo =
@@ -45,7 +47,4 @@ public class Invoker {
         System.Logger.Level.DEBUG, () -> String.format("Bootstrap operation - name: %s, type: %s", name, type));
 		return new MutableCallSite(todo);
     }
-
-  /** Private constructor to prevent instantiation. */
-  private Invoker() {}
 }

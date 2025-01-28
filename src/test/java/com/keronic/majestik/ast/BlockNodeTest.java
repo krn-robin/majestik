@@ -60,11 +60,11 @@ class BlockNodeTest extends NodeTest {
 
   @Test
   void shouldGenerateNoInstructions() {
-    var cnode = new BlockNode(new NoOperationNode());
-    var code = this.compileInto(cnode::compileInto);
+    final var cnode = new BlockNode(new NoOperationNode());
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(1, code.elementList().size());
-    var instruction = code.elementList().getFirst();
+    final var instruction = code.elementList().getFirst();
     assertInstanceOf(NopInstruction.class, instruction);
   }
 

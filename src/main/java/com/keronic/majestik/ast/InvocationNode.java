@@ -59,9 +59,9 @@ public class InvocationNode extends Node {
    * @param cb The code builder to use for compilation
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    this.arguments.forEach(a -> a.compileInto(cb));
-    cb.invokedynamic(
+  protected void doCompileInto(final CompilationContext cc) {
+    this.arguments.forEach(a -> a.compileInto(cc));
+    cc.codeBuilder().invokedynamic(
         DynamicCallSiteDesc.of(
             ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
   }

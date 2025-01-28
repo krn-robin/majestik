@@ -40,8 +40,8 @@ class NumberNodeTest extends NodeTest {
   void shouldGenerateCorrectBytecodeForNumericLiterals() {
     final int EXPECTED_INSTRUCTION_COUNT = 4;
 
-    var compoundNode = new CompoundNode(new NumberNode(1L), new NumberNode(2d));
-    var code = this.compileInto(compoundNode::compileInto);
+    final var cnode = new CompoundNode(new NumberNode(1L), new NumberNode(2d));
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(EXPECTED_INSTRUCTION_COUNT, code.elementList().size());
     var cel = code.elementList().toArray(new CodeElement[0]);
