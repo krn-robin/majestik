@@ -1,10 +1,13 @@
 package com.keronic.majestik.ast;
 
 /** Represents a block node in the AST, encapsulating a compound statement. */
-public class BlockNode extends AbstractCompoundNode {
+public class LoopNode extends AbstractCompoundNode {
+    private final String name;
+
   /** Creates a new block node without children. */
-  public BlockNode() {
+  public LoopNode(String name) {
     super();
+    this.name = name;
   }
 
   /**
@@ -13,8 +16,9 @@ public class BlockNode extends AbstractCompoundNode {
    * @param children The compound node containing the block's statements
    * @throws IllegalArgumentException if children is null
    */
-  public BlockNode(CompoundNode children) {
+  public LoopNode(String name, CompoundNode children) {
     super(children);
+    this.name = name;
   }
 
   /**
@@ -23,8 +27,9 @@ public class BlockNode extends AbstractCompoundNode {
    * @param child The node containing the block's statement
    * @throws IllegalArgumentException if child is null
    */
-  public BlockNode(Node child) {
+  public LoopNode(String name, Node child) {
     super(child);
+    this.name = name;
   }
 
   /**
@@ -51,5 +56,21 @@ public class BlockNode extends AbstractCompoundNode {
   @Override
   public int hashCode() {
     return super.hashCode();
+  }
+
+  /**
+   * Compiles this compound node into the given code builder.
+   *
+   * @param cb The code builder to compile into
+   * @throws NullPointerException if cb is null
+   */
+  protected void doCompileInto(final CompilationContext cc) {
+    cc.codeBuilder().block(bcb -> {
+      cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());
+      this.forEach(node -> node.compileInto(cc.withCodeBuilder(bcb)));
+      bcb.pop();
+      bcb.goto_(bcb.startLabel());
+      cc.popLabel();
+    });
   }
 }

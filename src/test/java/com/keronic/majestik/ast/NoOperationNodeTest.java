@@ -47,11 +47,11 @@ class NoOperationNodeTest extends NodeTest {
 
   @Test
   void shouldGenerateNopInstruction() {
-    var cnode = new NoOperationNode();
-    var code = this.compileInto(cnode::compileInto);
+    final var cnode = new NoOperationNode();
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(1, code.elementList().size());
-    var cel = code.elementList().getFirst();
+    final var cel = code.elementList().getFirst();
 
     assertInstanceOf(NopInstruction.class, cel);
   }

@@ -6,7 +6,9 @@ import module java.base;
 import com.keronic.majestik.internal.Utils;
 
 /** */
-public class GlobalAccessor {
+public enum GlobalAccessor {
+  INSTANCE;
+
   private static final Class<?> package_class = com.keronic.majestik.runtime.objects.Package.class;
   private static final MethodHandle getGlobal =
       Utils.findStatic(
@@ -55,7 +57,4 @@ public class GlobalAccessor {
       String global) {
     return new ConstantCallSite(MethodHandles.insertArguments(putGlobal, 0, packageName, global));
   }
-
-  /** Private constructor to prevent instantiation. */
-  private GlobalAccessor() {}
 }

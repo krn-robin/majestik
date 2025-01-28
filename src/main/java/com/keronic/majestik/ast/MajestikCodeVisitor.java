@@ -102,11 +102,37 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   }
 
   @Override
+  protected Node visitLeaveExpression(AstNode node) {
+    var label = node.getFirstChild(MagikGrammar.LABEL);
+    return switch (label) {
+      case AstNode n -> new LeaveNode(n.getLastToken().getValue());
+      case null -> LeaveNode.unnamed;
+    };
+  }
+
+  @Override
+  protected Node visitLoopExpression(final AstNode node) {
+    var sub = new MajestikCodeVisitor(this.varMap);
+    var label = node.getFirstChild(MagikGrammar.LABEL);
+    var labeltext = switch (label) {
+      case AstNode n -> n.getLastToken().getValue();
+      case null -> String.valueOf(node.hashCode());
+    };
+    var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
+    var result =  switch (body) {
+      case null -> new LoopNode(labeltext);
+      case CompoundNode n -> new LoopNode(labeltext, n);
+      case Node n -> new LoopNode(labeltext, n);
+    };
+    return result;
+  }
+
+  @Override
   protected Node visitMagik(final AstNode node) {
     LOGGER.log(
         Level.TRACE,
         () -> String.format("Visiting Magik node: %s %s", node.getType(), node.getTokenValue()));
-    Node compound = new CompoundNode();
+    Node compound = new ExpressionListNode();
     for (final AstNode childNode : node.getChildren()) {
       compound = this.mergeResults(compound, this.visit(childNode));
     }
@@ -132,9 +158,9 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
 
   @Override
   protected Node visitProcedureInvocation(final AstNode node) {
-    Node compound = new CompoundNode();
+    var compound = new CompoundNode();
     for (final AstNode childNode : node.getChildren()) {
-      compound = this.mergeResults(compound, this.visit(childNode));
+      compound = new CompoundNode(compound, this.visit(childNode));
     }
     return new InvocationNode((CompoundNode) compound);
   }
@@ -161,8 +187,8 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     if (first == null) return second;
 
     return switch (first) {
-      case CompoundNode c -> new CompoundNode(c, second);
-      case Node n -> new CompoundNode(n, second);
+      case ExpressionListNode c -> new ExpressionListNode(c, second);
+      case Node n -> new ExpressionListNode(n, second);
     };
   }
 

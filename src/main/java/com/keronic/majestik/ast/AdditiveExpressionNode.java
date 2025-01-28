@@ -10,10 +10,10 @@ public class AdditiveExpressionNode extends BinaryOperatorNode {
   }
 
   @Override
-  protected void doCompileInto(final CodeBuilder cb) {
-    lhs.compileInto(cb);
-    rhs.compileInto(cb);
-    cb.invokedynamic(
+  protected void doCompileInto(final CompilationContext cc) {
+    lhs.compileInto(cc);
+    rhs.compileInto(cc);
+    cc.codeBuilder().invokedynamic(
         DynamicCallSiteDesc.of(
             ConstantDescs.BSM_BINARY_DISPATCHER, "+", ConstantDescs.MTD_ObjectObjectObject));
   }

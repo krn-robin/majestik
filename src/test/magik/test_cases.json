@@ -41,6 +41,11 @@
             "expected": "success"
         },
         {
+            "file": "loop.magik",
+            "description": "Test loop/leave expression",
+            "expected": "1\n2\n3"
+        },
+        {
             "file": "identity_comparison.magik",
             "description": "Test identity comparison using _is operator",
             "expected": "success"

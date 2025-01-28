@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 import com.keronic.majestik.constant.ConstantDescs;
 
 class IdentityExpressionNode extends BinaryOperatorNode {
@@ -10,9 +8,10 @@ class IdentityExpressionNode extends BinaryOperatorNode {
   }
 
   @Override
-  public void doCompileInto(CodeBuilder cb) {
-    lhs.compileInto(cb);
-    rhs.compileInto(cb);
+  protected void doCompileInto(final CompilationContext cc) {
+    var cb = cc.codeBuilder();
+    lhs.compileInto(cc);
+    rhs.compileInto(cc);
     cb.invokestatic(ConstantDescs.CD_MagikObjectUtils, "is", ConstantDescs.MTD_booleanObjectObject);
     cb.new_(ConstantDescs.CD_Boolean);
     cb.dup_x1();

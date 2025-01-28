@@ -4,7 +4,9 @@ import module java.base;
 
 import com.keronic.majestik.runtime.Proc;
 
-public class ConstantBuilder {
+public enum ConstantBuilder {
+  INSTANCE;
+
   /**
    * Creates a call site for string operations.
    *
@@ -55,7 +57,4 @@ public class ConstantBuilder {
         MethodHandle target = MethodHandles.constant(Object.class, aProc);
         return new ConstantCallSite(target);
 	}
-
-  /** Private constructor to prevent instantiation. */
-  private ConstantBuilder() {}
 }

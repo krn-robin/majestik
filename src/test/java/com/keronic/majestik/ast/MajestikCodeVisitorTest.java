@@ -23,8 +23,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
     assertEquals(2, cnode.getChildCount(), "Expected two string nodes");
     var child0 = cnode.getChild(0);
     var child1 = cnode.getChild(1);
@@ -45,8 +45,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
     assertEquals(1, cnode.getChildCount(), "Expected one addtive node");
     var child0 = cnode.getChild(0);
     assertInstanceOf(
@@ -64,8 +64,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
     assertEquals(1, cnode.getChildCount(), "Expected one assignment node");
     var child0 = cnode.getChild(0);
     assertInstanceOf(AssignmentNode.class, child0, "First child should be AssignmentNode");
@@ -82,8 +82,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
 
     assertEquals(1, cnode.getChildCount(), "Expected one block node");
     var child0 = cnode.getChild(0);
@@ -102,8 +102,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
 
     assertEquals(1, cnode.getChildCount(), "Expected one character node");
     var child0 = cnode.getChild(0);
@@ -122,8 +122,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
 
     assertEquals(1, cnode.getChildCount(), "Expected one equality expression node");
     var child0 = cnode.getChild(0);
@@ -142,8 +142,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
     assertEquals(1, cnode.getChildCount(), "Expected one branch node");
     var child0 = cnode.getChild(0);
     assertInstanceOf(IfExpressionNode.class, child0, "First child should be IfExpressionNode");
@@ -157,17 +157,23 @@ class MajestikCodeVisitorTest {
     // Execute
     var node = mcv.scanFile(mf);
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var n = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var n = (ExpressionListNode) node;
 
     // Verify
     assertEquals(1, n.getChildCount(), "Expected one child node");
-    n = (CompoundNode) n.getChild(0);
+    n = (ExpressionListNode) n.getChild(0);
     assertEquals(new IdentifierNode("write"), n.getChild(0), "Expected write identifier");
 
     var expectedInvocation = new InvocationNode(new CompoundNode(new NumberNode(0)));
     var actualInvocation = n.getChild(1);
     assertInstanceOf(InvocationNode.class, actualInvocation, "Expected InvocationNode");
+
+    System.out.println("--------");
+    System.out.format("%s%n", expectedInvocation);
+    System.out.format("%s%n", actualInvocation);
+    System.out.println("^^^^^^^^");
+
     assertEquals(
         expectedInvocation.hashCode(),
         actualInvocation.hashCode(),
@@ -185,8 +191,8 @@ class MajestikCodeVisitorTest {
 
     // Verify
     assertNotNull(node, "Result should not be null");
-    assertInstanceOf(CompoundNode.class, node, "Expected CompoundNode");
-    var cnode = (CompoundNode) node;
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var cnode = (ExpressionListNode) node;
     assertEquals(2, cnode.getChildCount(), "Expected two string nodes");
     var child0 = cnode.getChild(0);
     var child1 = cnode.getChild(1);

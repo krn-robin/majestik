@@ -1,0 +1,8 @@
+_loop @outer
+	cnt << 0
+	_loop
+		cnt << cnt + 1
+		write(cnt)
+		_if cnt _is 3 _then _leave @outer _endif
+	_endloop
+_endloop
