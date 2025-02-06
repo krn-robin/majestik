@@ -15,7 +15,7 @@ public abstract class Node {
   /**
    * Compiles this AST node into bytecode using the provided CodeBuilder.
    *
-   * @param cb The CompilationContext instance to use for bytecode generation
+   * @param cc The CompilationContext instance to use for bytecode generation
    * @throws NullPointerException if cb is null
    */
   public void compileInto(CompilationContext cc) {

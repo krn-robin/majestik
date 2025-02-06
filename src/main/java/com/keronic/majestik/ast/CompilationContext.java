@@ -39,7 +39,7 @@ public class CompilationContext {
       if (name.equals(boundLabel.name))
         return boundLabel;
     }
-    throw new NoSuchElementException();
+    throw new NoSuchElementException("Label not found: " + name);
   }
 
   public BoundLabel lastLabel() {

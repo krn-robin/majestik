@@ -43,7 +43,7 @@ public class LoopNode extends AbstractCompoundNode {
   public boolean equals(Object obj) {
     return switch (obj) {
       case null -> false;
-      case BlockNode other -> super.equals(other);
+      case LoopNode other -> super.equals(other) && Objects.equals(this.name, other.name);
       default -> false;
     };
   }
@@ -64,6 +64,7 @@ public class LoopNode extends AbstractCompoundNode {
    * @param cb The code builder to compile into
    * @throws NullPointerException if cb is null
    */
+  @Override
   protected void doCompileInto(final CompilationContext cc) {
     cc.codeBuilder().block(bcb -> {
       cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());

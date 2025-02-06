@@ -56,7 +56,7 @@ public class InvocationNode extends Node {
    * Compiles this invocation node into bytecode. Each argument is compiled first, followed by an
    * invokedynamic call that sets up a dynamic call site for natural procedure invocation.
    *
-   * @param cb The code builder to use for compilation
+   * @param cc The compilation context to use for compilation
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {

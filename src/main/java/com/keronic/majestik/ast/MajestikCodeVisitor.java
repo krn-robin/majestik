@@ -116,7 +116,7 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
     var label = node.getFirstChild(MagikGrammar.LABEL);
     var labeltext = switch (label) {
       case AstNode n -> n.getLastToken().getValue();
-      case null -> String.valueOf(node.hashCode());
+      case null -> "loop_" + node.hashCode();
     };
     var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
     var result =  switch (body) {

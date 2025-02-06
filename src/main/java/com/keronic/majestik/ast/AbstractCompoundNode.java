@@ -95,9 +95,10 @@ abstract public class AbstractCompoundNode extends Node {
   /**
    * Compiles this compound node into the given code builder.
    *
-   * @param cb The code builder to compile into
-   * @throws NullPointerException if cb is null
+   * @param cc The compilation context to compile into
+   * @throws NullPointerException if cc is null
    */
+ protected void doCompileInto(final CompilationContext cc) {
   protected void doCompileInto(final CompilationContext cc) {
     this.forEach(node -> node.compileInto(cc));
   }

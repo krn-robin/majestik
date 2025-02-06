@@ -10,9 +10,17 @@ import com.keronic.majestik.runtime.internal.ProcImpl;
  * ProcInvoker is responsible for invoking procedures and managing method handles for dynamic
  * invocation.
  */
+/**
+ * ProcInvoker is responsible for invoking procedures and managing method handles for dynamic
+ * invocation.
+ *
+ * This is implemented as an enum singleton to ensure thread-safety and prevent multiple instantiation.
+ * Use {@link #INSTANCE} to access the singleton instance.
+ */
 public enum ProcInvoker {
+  /** The singleton instance of the ProcInvoker. */
   INSTANCE;
-
+}
   private static MethodHandle todo =
       Utils.findStatic(ProcInvoker.class, "todo", MethodType.genericMethodType(2));
 
