@@ -2,20 +2,23 @@ package com.keronic.majestik.ast;
 
 import module java.base;
 
-/** Represents a block node in the AST, encapsulating a compound statement. */
+/**
+ * Represents a loop node in the AST, encapsulating a compound statement that can be executed
+ * repeatedly.
+ */
 public class LoopNode extends AbstractCompoundNode {
   private final String name;
 
-  /** Creates a new block node without children. */
+  /** Creates a new loop node without children. */
   public LoopNode(String name) {
     super();
     this.name = name;
   }
 
   /**
-   * Creates a new block node with the given compound node.
+   * Creates a new loop node with the given compound node.
    *
-   * @param children The compound node containing the block's statements
+   * @param children The compound node containing the loop's statements
    * @throws IllegalArgumentException if children is null
    */
   public LoopNode(String name, CompoundNode children) {
@@ -24,9 +27,9 @@ public class LoopNode extends AbstractCompoundNode {
   }
 
   /**
-   * Creates a new block node with the given node.
+   * Creates a new loop node with the given node.
    *
-   * @param child The node containing the block's statement
+   * @param child The node containing the loop's statement
    * @throws IllegalArgumentException if child is null
    */
   public LoopNode(String name, Node child) {
@@ -35,8 +38,8 @@ public class LoopNode extends AbstractCompoundNode {
   }
 
   /**
-   * Checks if this block node equals another object. Two block nodes are equal if they have equal
-   * children.
+   * Checks if this loop node equals another object. Two loop nodes are equal if they have equal
+   * names and children.
    *
    * @param obj the object to compare with
    * @return true if the objects are equal, false otherwise
@@ -51,7 +54,7 @@ public class LoopNode extends AbstractCompoundNode {
   }
 
   /**
-   * Returns a hash code value for this block node.
+   * Returns a hash code value for this loop node.
    *
    * @return a hash code value for this object
    */
@@ -63,7 +66,7 @@ public class LoopNode extends AbstractCompoundNode {
   /**
    * Compiles this compound node into the given code builder.
    *
-   * @param cb The code builder to compile into
+   * @param cc The compilation context to compile into
    * @throws NullPointerException if cb is null
    */
   @Override

@@ -19,7 +19,7 @@ public class IdentifierNode extends Node {
   /**
    * Compiles this identifier into bytecode for global variable fetching.
    *
-   * @param cb The code builder to emit bytecode into
+   * @param cc The compilation context to compile into
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {

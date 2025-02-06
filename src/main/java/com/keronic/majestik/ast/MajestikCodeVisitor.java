@@ -160,11 +160,10 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
 
   @Override
   protected Node visitProcedureInvocation(final AstNode node) {
-    var compound = new CompoundNode();
-    for (final AstNode childNode : node.getChildren()) {
-      compound = new CompoundNode(compound, this.visit(childNode));
-    }
-    return new InvocationNode((CompoundNode) compound);
+    var nodes = new ArrayList<Node>();
+    for (final AstNode childNode : node.getChildren()) nodes.add(this.visit(childNode));
+    var compound = new CompoundNode(nodes.toArray(new Node[0]));
+    return new InvocationNode(compound);
   }
 
   @Override

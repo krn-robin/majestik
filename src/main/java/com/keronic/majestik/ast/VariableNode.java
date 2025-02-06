@@ -26,7 +26,7 @@ public class VariableNode extends Node {
    * Compiles this variable node by generating the appropriate bytecode instruction to store a value
    * from the operand stack into this variable.
    *
-   * @param cb the code builder to use for bytecode generation
+   * @param cc The compilation context to compile into
    * @throws NullPointerException if cb is null
    */
   public void compileIntoSet(CodeBuilder cb) {
@@ -73,7 +73,7 @@ public class VariableNode extends Node {
    * Compiles this variable node by generating the appropriate bytecode instruction to load the
    * variable value onto the operand stack.
    *
-   * @param cb the code builder to use for bytecode generation
+   * @param cc The compilation context to compile into
    * @throws NullPointerException if cb is null
    */
   @Override

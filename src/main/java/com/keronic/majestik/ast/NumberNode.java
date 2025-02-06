@@ -55,7 +55,7 @@ public class NumberNode extends Node {
   /**
    * Compiles this number node into bytecode.
    *
-   * @param cb The code builder to compile into
+   * @param cc The compilation context to compile into
    * @throws IllegalStateException if the value type is unsupported
    */
   @Override

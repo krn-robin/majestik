@@ -55,7 +55,7 @@ public abstract class Node {
    * Template method for actual bytecode generation. Subclasses implement this method instead of
    * compileInto directly.
    *
-   * @param cb The non-null CompilationContext instance
+   * @param cc The non-null CompilationContext instance
    */
   protected abstract void doCompileInto(CompilationContext cc);
 }

@@ -20,7 +20,7 @@ public class AssignmentNode extends BinaryOperatorNode {
    * Compiles this assignment node into bytecode. First compiles the right-hand side expression,
    * then compiles the assignment to each variable on the left-hand side.
    *
-   * @param cb The code builder to use
+   * @param cc The compilation context to compile into
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {
