@@ -35,8 +35,8 @@ public enum GlobalAccessor {
       MethodType type,
       String packageName,
       String global) {
-        return new ConstantCallSite(MethodHandles.insertArguments(getGlobal, 0, packageName, global));
-    }
+    return new ConstantCallSite(MethodHandles.insertArguments(getGlobal, 0, packageName, global));
+  }
 
   /**
    * Creates a CallSite for storing global variables.

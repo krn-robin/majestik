@@ -19,22 +19,26 @@ public enum Invoker {
    * @param o
    * @return
    */
-    @SuppressWarnings("unused")
-	public static Object todo(Object o) {
-		MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
+  @SuppressWarnings("unused")
+  public static Object todo(Object o) {
+    MutableCallSite proccs = new MutableCallSite(MethodType.methodType(ProcImpl.class));
     ProcImpl proc = (ProcImpl) o;
-		try {
-      LOGGER.log(System.Logger.Level.DEBUG, () -> String.format("Invoking procedure: %s [id=%d] with type: %s on thread: %s",
-          o,
-          System.identityHashCode(o),
-          o.getClass().getName(),
-          Thread.currentThread().getName()));
-			proc.invoke(o);
-		} catch (Throwable e) {
+    try {
+      LOGGER.log(
+          System.Logger.Level.DEBUG,
+          () ->
+              String.format(
+                  "Invoking procedure: %s [id=%d] with type: %s on thread: %s",
+                  o,
+                  System.identityHashCode(o),
+                  o.getClass().getName(),
+                  Thread.currentThread().getName()));
+      proc.invoke(o);
+    } catch (Throwable e) {
       throw new MajestikRuntimeException(e);
-		}
-		return null;
     }
+    return null;
+  }
 
   /**
    * @param lookup
@@ -42,9 +46,10 @@ public enum Invoker {
    * @param type
    * @return
    */
-    public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
+  public static CallSite tupleBootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
     LOGGER.log(
-        System.Logger.Level.DEBUG, () -> String.format("Bootstrap operation - name: %s, type: %s", name, type));
-		return new MutableCallSite(todo);
-    }
+        System.Logger.Level.DEBUG,
+        () -> String.format("Bootstrap operation - name: %s, type: %s", name, type));
+    return new MutableCallSite(todo);
+  }
 }

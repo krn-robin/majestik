@@ -2,7 +2,7 @@ package com.keronic.majestik.ast;
 
 /** Represents a block node in the AST, encapsulating a compound statement. */
 public class LoopNode extends AbstractCompoundNode {
-    private final String name;
+  private final String name;
 
   /** Creates a new block node without children. */
   public LoopNode(String name) {
@@ -66,12 +66,14 @@ public class LoopNode extends AbstractCompoundNode {
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    cc.codeBuilder().block(bcb -> {
-      cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());
-      this.forEach(node -> node.compileInto(cc.withCodeBuilder(bcb)));
-      bcb.pop();
-      bcb.goto_(bcb.startLabel());
-      cc.popLabel();
-    });
+    cc.codeBuilder()
+        .block(
+            bcb -> {
+              cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());
+              this.forEach(node -> node.compileInto(cc.withCodeBuilder(bcb)));
+              bcb.pop();
+              bcb.goto_(bcb.startLabel());
+              cc.popLabel();
+            });
   }
 }

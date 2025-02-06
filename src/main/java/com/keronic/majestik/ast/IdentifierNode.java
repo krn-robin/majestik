@@ -24,9 +24,14 @@ public class IdentifierNode extends Node {
   @Override
   protected void doCompileInto(final CompilationContext cc) {
     // TODO: Fix hardcoded "sw" package variable
-    cc.codeBuilder().invokedynamic(
-        DynamicCallSiteDesc.of(
-            ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", this.value));
+    cc.codeBuilder()
+        .invokedynamic(
+            DynamicCallSiteDesc.of(
+                ConstantDescs.BSM_GLOBAL_FETCHER,
+                "fetch",
+                ConstantDescs.MTD_Object,
+                "sw",
+                this.value));
   }
 
   @Override

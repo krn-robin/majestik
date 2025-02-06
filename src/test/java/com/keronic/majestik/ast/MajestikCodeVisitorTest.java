@@ -169,7 +169,6 @@ class MajestikCodeVisitorTest {
     var actualInvocation = n.getChild(1);
     assertInstanceOf(InvocationNode.class, actualInvocation, "Expected InvocationNode");
 
-
     assertEquals(
         expectedInvocation.hashCode(),
         actualInvocation.hashCode(),

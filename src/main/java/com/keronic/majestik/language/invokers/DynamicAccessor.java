@@ -7,8 +7,8 @@ import com.keronic.majestik.internal.Utils;
 
 /** */
 /**
- * Provides dynamic access functionality for the Magik language.
- * This enum-based singleton handles dynamic variable lookups and storage.
+ * Provides dynamic access functionality for the Magik language. This enum-based singleton handles
+ * dynamic variable lookups and storage.
  */
 public enum DynamicAccessor {
   INSTANCE;
@@ -19,9 +19,9 @@ public enum DynamicAccessor {
   /**
    * @param o
    */
-	public static void todo(Object o) {
-		// TODO: implement lookup of dynamic variables
-	}
+  public static void todo(Object o) {
+    // TODO: implement lookup of dynamic variables
+  }
 
   /**
    * @param lookup
@@ -34,6 +34,6 @@ public enum DynamicAccessor {
   public static CallSite bootstrapStorer(
       MethodHandles.Lookup lookup, String name, MethodType type, String packageName) {
     // System.out.format("\n\n--> %s, %s, %s, %s\n", lookup, name, type, packageName);
-        return new ConstantCallSite(todo);
-    }
+    return new ConstantCallSite(todo);
+  }
 }

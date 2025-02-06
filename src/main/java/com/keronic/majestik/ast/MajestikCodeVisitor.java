@@ -114,16 +114,18 @@ public class MajestikCodeVisitor extends MajestikAbstractVisitor<Node> {
   protected Node visitLoopExpression(final AstNode node) {
     var sub = new MajestikCodeVisitor(this.varMap);
     var label = node.getFirstChild(MagikGrammar.LABEL);
-    var labeltext = switch (label) {
-      case AstNode n -> n.getLastToken().getValue();
-      case null -> "loop_" + node.hashCode();
-    };
+    var labeltext =
+        switch (label) {
+          case AstNode n -> n.getLastToken().getValue();
+          case null -> "loop_" + node.hashCode();
+        };
     var body = sub.visit(node.getFirstChild(MagikGrammar.BODY));
-    var result =  switch (body) {
-      case null -> new LoopNode(labeltext);
-      case CompoundNode n -> new LoopNode(labeltext, n);
-      case Node n -> new LoopNode(labeltext, n);
-    };
+    var result =
+        switch (body) {
+          case null -> new LoopNode(labeltext);
+          case CompoundNode n -> new LoopNode(labeltext, n);
+          case Node n -> new LoopNode(labeltext, n);
+        };
     return result;
   }
 

@@ -4,7 +4,7 @@ import module java.base;
 
 public class LeaveNode extends Node {
   private final String name;
-  static public final LeaveNode unnamed = new LeaveNode("");
+  public static final LeaveNode unnamed = new LeaveNode("");
 
   public LeaveNode(String name) {
     this.name = Objects.requireNonNull(name);

@@ -47,6 +47,8 @@ public class IfExpressionNode extends Node {
     this.condition.compileInto(cc);
     cb.invokestatic(
         ConstantDescs.CD_MagikObjectUtils, "should_be_boolean", ConstantDescs.MTD_booleanObject);
-    cb.ifThenElse(bcb -> this.body.compileInto(cc.withCodeBuilder(bcb)), bcb -> this.elseBody.compileInto(cc.withCodeBuilder(bcb)));
+    cb.ifThenElse(
+        bcb -> this.body.compileInto(cc.withCodeBuilder(bcb)),
+        bcb -> this.elseBody.compileInto(cc.withCodeBuilder(bcb)));
   }
 }

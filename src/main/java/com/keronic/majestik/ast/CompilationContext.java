@@ -4,7 +4,8 @@ import module java.base;
 import java.util.NoSuchElementException;
 
 public class CompilationContext {
-  record BoundLabel(String name, Label startLabel, Label endLabel) { }
+  record BoundLabel(String name, Label startLabel, Label endLabel) {}
+
   final Deque<BoundLabel> loopStack;
   final CodeBuilder codeBuilder;
 
@@ -36,8 +37,7 @@ public class CompilationContext {
 
     while (iter.hasNext()) {
       var boundLabel = iter.next();
-      if (name.equals(boundLabel.name))
-        return boundLabel;
+      if (name.equals(boundLabel.name)) return boundLabel;
     }
     throw new NoSuchElementException("Label not found: " + name);
   }

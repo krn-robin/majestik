@@ -9,7 +9,7 @@ import module java.base;
  *
  * @see Node
  */
-abstract public class AbstractCompoundNode extends Node {
+public abstract class AbstractCompoundNode extends Node {
   private final String CLASSNAME = this.getClass().getSimpleName();
 
   /** The nodes containing this block's statements. */
@@ -98,7 +98,7 @@ abstract public class AbstractCompoundNode extends Node {
    * @param cc The compilation context to compile into
    * @throws NullPointerException if cc is null
    */
- protected void doCompileInto(final CompilationContext cc) {
+  @Override
   protected void doCompileInto(final CompilationContext cc) {
     this.forEach(node -> node.compileInto(cc));
   }
