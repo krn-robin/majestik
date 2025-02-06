@@ -1,5 +1,7 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
+
 /** Represents a block node in the AST, encapsulating a compound statement. */
 public class LoopNode extends AbstractCompoundNode {
   private final String name;
