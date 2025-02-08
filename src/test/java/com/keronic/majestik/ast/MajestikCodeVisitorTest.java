@@ -176,6 +176,27 @@ class MajestikCodeVisitorTest {
   }
 
   @Test
+  void testVisitLoopWithLeave() {
+    var mcv = new MajestikCodeVisitor();
+    var mf = new MagikFile(MagikFile.DEFAULT_URI, ("_loop @named%n_leave%n_endloop%n").formatted());
+
+    // Execute
+    var node = mcv.scanFile(mf);
+    assertNotNull(node, "Result should not be null");
+    assertInstanceOf(ExpressionListNode.class, node, "Expected ExpressionListNode");
+    var n = (ExpressionListNode) node;
+
+    // Verify
+    assertEquals(1, n.getChildCount(), "Expected one child node");
+
+    var expectedLoopNode = new LoopNode("named", new LeaveNode(""));
+    var actualLoopNode = n.getChild(0);
+
+    assertEquals(
+        expectedLoopNode.hashCode(), actualLoopNode.hashCode(), "Expected matching loop nodes");
+  }
+
+  @Test
   void testVisitString() {
     // Test input
     var mcv = new MajestikCodeVisitor();
