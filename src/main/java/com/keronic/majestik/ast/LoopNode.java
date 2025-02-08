@@ -60,7 +60,7 @@ public class LoopNode extends AbstractCompoundNode {
    */
   @Override
   public int hashCode() {
-    return super.hashCode();
+    return Objects.hash(super.hashCode(), this.name);
   }
 
   /**
@@ -80,5 +80,10 @@ public class LoopNode extends AbstractCompoundNode {
               bcb.goto_(bcb.startLabel());
               cc.popLabel();
             });
+  }
+
+  @Override
+  public String toString() {
+    return String.format("LoopNode{name='%s',children=[%s]}", name, this.childrenString());
   }
 }

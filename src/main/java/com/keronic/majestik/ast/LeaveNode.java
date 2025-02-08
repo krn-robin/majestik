@@ -26,7 +26,7 @@ public class LeaveNode extends Node {
 
   @Override
   public String toString() {
-    return String.format("LeaveNode{value='%s'}", name);
+    return String.format("LeaveNode{name='%s'}", name);
   }
 
   @Override

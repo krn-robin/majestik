@@ -27,6 +27,8 @@ class CompilationContextTest {
     var ilabel = cc.findLabel("inner");
     assertEquals("inner", ilabel.name());
 
+    assertThrows(NoSuchElementException.class, () -> cc.findLabel("unknown"));
+
     cc.popLabel();
     assertEquals("outer", cc.lastLabel().name());
 
