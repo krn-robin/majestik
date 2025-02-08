@@ -9,7 +9,7 @@ class IdentityExpressionNode extends BinaryOperatorNode {
 
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    var cb = cc.codeBuilder();
+    var cb = cc.getCodeBuilder();
     lhs.compileInto(cc);
     rhs.compileInto(cc);
     cb.invokestatic(ConstantDescs.CD_MagikObjectUtils, "is", ConstantDescs.MTD_booleanObjectObject);

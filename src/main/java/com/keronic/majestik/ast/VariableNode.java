@@ -78,6 +78,6 @@ public class VariableNode extends Node {
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    cc.codeBuilder().aload(this.varIndex);
+    cc.getCodeBuilder().aload(this.varIndex);
   }
 }

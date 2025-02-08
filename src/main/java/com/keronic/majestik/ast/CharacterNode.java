@@ -37,7 +37,7 @@ public class CharacterNode extends Node {
 
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    final var cb = cc.codeBuilder();
+    final var cb = cc.getCodeBuilder();
     cb.loadConstant((int) value);
     cb.invokestatic(ConstantDescs.CD_Character, "valueOf", ConstantDescs.MTD_Characterchar);
   }

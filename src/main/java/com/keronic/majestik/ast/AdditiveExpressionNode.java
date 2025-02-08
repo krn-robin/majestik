@@ -13,7 +13,7 @@ public class AdditiveExpressionNode extends BinaryOperatorNode {
   protected void doCompileInto(final CompilationContext cc) {
     lhs.compileInto(cc);
     rhs.compileInto(cc);
-    cc.codeBuilder()
+    cc.getCodeBuilder()
         .invokedynamic(
             DynamicCallSiteDesc.of(
                 ConstantDescs.BSM_BINARY_DISPATCHER, "+", ConstantDescs.MTD_ObjectObjectObject));

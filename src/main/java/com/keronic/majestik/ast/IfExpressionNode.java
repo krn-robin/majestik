@@ -43,7 +43,7 @@ public class IfExpressionNode extends Node {
 
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    final var cb = cc.codeBuilder();
+    final var cb = cc.getCodeBuilder();
     this.condition.compileInto(cc);
     cb.invokestatic(
         ConstantDescs.CD_MagikObjectUtils, "should_be_boolean", ConstantDescs.MTD_booleanObject);

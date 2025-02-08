@@ -24,7 +24,7 @@ public class IdentifierNode extends Node {
   @Override
   protected void doCompileInto(final CompilationContext cc) {
     // TODO: Fix hardcoded "sw" package variable
-    cc.codeBuilder()
+    cc.getCodeBuilder()
         .invokedynamic(
             DynamicCallSiteDesc.of(
                 ConstantDescs.BSM_GLOBAL_FETCHER,

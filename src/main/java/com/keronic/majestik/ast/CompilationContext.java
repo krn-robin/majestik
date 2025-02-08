@@ -18,7 +18,7 @@ public class CompilationContext {
     this.loopStack = loopStack;
   }
 
-  public CodeBuilder codeBuilder() {
+  public CodeBuilder getCodeBuilder() {
     return this.codeBuilder;
   }
 
@@ -28,7 +28,7 @@ public class CompilationContext {
 
   public BoundLabel bindLabel(String name, Label startLabel, Label endLabel) {
     var label = new BoundLabel(name, startLabel, endLabel);
-    this.loopStack.push(label);
+    this.loopStack.addLast(label);
     return label;
   }
 

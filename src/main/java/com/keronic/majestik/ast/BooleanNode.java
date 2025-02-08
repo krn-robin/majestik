@@ -38,6 +38,6 @@ public class BooleanNode extends Node {
   @Override
   protected void doCompileInto(final CompilationContext cc) {
     var bool = this.value ? "TRUE" : "FALSE";
-    cc.codeBuilder().getstatic(ConstantDescs.CD_Boolean, bool, ConstantDescs.CD_Boolean);
+    cc.getCodeBuilder().getstatic(ConstantDescs.CD_Boolean, bool, ConstantDescs.CD_Boolean);
   }
 }

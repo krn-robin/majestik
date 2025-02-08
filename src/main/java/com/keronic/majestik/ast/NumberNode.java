@@ -60,7 +60,7 @@ public class NumberNode extends Node {
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    final var cb = cc.codeBuilder();
+    final var cb = cc.getCodeBuilder();
     if (this.value instanceof Long n) {
       cb.loadConstant(n);
       cb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);

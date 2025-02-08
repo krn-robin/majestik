@@ -31,6 +31,6 @@ public class NoOperationNode extends Node {
 
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    cc.codeBuilder().nop();
+    cc.getCodeBuilder().nop();
   }
 }

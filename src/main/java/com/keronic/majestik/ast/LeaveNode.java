@@ -32,6 +32,6 @@ public class LeaveNode extends Node {
   @Override
   protected void doCompileInto(final CompilationContext cc) {
     var label = this == LeaveNode.unnamed ? cc.lastLabel() : cc.findLabel(this.name);
-    cc.codeBuilder().goto_(label.endLabel());
+    cc.getCodeBuilder().goto_(label.endLabel());
   }
 }

@@ -71,7 +71,7 @@ public class LoopNode extends AbstractCompoundNode {
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {
-    cc.codeBuilder()
+    cc.getCodeBuilder()
         .block(
             bcb -> {
               cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());
