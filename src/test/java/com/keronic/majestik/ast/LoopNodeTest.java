@@ -1,10 +1,16 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the LoopNode class, which implements the Magik loop construct. These tests verify
+ * the equality, hash code, and string representation behavior of loop nodes.
+ */
 class LoopNodeTest extends NodeTest {
   @Test
   void shouldBeEqualWhenValuesAreTheSame() {
@@ -57,5 +63,10 @@ class LoopNodeTest extends NodeTest {
   @Test
   void testToString() {
     assertEquals("LoopNode{name='named',children=[]}", new LoopNode("named").toString());
+    assertEquals("LoopNode{name='',children=[]}", new LoopNode("").toString());
+
+    var nodeWithChildren = new LoopNode("", new CompoundNode());
+    assertEquals(
+        "LoopNode{name='',children=[CompoundNode{children=[]}]}", nodeWithChildren.toString());
   }
 }

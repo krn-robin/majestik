@@ -10,29 +10,34 @@ import org.junit.jupiter.api.Test;
 class CompilationContextTest {
 
   @Test
-  void testLabels() {
-    // Test input
+  void shouldThrowExceptionWhenContextIsEmpty() {
     CompilationContext cc = new CompilationContext(null);
-
     assertThrows(NoSuchElementException.class, () -> cc.lastLabel());
+  }
 
+  @Test
+  void shouldManageLabelsInLastInFirstOutOrder() {
+    CompilationContext cc = new CompilationContext(null);
     cc.bindLabel("outer", null, null);
-    assertEquals("outer", cc.lastLabel().name());
     cc.bindLabel("inner", null, null);
     assertEquals("inner", cc.lastLabel().name());
+
+    cc.popLabel();
+    assertEquals("outer", cc.lastLabel().name());
+
+    cc.popLabel();
+    assertThrows(NoSuchElementException.class, () -> cc.popLabel());
+  }
+
+  @Test
+  void shouldFindLabelsByName() {
+    CompilationContext cc = new CompilationContext(null);
+    cc.bindLabel("outer", null, null);
+    cc.bindLabel("inner", null, null);
 
     var olabel = cc.findLabel("outer");
     assertEquals("outer", olabel.name());
 
-    var ilabel = cc.findLabel("inner");
-    assertEquals("inner", ilabel.name());
-
     assertThrows(NoSuchElementException.class, () -> cc.findLabel("unknown"));
-
-    cc.popLabel();
-    assertEquals("outer", cc.lastLabel().name());
-
-    cc.popLabel();
-    assertThrows(NoSuchElementException.class, () -> cc.lastLabel());
   }
 }

@@ -1,8 +1,11 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.lang.classfile.instruction.BranchInstruction;
 import org.junit.jupiter.api.Test;
 
 class LeaveNodeTest extends NodeTest {
@@ -57,5 +60,38 @@ class LeaveNodeTest extends NodeTest {
   @Test
   void testToString() {
     assertEquals("LeaveNode{name='named'}", new LeaveNode("named").toString());
+  }
+
+  @Test
+  void shouldGenerateGotoInstructions() {
+    // Test unnamed leave
+    final var unnamedNode = LeaveNode.unnamed;
+    final var unnamedCode =
+        this.compileInto(
+            cb -> {
+              var cc = new CompilationContext(cb);
+              cb.block(
+                  bcb -> {
+                    cc.bindLabel("outer", bcb.startLabel(), bcb.endLabel());
+                    unnamedNode.compileInto(cc.withCodeBuilder(cb));
+                  });
+              cb.nop();
+            });
+    assertInstanceOf(BranchInstruction.class, unnamedCode.elementList().getFirst());
+
+    // Test named leave
+    final var namedNode = new LeaveNode("outer");
+    final var namedCode =
+        this.compileInto(
+            cb -> {
+              var cc = new CompilationContext(cb);
+              cb.block(
+                  bcb -> {
+                    cc.bindLabel("outer", bcb.startLabel(), bcb.endLabel());
+                    namedNode.compileInto(cc);
+                  });
+              cb.nop();
+            });
+    assertInstanceOf(BranchInstruction.class, namedCode.elementList().getFirst());
   }
 }
