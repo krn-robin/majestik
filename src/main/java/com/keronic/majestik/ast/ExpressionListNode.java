@@ -9,7 +9,7 @@ public class ExpressionListNode extends AbstractCompoundNode {
   /**
    * Creates an ExpressionListNode by appending a node to an existing list.
    *
-   * @param c The existing expression list
+   * @param existing The existing expression list
    * @param second The node to append
    */
   public ExpressionListNode(ExpressionListNode existing, Node second) {

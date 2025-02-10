@@ -60,10 +60,12 @@ class LeaveNodeTest extends NodeTest {
   @Test
   void testToString() {
     assertEquals("LeaveNode{name='named'}", new LeaveNode("named").toString());
+    assertEquals("LeaveNode{name=''}", new LeaveNode("").toString());
+    assertEquals("LeaveNode{name=''}", LeaveNode.unnamed.toString());
   }
 
   @Test
-  void unnamedNodeshouldGenerateGotoInstructions() {
+  void unnamedNodeShouldGenerateGotoInstructions() {
     // Test unnamed leave
     final var unnamedNode = LeaveNode.unnamed;
     final var unnamedCode =
@@ -86,7 +88,7 @@ class LeaveNodeTest extends NodeTest {
   }
 
   @Test
-  void namedNodeshouldGenerateGotoInstructions() {
+  void namedNodeShouldGenerateGotoInstructions() {
     // Test named leave
     final var namedNode = new LeaveNode("outer");
     final var namedCode =

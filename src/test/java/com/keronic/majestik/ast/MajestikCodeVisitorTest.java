@@ -192,8 +192,11 @@ class MajestikCodeVisitorTest {
     var expectedLoopNode = new LoopNode("named", new LeaveNode(""));
     var actualLoopNode = n.getChild(0);
 
-    assertEquals(
-        expectedLoopNode.hashCode(), actualLoopNode.hashCode(), "Expected matching loop nodes");
+    assertEquals(expectedLoopNode, actualLoopNode, "Expected matching loop nodes");
+    // Optionally, also verify the structure explicitly
+    assertInstanceOf(LoopNode.class, actualLoopNode, "Expected LoopNode");
+    var loopNode = (LoopNode) actualLoopNode;
+    assertInstanceOf(LeaveNode.class, loopNode.getChild(0), "Expected LeaveNode in body");
   }
 
   @Test

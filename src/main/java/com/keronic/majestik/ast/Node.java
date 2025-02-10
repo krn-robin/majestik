@@ -18,7 +18,7 @@ public abstract class Node {
    * @param cc The CompilationContext instance to use for bytecode generation
    * @throws NullPointerException if cc is null
    */
-  public void compileInto(CompilationContext cc) {
+  public void compileInto(final CompilationContext cc) {
     Objects.requireNonNull(cc);
     doCompileInto(cc);
   }
@@ -57,5 +57,5 @@ public abstract class Node {
    *
    * @param cc The non-null CompilationContext instance
    */
-  protected abstract void doCompileInto(CompilationContext cc);
+  protected abstract void doCompileInto(final CompilationContext cc);
 }

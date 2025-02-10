@@ -25,7 +25,7 @@ abstract class NodeTest {
    *
    * @param cb the code builder consumer to compile
    * @return the resulting CodeModel
-   * @throws NullPointerException if cc is null
+   * @throws NullPointerException if cb is null
    * @throws IllegalStateException if method type or code cannot be resolved
    */
   CodeModel compileInto(Consumer<? super CodeBuilder> cb) {
