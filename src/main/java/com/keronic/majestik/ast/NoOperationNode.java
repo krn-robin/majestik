@@ -30,7 +30,7 @@ public class NoOperationNode extends Node {
   }
 
   @Override
-  protected void doCompileInto(final CodeBuilder cb) {
-    cb.nop();
+  protected void doCompileInto(final CompilationContext cc) {
+    cc.getCodeBuilder().nop();
   }
 }

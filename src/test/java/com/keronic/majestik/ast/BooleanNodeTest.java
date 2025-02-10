@@ -62,8 +62,8 @@ class BooleanNodeTest extends NodeTest {
 
   @Test
   void shouldGenerateFieldInstructions() {
-    var cnode = new CompoundNode(new BooleanNode(true), new BooleanNode(false));
-    var code = this.compileInto(cnode::compileInto);
+    final var cnode = new CompoundNode(new BooleanNode(true), new BooleanNode(false));
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(2, code.elementList().size());
     var trueinstruction = code.elementList().get(0);

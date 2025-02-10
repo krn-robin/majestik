@@ -67,10 +67,10 @@ class IfExpressionNodeTest extends NodeTest {
 
   @Test
   void shouldGenerateBranchInstructions() {
-    var nnode = new NoOperationNode();
-    var node = new IfExpressionNode(new BooleanNode(true), nnode, nnode);
-    var cnode = new CompoundNode(node, nnode);
-    var code = this.compileInto(cnode::compileInto);
+    final var nnode = new NoOperationNode();
+    final var node = new IfExpressionNode(new BooleanNode(true), nnode, nnode);
+    final var cnode = new CompoundNode(node, nnode);
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(9, code.elementList().size());
     var cel = code.elementList().toArray(new CodeElement[0]);

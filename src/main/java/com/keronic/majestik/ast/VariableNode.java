@@ -26,11 +26,11 @@ public class VariableNode extends Node {
    * Compiles this variable node by generating the appropriate bytecode instruction to store a value
    * from the operand stack into this variable.
    *
-   * @param cb the code builder to use for bytecode generation
-   * @throws NullPointerException if cb is null
+   * @param cc The compilation context to compile into
+   * @throws NullPointerException if cc is null
    */
-  public void compileIntoSet(CodeBuilder cb) {
-    Objects.requireNonNull(cb, "CodeBuilder cannot be null");
+  public void compileIntoSet(final CompilationContext cc) {
+    var cb = cc.getCodeBuilder();
     cb.astore(this.varIndex);
   }
 
@@ -73,12 +73,11 @@ public class VariableNode extends Node {
    * Compiles this variable node by generating the appropriate bytecode instruction to load the
    * variable value onto the operand stack.
    *
-   * @param cb the code builder to use for bytecode generation
-   * @throws NullPointerException if cb is null
+   * @param cc The compilation context to compile into
+   * @throws NullPointerException if cc is null
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    Objects.requireNonNull(cb, "CodeBuilder cannot be null");
-    cb.aload(this.varIndex);
+  protected void doCompileInto(final CompilationContext cc) {
+    cc.getCodeBuilder().aload(this.varIndex);
   }
 }

@@ -19,14 +19,19 @@ public class IdentifierNode extends Node {
   /**
    * Compiles this identifier into bytecode for global variable fetching.
    *
-   * @param cb The code builder to emit bytecode into
+   * @param cc The compilation context to compile into
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
+  protected void doCompileInto(final CompilationContext cc) {
     // TODO: Fix hardcoded "sw" package variable
-    cb.invokedynamic(
-        DynamicCallSiteDesc.of(
-            ConstantDescs.BSM_GLOBAL_FETCHER, "fetch", ConstantDescs.MTD_Object, "sw", this.value));
+    cc.getCodeBuilder()
+        .invokedynamic(
+            DynamicCallSiteDesc.of(
+                ConstantDescs.BSM_GLOBAL_FETCHER,
+                "fetch",
+                ConstantDescs.MTD_Object,
+                "sw",
+                this.value));
   }
 
   @Override

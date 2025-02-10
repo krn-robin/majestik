@@ -4,7 +4,9 @@ import module java.base;
 
 import com.keronic.majestik.runtime.Proc;
 
-public class ConstantBuilder {
+public enum ConstantBuilder {
+  INSTANCE;
+
   /**
    * Creates a call site for string operations.
    *
@@ -17,9 +19,9 @@ public class ConstantBuilder {
   @SuppressWarnings("java:S1172")
   public static CallSite stringBootstrap(
       MethodHandles.Lookup lookup, String name, MethodType type, String aString) {
-    	var bla = MethodHandles.constant(Object.class, String.format(aString));
-    	return new ConstantCallSite(bla);
-    }
+    var stringConstant = MethodHandles.constant(Object.class, String.format(aString));
+    return new ConstantCallSite(stringConstant);
+  }
 
   /**
    * Creates a call site for a procedure with an empty environment.
@@ -52,10 +54,7 @@ public class ConstantBuilder {
       throws Throwable {
     Proc aProc =
         Proc.of(aClass, jMethodName, magikMethodName, numArgs, mandatoryArgs, iterator != 0);
-        MethodHandle target = MethodHandles.constant(Object.class, aProc);
-        return new ConstantCallSite(target);
-	}
-
-  /** Private constructor to prevent instantiation. */
-  private ConstantBuilder() {}
+    MethodHandle target = MethodHandles.constant(Object.class, aProc);
+    return new ConstantCallSite(target);
+  }
 }

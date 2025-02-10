@@ -45,7 +45,7 @@ public class NumberNode extends Node {
   /**
    * Returns a string representation of this NumberNode.
    *
-   * @return a string in the format "NumberNode{value=<value>}"
+   * @return a string in the format {@literal "NumberNode{value=<value>}"}
    */
   @Override
   public String toString() {
@@ -55,11 +55,12 @@ public class NumberNode extends Node {
   /**
    * Compiles this number node into bytecode.
    *
-   * @param cb The code builder to compile into
+   * @param cc The compilation context to compile into
    * @throws IllegalStateException if the value type is unsupported
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
+  protected void doCompileInto(final CompilationContext cc) {
+    final var cb = cc.getCodeBuilder();
     if (this.value instanceof Long n) {
       cb.loadConstant(n);
       cb.invokestatic(ConstantDescs.CD_Long, "valueOf", ConstantDescs.MTD_Longlong);

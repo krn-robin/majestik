@@ -10,7 +10,7 @@ public class IfExpressionNode extends Node {
   private final Node body;
   private final Node elseBody;
 
-  static final Node EMPTYCOMPOUNDNODE = new CompoundNode();
+  static final Node EMPTYCOMPOUNDNODE = new ExpressionListNode();
 
   public IfExpressionNode(Node condition, Node body, Node elseBody) {
     this.condition = Objects.requireNonNull(condition);
@@ -42,10 +42,13 @@ public class IfExpressionNode extends Node {
   }
 
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    this.condition.compileInto(cb);
+  protected void doCompileInto(final CompilationContext cc) {
+    final var cb = cc.getCodeBuilder();
+    this.condition.compileInto(cc);
     cb.invokestatic(
         ConstantDescs.CD_MagikObjectUtils, "should_be_boolean", ConstantDescs.MTD_booleanObject);
-    cb.ifThenElse(bcb -> this.body.compileInto(bcb), bcb -> this.elseBody.compileInto(bcb));
+    cb.ifThenElse(
+        bcb -> this.body.compileInto(cc.withCodeBuilder(bcb)),
+        bcb -> this.elseBody.compileInto(cc.withCodeBuilder(bcb)));
   }
 }

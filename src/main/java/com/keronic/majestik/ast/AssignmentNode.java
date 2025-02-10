@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 /**
  * Represents an assignment operation in the AST. This node handles the compilation of assignment
  * expressions where a value (rhs) is assigned to a target (lhs).
@@ -22,12 +20,12 @@ public class AssignmentNode extends BinaryOperatorNode {
    * Compiles this assignment node into bytecode. First compiles the right-hand side expression,
    * then compiles the assignment to each variable on the left-hand side.
    *
-   * @param cb The code builder to use
+   * @param cc The compilation context to compile into
    */
   @Override
-  protected void doCompileInto(CodeBuilder cb) {
-    this.rhs.compileInto(cb);
+  protected void doCompileInto(final CompilationContext cc) {
+    this.rhs.compileInto(cc);
     var vnode = (VariableNode) this.lhs;
-    vnode.compileIntoSet(cb);
+    vnode.compileIntoSet(cc);
   }
 }

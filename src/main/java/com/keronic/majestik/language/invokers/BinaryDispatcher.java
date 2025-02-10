@@ -8,7 +8,9 @@ import com.keronic.majestik.internal.Utils;
  * BinaryDispatcher is responsible for handling binary operations and dispatching them to
  * appropriate handlers.
  */
-public class BinaryDispatcher {
+public enum BinaryDispatcher {
+  INSTANCE;
+
   private static MethodHandle todo =
       Utils.findStatic(BinaryDispatcher.class, "todo", MethodType.genericMethodType(2));
 
@@ -39,7 +41,4 @@ public class BinaryDispatcher {
     if (name.equals("+")) return new ConstantCallSite(todo);
     throw new UnsupportedOperationException(String.format("Not implemented: operator %s ", name));
   }
-
-  /** Private constructor to prevent instantiation. */
-  private BinaryDispatcher() {}
 }

@@ -1,7 +1,7 @@
 package com.keronic.majestik.ast;
 
 /** Represents a block node in the AST, encapsulating a compound statement. */
-public class BlockNode extends CompoundNode {
+public class BlockNode extends AbstractCompoundNode {
   /** Creates a new block node without children. */
   public BlockNode() {
     super();

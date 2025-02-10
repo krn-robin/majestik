@@ -5,7 +5,9 @@ import module java.base;
 import com.keronic.majestik.internal.Utils;
 import com.keronic.majestik.language.ResultTuple;
 
-public class TupleBuilder {
+public enum TupleBuilder {
+  INSTANCE;
+
   private static MethodHandle tuplecreator =
       Utils.findStatic(
           ResultTuple.class,
@@ -16,8 +18,5 @@ public class TupleBuilder {
   public static CallSite bootstrap(MethodHandles.Lookup lookup, String name, MethodType type) {
     return new ConstantCallSite(
         tuplecreator.asCollector(Object.class.arrayType(), type.parameterCount()));
-    }
-
-  /** Private constructor to prevent instantiation. */
-  private TupleBuilder() {}
+  }
 }

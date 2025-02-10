@@ -41,6 +41,8 @@ public abstract class MajestikAbstractVisitor<T> {
         case FALSE -> visitFalse(node);
         case IDENTIFIER -> visitIdentifier(node);
         case IF -> visitIfExpression(node);
+        case LEAVE_STATEMENT -> visitLeaveExpression(node);
+        case LOOP -> visitLoopExpression(node);
         case MAGIK -> visitMagik(node);
         case NUMBER -> visitNumber(node);
         case PROCEDURE_INVOCATION -> visitProcedureInvocation(node);
@@ -85,25 +87,15 @@ public abstract class MajestikAbstractVisitor<T> {
    * @param node the AST node representing the assignment expression
    * @return result of the visit operation
    */
-  protected T visitAssignmentExpression(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitAssignmentExpression(final AstNode node);
 
-  protected T visitAdditiveExpression(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitAdditiveExpression(final AstNode node);
 
-  protected T visitBlock(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitBlock(final AstNode node);
 
-  protected T visitCharacter(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitCharacter(final AstNode node);
 
-  protected T visitEqualityExpression(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitEqualityExpression(final AstNode node);
 
   /**
    * Visits a false literal node.
@@ -111,9 +103,7 @@ public abstract class MajestikAbstractVisitor<T> {
    * @param node the AST node representing the false literal
    * @return result of the visit operation
    */
-  protected T visitFalse(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitFalse(final AstNode node);
 
   /**
    * Visits an identifier node.
@@ -121,9 +111,7 @@ public abstract class MajestikAbstractVisitor<T> {
    * @param node the AST node representing the identifier
    * @return result of the visit operation
    */
-  protected T visitIdentifier(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitIdentifier(final AstNode node);
 
   /**
    * Visits an if expression node.
@@ -131,25 +119,19 @@ public abstract class MajestikAbstractVisitor<T> {
    * @param node the AST node representing the if expression
    * @return result of the visit operation
    */
-  protected T visitIfExpression(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitIfExpression(final AstNode node);
 
-  protected T visitMagik(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitLeaveExpression(final AstNode node);
 
-  protected T visitNumber(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitLoopExpression(final AstNode node);
 
-  protected T visitProcedureInvocation(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitMagik(final AstNode node);
 
-  protected T visitString(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitNumber(final AstNode node);
+
+  protected abstract T visitProcedureInvocation(final AstNode node);
+
+  protected abstract T visitString(final AstNode node);
 
   /**
    * Visits a true literal node.
@@ -157,7 +139,5 @@ public abstract class MajestikAbstractVisitor<T> {
    * @param node the AST node representing the true literal
    * @return result of the visit operation
    */
-  protected T visitTrue(final AstNode node) {
-    return this.visitDefault(node);
-  }
+  protected abstract T visitTrue(final AstNode node);
 }

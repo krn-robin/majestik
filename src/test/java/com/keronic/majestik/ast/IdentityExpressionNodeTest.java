@@ -40,7 +40,7 @@ class IdentityExpressionNodeTest extends NodeTest {
   void shouldGenerateInvokeDynamicInstruction() {
     final var cnode = new IdentityExpressionNode(new NumberNode(1l), new NumberNode(2l));
 
-    final var code = this.compileInto(cnode::compileInto);
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
     assertEquals(9, code.elementList().size());
     final var cel = code.elementList().toArray(new CodeElement[0]);
 

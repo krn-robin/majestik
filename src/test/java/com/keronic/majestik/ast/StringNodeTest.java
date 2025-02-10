@@ -44,9 +44,8 @@ class StringNodeTest extends NodeTest {
 
   @Test
   void shouldGenerateInvokeDynamicInstruction() {
-    var cnode = new CompoundNode(new StringNode("a test string"));
-
-    var code = this.compileInto(cnode::compileInto);
+    final var cnode = new CompoundNode(new StringNode("a test string"));
+    final var code = this.compileInto(cb -> cnode.compileInto(new CompilationContext(cb)));
 
     assertEquals(1, code.elementList().size());
     var instruction = code.elementList().getFirst();

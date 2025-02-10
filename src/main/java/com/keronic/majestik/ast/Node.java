@@ -15,12 +15,12 @@ public abstract class Node {
   /**
    * Compiles this AST node into bytecode using the provided CodeBuilder.
    *
-   * @param cb The CodeBuilder instance to use for bytecode generation
-   * @throws NullPointerException if cb is null
+   * @param cc The CompilationContext instance to use for bytecode generation
+   * @throws NullPointerException if cc is null
    */
-  public void compileInto(CodeBuilder cb) {
-    Objects.requireNonNull(cb, "CodeBuilder cannot be null");
-    doCompileInto(cb);
+  public void compileInto(final CompilationContext cc) {
+    Objects.requireNonNull(cc);
+    doCompileInto(cc);
   }
 
   @Override
@@ -55,7 +55,7 @@ public abstract class Node {
    * Template method for actual bytecode generation. Subclasses implement this method instead of
    * compileInto directly.
    *
-   * @param cb The non-null CodeBuilder instance
+   * @param cc The non-null CompilationContext instance
    */
-  protected abstract void doCompileInto(CodeBuilder cb);
+  protected abstract void doCompileInto(final CompilationContext cc);
 }
