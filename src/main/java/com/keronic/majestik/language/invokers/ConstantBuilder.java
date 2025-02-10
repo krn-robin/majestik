@@ -19,8 +19,8 @@ public enum ConstantBuilder {
   @SuppressWarnings("java:S1172")
   public static CallSite stringBootstrap(
       MethodHandles.Lookup lookup, String name, MethodType type, String aString) {
-    var bla = MethodHandles.constant(Object.class, String.format(aString));
-    return new ConstantCallSite(bla);
+    var stringConstant = MethodHandles.constant(Object.class, String.format(aString));
+    return new ConstantCallSite(stringConstant);
   }
 
   /**

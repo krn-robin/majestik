@@ -12,8 +12,8 @@ public class ExpressionListNode extends AbstractCompoundNode {
    * @param c The existing expression list
    * @param second The node to append
    */
-  public ExpressionListNode(ExpressionListNode c, Node second) {
-    super(c, second);
+  public ExpressionListNode(ExpressionListNode existing, Node second) {
+    super(existing, second);
   }
 
   /**

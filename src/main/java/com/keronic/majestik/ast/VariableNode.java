@@ -27,10 +27,10 @@ public class VariableNode extends Node {
    * from the operand stack into this variable.
    *
    * @param cc The compilation context to compile into
-   * @throws NullPointerException if cb is null
+   * @throws NullPointerException if cc is null
    */
-  public void compileIntoSet(CodeBuilder cb) {
-    Objects.requireNonNull(cb, "CodeBuilder cannot be null");
+  public void compileIntoSet(final CompilationContext cc) {
+    var cb = cc.getCodeBuilder();
     cb.astore(this.varIndex);
   }
 
@@ -74,7 +74,7 @@ public class VariableNode extends Node {
    * variable value onto the operand stack.
    *
    * @param cc The compilation context to compile into
-   * @throws NullPointerException if cb is null
+   * @throws NullPointerException if cc is null
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {

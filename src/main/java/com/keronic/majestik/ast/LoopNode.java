@@ -12,7 +12,7 @@ public class LoopNode extends AbstractCompoundNode {
   /** Creates a new loop node without children. */
   public LoopNode(String name) {
     super();
-    this.name = name;
+    this.name = Objects.requireNonNull(name);
   }
 
   /**
@@ -23,7 +23,7 @@ public class LoopNode extends AbstractCompoundNode {
    */
   public LoopNode(String name, CompoundNode children) {
     super(children);
-    this.name = name;
+    this.name = Objects.requireNonNull(name);
   }
 
   /**
@@ -34,7 +34,7 @@ public class LoopNode extends AbstractCompoundNode {
    */
   public LoopNode(String name, Node child) {
     super(child);
-    this.name = name;
+    this.name = Objects.requireNonNull(name);
   }
 
   /**
@@ -67,7 +67,7 @@ public class LoopNode extends AbstractCompoundNode {
    * Compiles this compound node into the given code builder.
    *
    * @param cc The compilation context to compile into
-   * @throws NullPointerException if cb is null
+   * @throws NullPointerException if cc is null
    */
   @Override
   protected void doCompileInto(final CompilationContext cc) {

@@ -26,6 +26,6 @@ public class AssignmentNode extends BinaryOperatorNode {
   protected void doCompileInto(final CompilationContext cc) {
     this.rhs.compileInto(cc);
     var vnode = (VariableNode) this.lhs;
-    vnode.compileIntoSet(cc.getCodeBuilder());
+    vnode.compileIntoSet(cc);
   }
 }

@@ -15,8 +15,6 @@ public abstract class AbstractCompoundNode extends Node {
   /** The nodes containing this block's statements. */
   private final Node[] children;
 
-  static final Node EMPTYCOMPOUNDNODE = new ExpressionListNode();
-
   public AbstractCompoundNode() {
     this.children = new Node[0];
   }
