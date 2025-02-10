@@ -76,7 +76,6 @@ public class LoopNode extends AbstractCompoundNode {
             bcb -> {
               cc.bindLabel(this.name, bcb.startLabel(), bcb.endLabel());
               this.forEach(node -> node.compileInto(cc.withCodeBuilder(bcb)));
-              bcb.pop();
               bcb.goto_(bcb.startLabel());
               cc.popLabel();
             });

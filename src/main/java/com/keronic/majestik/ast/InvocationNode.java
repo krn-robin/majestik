@@ -61,9 +61,10 @@ public class InvocationNode extends Node {
   @Override
   protected void doCompileInto(final CompilationContext cc) {
     this.arguments.forEach(a -> a.compileInto(cc));
-    cc.getCodeBuilder()
-        .invokedynamic(
-            DynamicCallSiteDesc.of(
-                ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
+    var cb = cc.getCodeBuilder();
+    cb.invokedynamic(
+        DynamicCallSiteDesc.of(
+            ConstantDescs.BSM_NATURAL_PROC, "()", ConstantDescs.MTD_ObjectObjectObject));
+    cb.pop(); // Discard the returned result
   }
 }

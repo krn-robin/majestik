@@ -63,7 +63,7 @@ class LeaveNodeTest extends NodeTest {
   }
 
   @Test
-  void shouldGenerateGotoInstructions() {
+  void unnamedNodeshouldGenerateGotoInstructions() {
     // Test unnamed leave
     final var unnamedNode = LeaveNode.unnamed;
     final var unnamedCode =
@@ -77,8 +77,16 @@ class LeaveNodeTest extends NodeTest {
                   });
               cb.nop();
             });
-    assertInstanceOf(BranchInstruction.class, unnamedCode.elementList().getFirst());
 
+    var unnamedElements = unnamedCode.elementList();
+    assertEquals(3, unnamedElements.size());
+    assertInstanceOf(BranchInstruction.class, unnamedElements.get(0));
+    assertInstanceOf(Label.class, unnamedElements.get(1));
+    assertInstanceOf(NopInstruction.class, unnamedElements.get(2));
+  }
+
+  @Test
+  void namedNodeshouldGenerateGotoInstructions() {
     // Test named leave
     final var namedNode = new LeaveNode("outer");
     final var namedCode =
@@ -92,6 +100,10 @@ class LeaveNodeTest extends NodeTest {
                   });
               cb.nop();
             });
-    assertInstanceOf(BranchInstruction.class, namedCode.elementList().getFirst());
+    var namedElements = namedCode.elementList();
+    assertEquals(3, namedElements.size());
+    assertInstanceOf(BranchInstruction.class, namedElements.get(0));
+    assertInstanceOf(Label.class, namedElements.get(1));
+    assertInstanceOf(NopInstruction.class, namedElements.get(2));
   }
 }

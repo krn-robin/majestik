@@ -1,8 +1,8 @@
 package com.keronic.majestik.ast;
 
 import module java.base;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -68,5 +68,32 @@ class LoopNodeTest extends NodeTest {
     var nodeWithChildren = new LoopNode("", new CompoundNode());
     assertEquals(
         "LoopNode{name='',children=[CompoundNode{children=[]}]}", nodeWithChildren.toString());
+  }
+
+  @Test
+  void shouldGenerateGotoInstructions() {
+    // Test named loop
+    final var namedNode = new LoopNode("loopie");
+    final var namedCode =
+        this.compileInto(
+            cb -> {
+              var cc = new CompilationContext(cb);
+              cb.block(
+                  bcb -> {
+                    cc.bindLabel("outer", bcb.startLabel(), bcb.endLabel());
+                    namedNode.compileInto(cc);
+                  });
+              cb.nop(); // Target instruction to jump to
+            });
+
+    var namedElements = namedCode.elementList();
+
+    assertEquals(4, namedElements.size());
+    assertInstanceOf(Label.class, namedElements.get(0));
+    assertInstanceOf(BranchInstruction.class, namedElements.get(1));
+    assertInstanceOf(Label.class, namedElements.get(2));
+
+    // Not really sure why the NOp compiles into a throw here?
+    assertInstanceOf(ThrowInstruction.class, namedElements.get(3));
   }
 }
