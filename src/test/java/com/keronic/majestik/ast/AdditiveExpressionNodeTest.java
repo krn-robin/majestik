@@ -45,9 +45,9 @@ class AdditiveExpressionNodeTest extends NodeTest {
     final var cel = code.elementList().toArray(new CodeElement[0]);
 
     final var consins0 = (ConstantInstruction) cel[0];
-    assertEquals(TypeKind.LongType, consins0.typeKind());
+    assertEquals(TypeKind.LONG, consins0.typeKind());
     final var consins1 = (ConstantInstruction) cel[2];
-    assertEquals(TypeKind.LongType, consins1.typeKind());
+    assertEquals(TypeKind.LONG, consins1.typeKind());
 
     final var invins0 = (InvokeInstruction) cel[1];
     assertEquals("valueOf", invins0.name().toString());

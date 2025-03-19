@@ -1,6 +1,11 @@
-/** */
 package com.keronic;
 
+import static java.lang.classfile.ClassFile.ACC_PUBLIC;
+import static java.lang.classfile.ClassFile.ACC_STATIC;
+import static java.lang.constant.ConstantDescs.CD_Object;
+import static java.lang.constant.ConstantDescs.CLASS_INIT_NAME;
+import static java.lang.constant.ConstantDescs.INIT_NAME;
+import static java.lang.constant.ConstantDescs.MTD_void;
 import module java.base;
 
 import com.keronic.majestik.MajestikRuntimeException;
@@ -14,6 +19,22 @@ import nl.ramsolutions.sw.magik.MagikFile;
 public class Majestik {
   private static final System.Logger LOGGER =
       System.getLogger(MethodHandles.lookup().lookupClass().getName());
+
+  static void buildClass(MagikFile mf, ClassBuilder cb) {
+    cb.withMethodBody(INIT_NAME, MTD_void, ACC_PUBLIC, Majestik::buildEmptyInitMethod)
+        .withMethodBody(CLASS_INIT_NAME, MTD_void, ACC_STATIC,
+            cb2 -> buildClassInitMethod(mf, cb2));
+  }
+
+  static void buildEmptyInitMethod(CodeBuilder cb) {
+    cb.aload(0).invokespecial(CD_Object, INIT_NAME, MTD_void).return_();
+  }
+
+  static void buildClassInitMethod(MagikFile mf, CodeBuilder cb) {
+    MajestikCodeVisitor mcv = new MajestikCodeVisitor();
+    mcv.scanFile(mf).compileInto(new CompilationContext(cb));
+    cb.return_();
+  }
 
   /**
    * The main entry point of the Majestik test application.
@@ -31,7 +52,8 @@ public class Majestik {
       throw new MajestikRuntimeException(e);
     }
 
-    if (args.length == 0) LOGGER.log(Level.ERROR, () -> "Usage: majestik file.magik");
+    if (args.length == 0)
+      LOGGER.log(Level.ERROR, () -> "Usage: majestik file.magik");
     else
       try {
         LOGGER.log(Level.INFO, () -> String.format("Reading file: %s", args[0]));
@@ -44,38 +66,12 @@ public class Majestik {
 
         var newFileName = "majestik/%s.class".formatted(baseName); // TODO: move to pathutils
         LOGGER.log(Level.INFO, () -> String.format("Writing to classfile: %s", newFileName));
-        ClassFile.of()
-            .buildTo(
-                Path.of(newFileName),
-                ClassDesc.of("majestik.%s".formatted(baseName)),
-                classBuilder ->
-                    classBuilder
-                        .withMethodBody(
-                            ConstantDescs.INIT_NAME,
-                            ConstantDescs.MTD_void,
-                            ClassFile.ACC_PUBLIC,
-                            codeBuilder ->
-                                codeBuilder
-                                    .aload(0)
-                                    .invokespecial(
-                                        ConstantDescs.CD_Object,
-                                        ConstantDescs.INIT_NAME,
-                                        ConstantDescs.MTD_void)
-                                    .return_())
-                        .withMethodBody(
-                            ConstantDescs.CLASS_INIT_NAME,
-                            ConstantDescs.MTD_void,
-                            ClassFile.ACC_STATIC,
-                            codeBuilder -> {
-                              MajestikCodeVisitor mcv = new MajestikCodeVisitor();
-                              mcv.scanFile(mf).compileInto(new CompilationContext(codeBuilder));
-                              codeBuilder.return_();
-                            }));
-        var cl = new MajestikClassLoader();
+        ClassFile.of().buildTo(Path.of(newFileName),
+            ClassDesc.of("majestik.%s".formatted(baseName)), cb -> buildClass(mf, cb));
 
-        LOGGER.log(
-            Level.INFO,
+        LOGGER.log(Level.INFO,
             () -> String.format("LOG: Loading compiled class: %s", Path.of(newFileName)));
+        var cl = new MajestikClassLoader();
         cl.loadClass("majestik.%s".formatted(baseName)).getDeclaredConstructor().newInstance();
       } catch (Exception e) {
         throw new MajestikRuntimeException(e);

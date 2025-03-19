@@ -52,9 +52,9 @@ class NumberNodeTest extends NodeTest {
     assertInstanceOf(InvokeInstruction.class, cel[3]);
 
     var consins0 = (ConstantInstruction) cel[0];
-    assertEquals(TypeKind.LongType, consins0.typeKind());
+    assertEquals(TypeKind.LONG, consins0.typeKind());
     var consins1 = (ConstantInstruction) cel[2];
-    assertEquals(TypeKind.DoubleType, consins1.typeKind());
+    assertEquals(TypeKind.DOUBLE, consins1.typeKind());
 
     var invins0 = (InvokeInstruction) cel[1];
     assertEquals("valueOf", invins0.name().toString());
