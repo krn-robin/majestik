@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.keronic.majestik.runtime;
 
 import com.keronic.majestik.runtime.internal.ProcImpl;

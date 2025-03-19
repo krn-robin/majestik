@@ -23,7 +23,6 @@ public abstract class Node {
     doCompileInto(cc);
   }
 
-  @Override
   /**
    * Compares this node with another object for structural equality. Two nodes are equal if they are
    * of the same type and have equal children.
@@ -31,24 +30,25 @@ public abstract class Node {
    * @param obj The object to compare with
    * @return true if the objects are structurally equal
    */
+  @Override
   public abstract boolean equals(Object obj);
 
-  @Override
   /**
    * Returns a hash code consistent with equals(). Implementations should include all fields used in
    * equals().
    *
    * @return The hash code value
    */
+  @Override
   public abstract int hashCode();
 
-  @Override
   /**
    * Returns a string representation of this node for debugging. The format should include the node
    * type and essential attributes.
    *
    * @return A debug-friendly string representation
    */
+  @Override
   public abstract String toString();
 
   /**

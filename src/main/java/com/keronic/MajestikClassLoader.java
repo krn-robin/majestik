@@ -1,4 +1,3 @@
-/** */
 package com.keronic;
 
 import module java.base;
