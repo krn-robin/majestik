@@ -2,7 +2,7 @@ package com.keronic;
 
 import module java.base;
 
-import com.keronic.majestik.internal.impl.ClassRemapper;
+import jdk.internal.classfile.components.ClassRemapper;
 
 /** */
 public class MajestikClassLoader extends ClassLoader {
