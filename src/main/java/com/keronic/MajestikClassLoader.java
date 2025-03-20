@@ -24,20 +24,14 @@ public class MajestikClassLoader extends ClassLoader {
       try {
         var cd = this.loadClassData(name);
         return super.defineClass(name, cd, 0, cd.length);
-      } catch (Exception e) {
-        e.printStackTrace();
+      } catch (IOException e) {
         return super.findClass(name);
       }
     }
     return super.findClass(name);
   }
 
-  private byte[] loadClassData(String className)
-      throws IOException,
-          ClassNotFoundException,
-          NoSuchMethodException,
-          IllegalAccessException,
-          InvocationTargetException {
+  private byte[] loadClassData(String className) throws IOException {
     var fileName = className.replace('.', File.separatorChar) + ".class";
 
     // ClassFile instance for parsing and transforming the class file
