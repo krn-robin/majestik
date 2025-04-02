@@ -1,11 +1,9 @@
-/** */
 package com.keronic.majestik.language.invokers;
 
 import module java.base;
 
 import com.keronic.majestik.internal.Utils;
 
-/** */
 /**
  * Provides dynamic access functionality for the Magik language. This enum-based singleton handles
  * dynamic variable lookups and storage.

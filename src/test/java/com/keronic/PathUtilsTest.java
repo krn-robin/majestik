@@ -1,4 +1,3 @@
-/** */
 package com.keronic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
