@@ -13,10 +13,10 @@ class CharacterNodeTest extends NodeTest {
 
     assertEquals(node1, node2);
 
-    assertNotEquals(node1, (char) 'a');
+    assertNotEquals(node1, 'a');
     var node3 = new CharacterNode('b');
     assertNotEquals(node1, node3);
-    var node4 = new CharacterNode((char) ' ');
+    var node4 = new CharacterNode(' ');
     assertNotEqualsNull(node4);
   }
 

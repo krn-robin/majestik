@@ -9,8 +9,8 @@
   <properties>
     <dependency.junit.version>5.12.2</dependency.junit.version>
     <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
-    <maven.compiler.source>23</maven.compiler.source>
-    <maven.compiler.target>23</maven.compiler.target>
+    <maven.compiler.source>24</maven.compiler.source>
+    <maven.compiler.target>24</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.java.enablePreview>true</sonar.java.enablePreview>
@@ -65,6 +65,9 @@
           <configuration>
             <compilerArgs>
               <arg>--enable-preview</arg>
+              <arg>-Xlint:all,-preview</arg>
+              <arg>--add-exports</arg>
+              <arg>java.base/jdk.internal.classfile.components=ALL-UNNAMED</arg>
             </compilerArgs>
           </configuration>
         </plugin>
@@ -108,7 +111,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.3</version>
           <configuration>
-            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --enable-preview</argLine>
+            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --add-exports java.base/jdk.internal.classfile.components=ALL-UNNAMED --enable-preview</argLine>
           </configuration>
         </plugin>
       </plugins>
