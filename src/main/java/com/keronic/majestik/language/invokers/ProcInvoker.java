@@ -1,4 +1,3 @@
-/** */
 package com.keronic.majestik.language.invokers;
 
 import module java.base;
