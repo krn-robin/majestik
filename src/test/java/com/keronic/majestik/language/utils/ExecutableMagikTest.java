@@ -22,12 +22,12 @@ class ExecutableMagikTest {
   }
 
   @Test
-  void testExecute() {
+  void shouldReturnCorrectExecutionResult() {
     assertEquals("Execution Result", executableMagik.execute());
   }
 
   @Test
-  void testPreload() {
+  void shouldNotThrowExceptionWhenPreloading() {
     assertDoesNotThrow(() -> executableMagik.preload());
   }
 }
