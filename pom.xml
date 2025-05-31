@@ -9,11 +9,11 @@
   <properties>
     <dependency.junit.version>5.12.2</dependency.junit.version>
     <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
-    <maven.compiler.source>24</maven.compiler.source>
-    <maven.compiler.target>24</maven.compiler.target>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.java.enablePreview>true</sonar.java.enablePreview>
+    <sonar.java.enablePreview>false</sonar.java.enablePreview>
     <sonar.organization>krn-robin</sonar.organization>
   </properties>
   <dependencies>
@@ -21,6 +21,7 @@
       <groupId>nl.ramsolutions</groupId>
       <artifactId>magik-squid</artifactId>
       <version>${dependency.magik-tools.version}</version>
+      <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -64,23 +65,13 @@
           <version>3.14.0</version>
           <configuration>
             <compilerArgs>
-              <arg>--enable-preview</arg>
-              <arg>-Xlint:all,-preview</arg>
               <arg>--add-exports</arg>
               <arg>java.base/jdk.internal.classfile.components=ALL-UNNAMED</arg>
             </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.8.1</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
           <version>3.1.4</version>
         </plugin>
         <plugin>
@@ -111,7 +102,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.3</version>
           <configuration>
-            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --add-exports java.base/jdk.internal.classfile.components=ALL-UNNAMED --enable-preview</argLine>
+            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --add-exports java.base/jdk.internal.classfile.components=ALL-UNNAMED</argLine>
           </configuration>
         </plugin>
       </plugins>
@@ -127,14 +118,14 @@
             <goals>
               <goal>wget</goal>
             </goals>
-            <phase>clean</phase>
+             <phase>initialize</phase>
             <configuration>
               <retries>3</retries>
               <skipCache>false</skipCache>
               <readTimeOut>30000</readTimeOut>
               <uri>https://github.com/StevenLooman/magik-tools/releases/download/${dependency.magik-tools.version}/magik-squid-${dependency.magik-tools.version}.jar</uri>
               <sha256>4b74d3f5204fc652a4ebb8fe2522b1cd25fecc56e063dbdfcf1e8df98f2f8986</sha256>
-              <outputDirectory>${project.basedir}/libs</outputDirectory>
+                <outputDirectory>${project.basedir}/libs</outputDirectory>
             </configuration>
           </execution>
           <execution>
@@ -142,13 +133,13 @@
             <goals>
               <goal>wget</goal>
             </goals>
-            <phase>clean</phase>
+            <phase>initialize</phase>
             <configuration>
               <retries>3</retries>
               <skipCache>false</skipCache>
               <readTimeOut>30000</readTimeOut>
               <uri>https://raw.githubusercontent.com/StevenLooman/magik-tools/${dependency.magik-tools.version}/pom.xml</uri>
-              <outputDirectory>${project.basedir}/libs</outputDirectory>
+               <outputDirectory>${project.basedir}/libs</outputDirectory>
               <sha256>b19d2799034bea4f2e2040932dff645ad20ba3a76705d72804e7ddf140e81fa5</sha256>
               <outputFileName>magik-tools-${dependency.magik-tools.version}.pom</outputFileName>
             </configuration>
@@ -177,15 +168,19 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
+         <version>3.1.4</version>
         <executions>
           <execution>
             <id>install-magik-squid</id>
             <goals>
               <goal>install-file</goal>
             </goals>
-            <phase>clean</phase>
+            <phase>initialize</phase>
             <configuration>
               <file>${project.basedir}/libs/magik-squid-${dependency.magik-tools.version}.jar</file>
+              <groupId>nl.ramsolutions</groupId>
+              <artifactId>magik-squid</artifactId>
+              <version>${dependency.magik-tools.version}</version>
               <packaging>jar</packaging>
             </configuration>
           </execution>
@@ -194,13 +189,13 @@
             <goals>
               <goal>install-file</goal>
             </goals>
-            <phase>clean</phase>
+             <phase>initialize</phase>
             <configuration>
-              <file>${project.basedir}/libs/magik-tools-${dependency.magik-tools.version}.pom</file>
-              <groupId>nl.ramsolutions</groupId>
-              <artifactId>magik-tools</artifactId>
-              <version>${dependency.magik-tools.version}</version>
-              <packaging>pom</packaging>
+               <file>${project.basedir}/libs/magik-tools-${dependency.magik-tools.version}.pom</file>
+               <groupId>nl.ramsolutions</groupId>
+               <artifactId>magik-tools</artifactId>
+               <version>${dependency.magik-tools.version}</version>
+               <packaging>pom</packaging>
             </configuration>
           </execution>
         </executions>
@@ -264,7 +259,6 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.11.2</version>
         <configuration>
-          <additionalOptions>--enable-preview</additionalOptions>
           <doclint>all,-missing</doclint>
         </configuration>
       </plugin>
