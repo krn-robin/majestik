@@ -1,4 +1,3 @@
-/** */
 package com.keronic.majestik.language.utils;
 
 /** */

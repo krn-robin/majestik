@@ -7,7 +7,7 @@ test() {
     printf "\e[33mRunning test for %s\e[0m\n" "$input_file"
 
     # Run the JAR and capture the output
-    output=$(java -jar --enable-preview target/majestik*.jar "$input_file")
+    output=$(java -jar --add-exports java.base/jdk.internal.classfile.components=ALL-UNNAMED --enable-preview target/majestik*.jar "$input_file")
 
     # Compare the output with the expected output
     if [ "$output" = "$expected_output" ]; then

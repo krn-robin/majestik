@@ -1,4 +1,3 @@
-/** */
 package com.keronic.majestik.runtime.objects.internal;
 
 import module java.base;
