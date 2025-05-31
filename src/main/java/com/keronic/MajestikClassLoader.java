@@ -78,7 +78,7 @@ public class MajestikClassLoader extends ClassLoader {
         if (classModel.majorVersion() > 0) {
             classBuilder.withVersion(classModel.majorVersion(), classModel.minorVersion());
         }
-        classBuilder.withFlags(classModel.flagsMask());
+        classBuilder.withFlags(classModel.flags().flagsMask());
 
         ConstantPoolBuilder cp = classBuilder.constantPool(); // Get ConstantPoolBuilder once
 
@@ -91,7 +91,7 @@ public class MajestikClassLoader extends ClassLoader {
                     .ifPresent(classBuilder::withSuperclass);
             } else if (ce instanceof Interfaces ifs) {
                 List<ClassDesc> remappedInterfaceDescs = ifs.interfaces().stream()
-                        .map(ifEntry -> ((ClassEntry)ifEntry).asSymbol())
+                        .map(ClassEntry::asSymbol) // Use method reference
                         .map(REMAP_FUNCTION)
                         .collect(Collectors.toList());
                 if (!remappedInterfaceDescs.isEmpty()) {
@@ -103,7 +103,7 @@ public class MajestikClassLoader extends ClassLoader {
                 classBuilder.withField(fm.fieldName().stringValue(), remappedFieldTypeDesc, fieldBuilder -> {
                     fieldBuilder.withFlags(fm.flags().flagsMask());
                     for (Attribute<?> attr : fm.attributes()) { // Attribute<?> implements FieldElement
-                        fieldBuilder.with((FieldElement) attr);
+                        fieldBuilder.with((FieldElement) attr); // Use .with()
                     }
                 });
             } else if (ce instanceof MethodModel mm) {
@@ -124,10 +124,10 @@ public class MajestikClassLoader extends ClassLoader {
                                 .map(REMAP_FUNCTION)
                                 .collect(Collectors.toList());
                             if (!remappedExceptionDescs.isEmpty()) {
-                               methodBuilder.with(ExceptionsAttribute.ofSymbols(remappedExceptionDescs)); // Use with()
+                               methodBuilder.with(ExceptionsAttribute.ofSymbols(remappedExceptionDescs));
                             }
                         } else { // Other attributes like SignatureAttribute
-                            methodBuilder.with((MethodElement) attr); // Use with()
+                            methodBuilder.with((MethodElement) attr);
                         }
                     }
                     mm.code().ifPresent(codeModel -> {
@@ -135,39 +135,40 @@ public class MajestikClassLoader extends ClassLoader {
                     });
                 });
             } else if (ce instanceof InnerClassesAttribute ica) {
-                List<InnerClassesAttribute.InnerClass> remappedInnerClasses = new ArrayList<>();
-                for (InnerClassesAttribute.InnerClass entry : ica.classes()) { // .classes() and InnerClass type
+                List<InnerClassesAttribute.InnerClassInfo> remappedInnerClasses = new ArrayList<>(); // Use InnerClassInfo
+                for (InnerClassesAttribute.InnerClassInfo entry : ica.classes()) { // .classes() and InnerClassInfo type
                     ClassDesc innerClsSym = entry.innerClass().asSymbol();
                     ClassDesc remappedInnerClsSym = REMAP_FUNCTION.apply(innerClsSym);
 
                     Optional<ClassEntry> remappedOuterEntryOpt = entry.outerClass()
                         .map(ClassEntry::asSymbol)
                         .map(REMAP_FUNCTION)
-                        .map(cp::classEntry); // Convert remapped ClassDesc to ClassEntry via CPBuilder
+                        .map(cp::classEntry);
 
-                    remappedInnerClasses.add(InnerClassesAttribute.InnerClass.of(
+                    remappedInnerClasses.add(InnerClassesAttribute.InnerClassInfo.of( // Use InnerClassInfo.of
                         cp.classEntry(remappedInnerClsSym),
-                        remappedOuterEntryOpt, // Optional<ClassEntry>
+                        remappedOuterEntryOpt,
                         entry.innerName().map(name -> cp.utf8Entry(name.stringValue())),
-                        entry.flags()
+                        entry.accessFlags() // Use accessFlags()
                     ));
                 }
                 if (!remappedInnerClasses.isEmpty()) {
-                    classBuilder.with(InnerClassesAttribute.of(remappedInnerClasses)); // Use .with()
+                    InnerClassesAttribute newInnerClassesAttribute = InnerClassesAttribute.of(remappedInnerClasses); // Use InnerClassesAttribute.of
+                    classBuilder.with(newInnerClassesAttribute);
                 }
             } else if (ce instanceof NestHostAttribute nha) {
                  ClassDesc remappedHostDesc = REMAP_FUNCTION.apply(nha.nestHost().asSymbol());
-                 classBuilder.with(NestHostAttribute.of(cp.classEntry(remappedHostDesc))); // Use .with() and of(ClassEntry)
+                 classBuilder.with(NestHostAttribute.of(cp.classEntry(remappedHostDesc)));
             } else if (ce instanceof NestMembersAttribute nma) {
-                 List<ClassDesc> remappedMembers = nma.members().stream() // .members()
+                 List<ClassDesc> remappedMemberDescs = nma.nestMembers().stream() // Use nestMembers()
                     .map(ClassEntry::asSymbol)
                     .map(REMAP_FUNCTION)
                     .collect(Collectors.toList());
-                 if(!remappedMembers.isEmpty()) {
-                    classBuilder.with(NestMembersAttribute.ofSymbols(remappedMembers)); // .with()
+                 if(!remappedMemberDescs.isEmpty()) {
+                    classBuilder.with(NestMembersAttribute.ofSymbols(remappedMemberDescs));
                  }
             } else if (ce instanceof PermittedSubclassesAttribute psa) {
-                List<ClassDesc> remappedSubclasses = psa.subclasses().stream() // .subclasses()
+                List<ClassDesc> remappedSubclassDescs = psa.permittedSubclasses().stream() // Use permittedSubclasses()
                     .map(ClassEntry::asSymbol)
                     .map(REMAP_FUNCTION)
                     .collect(Collectors.toList());
@@ -231,7 +232,7 @@ public class MajestikClassLoader extends ClassLoader {
             ClassDesc originalType = instr.type().asSymbol(); // type() returns ClassEntry
             ClassDesc remappedType = remapFunction.apply(originalType);
             if (opcode == Opcode.INSTANCEOF) {
-                codeBuilder.instanceofOp(remappedType); // Corrected
+                codeBuilder.instanceofInstruction(remappedType); // Corrected
             } else if (opcode == Opcode.CHECKCAST) {
                 codeBuilder.checkcast(remappedType);
             } else {
@@ -240,7 +241,7 @@ public class MajestikClassLoader extends ClassLoader {
         } else if (element instanceof NewObjectInstruction instr) {
             ClassDesc originalType = instr.className().asSymbol();
             ClassDesc remappedType = remapFunction.apply(originalType);
-            codeBuilder.newOp(remappedType); // Corrected
+            codeBuilder.newObject(remappedType); // Corrected
         } else if (element instanceof NewReferenceArrayInstruction instr) {
             ClassDesc componentType = instr.componentType().asSymbol();
             ClassDesc remappedComponentType = remapFunction.apply(componentType);
