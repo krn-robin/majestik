@@ -9,11 +9,11 @@
   <properties>
     <dependency.junit.version>5.12.2</dependency.junit.version>
     <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
-    <maven.compiler.source>24</maven.compiler.source>
-    <maven.compiler.target>24</maven.compiler.target>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.java.enablePreview>true</sonar.java.enablePreview>
+    <sonar.java.enablePreview>false</sonar.java.enablePreview>
     <sonar.organization>krn-robin</sonar.organization>
   </properties>
   <dependencies>
@@ -64,23 +64,12 @@
           <version>3.14.0</version>
           <configuration>
             <compilerArgs>
-              <arg>--enable-preview</arg>
-              <arg>-Xlint:all,-preview</arg>
-              <arg>--add-exports</arg>
-              <arg>java.base/jdk.internal.classfile.components=ALL-UNNAMED</arg>
+              <arg>-Xlint:all</arg>
             </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.8.1</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.4</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
           <version>3.1.4</version>
         </plugin>
         <plugin>
@@ -111,7 +100,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.3</version>
           <configuration>
-            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties --add-exports java.base/jdk.internal.classfile.components=ALL-UNNAMED --enable-preview</argLine>
+            <argLine>@{argLine} -Djava.util.logging.config.file=src/test/resources/jul.properties</argLine>
           </configuration>
         </plugin>
       </plugins>
@@ -158,6 +147,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.8.1</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -177,6 +167,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
+        <version>3.1.4</version>
         <executions>
           <execution>
             <id>install-magik-squid</id>
@@ -264,7 +255,6 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.11.2</version>
         <configuration>
-          <additionalOptions>--enable-preview</additionalOptions>
           <doclint>all,-missing</doclint>
         </configuration>
       </plugin>
