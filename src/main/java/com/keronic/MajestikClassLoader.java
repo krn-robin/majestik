@@ -1,39 +1,23 @@
 package com.keronic;
 
-import java.io.File;
+import java.io.File; // Keep for File.separatorChar in findClass potentially, or loadClassData if it used it
 import java.io.IOException;
-import java.io.InputStream;
-// import java.io.UncheckedIOException; // Might not be needed if Files.readAllBytes is out of test scope
-import java.lang.classfile.AccessFlags;
-// import java.lang.classfile.Attribute; // Only if the fallback attribute handler is kept
-import java.lang.classfile.ClassBuilder;
-import java.lang.classfile.ClassElement;
-import java.lang.classfile.ClassFile;
-// import java.lang.classfile.ClassFileElement; // Only if the fallback attribute handler is kept
-import java.lang.classfile.ClassFileVersion; // For instanceof check to skip
-import java.lang.classfile.ClassModel;
-import java.lang.classfile.attribute.InnerClassesAttribute;
-// import java.lang.classfile.attribute.InnerClassesAttribute.InnerClassInfo; // Do not rely on this, use FQN
-import java.lang.classfile.constantpool.ClassEntry;
-import java.lang.classfile.constantpool.ConstantPoolBuilder;
-import java.lang.classfile.constantpool.Utf8Entry;
-import java.lang.constant.ClassDesc;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-// import java.util.stream.Collectors; // Not needed for this isolated test
+// import java.io.InputStream; // Not used if loadClassData body is gone
+// import java.nio.file.Files; // Not used if loadClassData body is gone
+// import java.nio.file.Path; // Not used if loadClassData body is gone
+// import java.util.function.Function; // For REMAP_FUNCTION
+// import java.lang.constant.ClassDesc; // For REMAP_FUNCTION
 
 /** */
 public class MajestikClassLoader extends ClassLoader {
 
+  /*
   static final Function<ClassDesc, ClassDesc> REMAP_FUNCTION =
       cd ->
           ClassDesc.of(
               cd.packageName().replace("com.gesmallworld.magik", "com.keronic.majestik"),
               cd.displayName());
+  */
 
   public MajestikClassLoader() {
     super("Majestik", getSystemClassLoader());
@@ -43,22 +27,36 @@ public class MajestikClassLoader extends ClassLoader {
   protected Class<?> findClass(String name) throws ClassNotFoundException {
     if (name.startsWith("magik") || name.startsWith("majestik")) {
       try {
-        var cd = this.loadClassData(name);
+        var cd = this.loadClassData(name); // This call will now do very little
+        // Since loadClassData is expected to return byte[], and now it won't,
+        // this defineClass call will fail if cd is null or not a byte array.
+        // For the purpose of this FQN test, we might need to make loadClassData return null
+        // and handle that in findClass, or let it throw an IOException that findClass catches.
+        // The subtask implies loadClassData should still declare `throws IOException`.
+        if (cd == null) { // Or check if it's the dummy byte array if we made one
+             throw new ClassNotFoundException(name + " (Majestik: loadClassData returned null)");
+        }
         return super.defineClass(name, cd, 0, cd.length);
       } catch (IOException e) {
-        return super.findClass(name);
+        // If loadClassData throws an IOException (e.g. "Not implemented for test"),
+        // this catch block will handle it.
+        // Depending on the test, we might want loadClassData to throw or return null.
+        // For a pure FQN resolution test, loadClassData just needs to compile.
+        // The original code had `return super.findClass(name);` here.
+        throw new ClassNotFoundException(name, e);
       }
     }
     return super.findClass(name);
   }
 
   private byte[] loadClassData(String className) throws IOException {
+    /*
     var classFileName = className.replace('.', File.separatorChar) + ".class";
     byte[] classBytes;
     try {
-      Path path = Path.of(classFileName); // This path resolution might need to be more robust in a real classloader
+      Path path = Path.of(classFileName);
       if (!Files.exists(path)) {
-        InputStream is = getResourceAsStream(classFileName); // Use imported InputStream
+        InputStream is = getResourceAsStream(classFileName);
         if (is == null) {
           throw new IOException("Class file not found: " + classFileName + " via direct path or resource stream.");
         }
@@ -87,77 +85,12 @@ public class MajestikClassLoader extends ClassLoader {
         }
         classBuilder.withFlags(classModel.flags().flagsMask());
 
-        ConstantPoolBuilder cp = classBuilder.constantPool(); // Get ConstantPoolBuilder once
+        ConstantPoolBuilder cp = classBuilder.constantPool();
 
         for (ClassElement ce : classModel) {
-            // Skip ClassFileVersion as it's handled by withVersion or defaults.
-            // ThisClass is handled by the first argument to build().
             if (ce instanceof ClassFileVersion) {
                 continue;
             }
-            // Comment out ALL else if blocks for Superclass, Interfaces, FieldModel, MethodModel,
-            // NestHostAttribute, NestMembersAttribute, PermittedSubclassesAttribute,
-            // and any generic Attribute<?> fallback.
-            /*
-            else if (ce instanceof Superclass sc) {
-                sc.superclassEntry() // Returns Optional<ClassEntry>
-                    .map(java.lang.classfile.constantpool.ClassEntry::asSymbol)
-                    .map(REMAP_FUNCTION)
-                    .ifPresent(classBuilder::withSuperclass);
-            } else if (ce instanceof Interfaces ifs) {
-                List<ClassDesc> remappedInterfaceDescs = new ArrayList<>();
-                List<java.lang.classfile.constantpool.ClassEntry> interfaceEntries = ifs.interfaces();
-                if (interfaceEntries != null) {
-                    for (java.lang.classfile.constantpool.ClassEntry interfaceEntry : interfaceEntries) {
-                        ClassDesc originalInterfaceDesc = interfaceEntry.asSymbol();
-                        remappedInterfaceDescs.add(REMAP_FUNCTION.apply(originalInterfaceDesc));
-                    }
-                }
-                if (!remappedInterfaceDescs.isEmpty()) {
-                    classBuilder.withInterfaceSymbols(remappedInterfaceDescs);
-                }
-            } else if (ce instanceof FieldModel fm) {
-                ClassDesc originalFieldTypeDesc = ClassDesc.ofDescriptor(fm.fieldType().stringValue());
-                ClassDesc remappedFieldTypeDesc = remapClassDescRecursively(originalFieldTypeDesc, REMAP_FUNCTION);
-                classBuilder.withField(fm.fieldName().stringValue(), remappedFieldTypeDesc, fieldBuilder -> {
-                    fieldBuilder.withFlags(fm.flags().flagsMask());
-                    for (java.lang.classfile.Attribute<?> attr : fm.attributes()) {
-                        fieldBuilder.with((java.lang.classfile.FieldElement)attr);
-                    }
-                });
-            } else if (ce instanceof MethodModel mm) {
-                java.lang.constant.MethodTypeDesc originalMethodTypeDesc = mm.methodTypeSymbol();
-                java.lang.constant.MethodTypeDesc remappedMethodTypeDesc = java.lang.constant.MethodTypeDesc.of(
-                        remapClassDescRecursively(originalMethodTypeDesc.returnType(), REMAP_FUNCTION),
-                        originalMethodTypeDesc.parameterList().stream()
-                                .map(pt -> remapClassDescRecursively(pt, REMAP_FUNCTION))
-                                .toArray(java.lang.constant.ClassDesc[]::new)
-                );
-                classBuilder.withMethod(mm.methodName().stringValue(), remappedMethodTypeDesc, mm.flags().flagsMask(), methodBuilder -> {
-                    for (java.lang.classfile.Attribute<?> attr : mm.attributes()) {
-                        if (attr instanceof java.lang.classfile.attribute.CodeAttribute) {
-                            // Handled by withCode
-                        } else if (attr instanceof java.lang.classfile.attribute.ExceptionsAttribute ea) {
-                            List<ClassDesc> remappedExceptionDescs = new ArrayList<>();
-                            List<java.lang.classfile.constantpool.ClassEntry> exceptionEntries = ea.exceptions();
-                            if (exceptionEntries != null) {
-                                for (java.lang.classfile.constantpool.ClassEntry entry : exceptionEntries) {
-                                    remappedExceptionDescs.add(REMAP_FUNCTION.apply(entry.asSymbol()));
-                                }
-                            }
-                            if (!remappedExceptionDescs.isEmpty()) {
-                               methodBuilder.with(java.lang.classfile.attribute.ExceptionsAttribute.ofSymbols(remappedExceptionDescs));
-                            }
-                        } else {
-                            methodBuilder.with((java.lang.classfile.MethodElement) attr);
-                        }
-                    }
-                    mm.code().ifPresent(codeModel -> {
-                        methodBuilder.withCode(codeBodyBuilder -> MajestikClassLoader.transformCode(codeBodyBuilder, codeModel, REMAP_FUNCTION));
-                    });
-                });
-            }
-            */
             else if (ce instanceof InnerClassesAttribute ica) {
                 List<java.lang.classfile.attribute.InnerClassesAttribute.InnerClassInfo> remappedInnerClasses = new ArrayList<>();
                 // ConstantPoolBuilder cp is already available from ClassBuilder
@@ -188,46 +121,29 @@ public class MajestikClassLoader extends ClassLoader {
                     classBuilder.with(java.lang.classfile.attribute.InnerClassesAttribute.of(remappedInnerClasses));
                 }
             }
-            /*
-            else if (ce instanceof NestHostAttribute nha) {
-                 ClassDesc remappedHostDesc = REMAP_FUNCTION.apply(nha.nestHost().asSymbol());
-                 classBuilder.with(java.lang.classfile.attribute.NestHostAttribute.of(cp.classEntry(remappedHostDesc)));
-            } else if (ce instanceof NestMembersAttribute nma) {
-                List<ClassDesc> remappedMemberDescs = new ArrayList<>();
-                List<java.lang.classfile.constantpool.ClassEntry> memberEntries = nma.nestMembers();
-                if (memberEntries != null) {
-                    for (java.lang.classfile.constantpool.ClassEntry entry : memberEntries) {
-                        remappedMemberDescs.add(REMAP_FUNCTION.apply(entry.asSymbol()));
-                    }
-                }
-                if(!remappedMemberDescs.isEmpty()) {
-                   classBuilder.with(java.lang.classfile.attribute.NestMembersAttribute.ofSymbols(remappedMemberDescs));
-                }
-            } else if (ce instanceof PermittedSubclassesAttribute psa) {
-                List<ClassDesc> remappedSubclassDescs = new ArrayList<>();
-                List<java.lang.classfile.constantpool.ClassEntry> subclassEntries = psa.permittedSubclasses();
-                if (subclassEntries != null) {
-                    for (java.lang.classfile.constantpool.ClassEntry entry : subclassEntries) {
-                        remappedSubclassDescs.add(REMAP_FUNCTION.apply(entry.asSymbol()));
-                    }
-                }
-                if(!remappedSubclassDescs.isEmpty()) {
-                    java.lang.classfile.attribute.PermittedSubclassesAttribute newAttr = java.lang.classfile.attribute.PermittedSubclassesAttribute.ofSymbols(remappedSubclassDescs);
-                    classBuilder.with(newAttr);
-                }
-            }
-            // General Class-Level Attribute Fallback
-            else if (ce instanceof Attribute<?> attr &&
-                     !(ce instanceof ClassFileVersion || ce instanceof Superclass || ce instanceof Interfaces ||
-                       ce instanceof FieldModel || ce instanceof MethodModel || ce instanceof InnerClassesAttribute ||
-                       ce instanceof NestHostAttribute || ce instanceof NestMembersAttribute || ce instanceof PermittedSubclassesAttribute)) {
-                classBuilder.with((ClassFileElement) attr);
-            }
-            */
         }
     });
+    */
+    java.lang.classfile.ClassFile testCf = null;
+    // To make this method satisfy its byte[] return type for the findClass method,
+    // and to avoid NullPointerException there if findClass doesn't handle null well:
+    // Option 1: Return a dummy byte array (e.g., new byte[0])
+    // Option 2: Let it throw an IOException as it declares.
+    // Option 3: Return null and ensure findClass handles it.
+    // The subtask is about FQN resolution, so a compile error or a specific runtime error
+    // if ClassFile is not found is the target. If it compiles, the FQN is resolved.
+    // To ensure it compiles and findClass doesn't immediately break due to return type:
+    // throw new IOException("Ultra-minimal test: loadClassData not implemented.");
+    // Or, for a quieter test that still allows findClass to proceed (and likely fail later):
+    return null; // findClass needs to handle this, or it will NPE.
+                 // The provided findClass has a try-catch for IOException.
+                 // If we return null, then `cd.length` will NPE.
+                 // Let's make it throw to be caught by findClass.
+    // throw new IOException("Ultra-minimal test: loadClassData intentionally not returning class bytes.");
+
   }
 
+  /*
   private static void transformCode(CodeBuilder codeBuilder, CodeModel codeModel, Function<ClassDesc, ClassDesc> remapFunction) {
     for (CodeElement element : codeModel) {
         if (element instanceof InvokeInstruction instr) {
@@ -338,4 +254,5 @@ public class MajestikClassLoader extends ClassLoader {
     // Apply the remap function for non-array, non-primitive types
     return remapFunction.apply(cd);
   }
+  */
 }
