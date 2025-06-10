@@ -1,5 +1,7 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
+
 /**
  * Represents a loop node in the AST, encapsulating a compound statement that can be executed
  * repeatedly.

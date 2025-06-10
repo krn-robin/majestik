@@ -1,9 +1,6 @@
 package com.keronic;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Comparator;
+import module java.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -11,15 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.keronic.majestik.constant.ConstantDescs;
-import java.lang.ClassLoader;
-import java.lang.classfile.AccessFlag;
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.attribute.ConstantValueAttribute;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.MethodTypeDesc;
-import java.lang.constant.DynamicCallSiteDesc; // Corrected import
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,12 +25,12 @@ class MajestikClassLoaderTest {
     var dyndesc =
         DynamicCallSiteDesc.of(
             java.lang.constant.ConstantDescs.ofCallsiteBootstrap(
-                java.lang.constant.ClassDesc.of("com.gesmallworld.magik.language.invokers.ConstantBuilder"),
+                ClassDesc.of("com.gesmallworld.magik.language.invokers.ConstantBuilder"),
                 "stringBootstrap",
-                com.keronic.majestik.constant.ConstantDescs.CD_CallSite,
-                com.keronic.majestik.constant.ConstantDescs.CD_String),
+                ConstantDescs.CD_CallSite,
+                ConstantDescs.CD_String),
             "string",
-            com.keronic.majestik.constant.ConstantDescs.MTD_Object,
+            ConstantDescs.MTD_Object,
             "test");
 
     Files.createDirectories(MAGIK_ROOT_DIR);
@@ -54,15 +42,15 @@ class MajestikClassLoaderTest {
             java.lang.constant.ClassDesc.of("magik.T"),
             clb ->
                 clb.withMethodBody(
-                    com.keronic.majestik.constant.ConstantDescs.INIT_NAME,
-                    com.keronic.majestik.constant.ConstantDescs.MTD_void,
+                    ConstantDescs.INIT_NAME,
+                    ConstantDescs.MTD_void,
                     ClassFile.ACC_PUBLIC,
                     cb ->
                         cb.aload(0)
                             .invokespecial(
-                                com.keronic.majestik.constant.ConstantDescs.CD_Object,
-                                com.keronic.majestik.constant.ConstantDescs.INIT_NAME,
-                                com.keronic.majestik.constant.ConstantDescs.MTD_void)
+                                ConstantDescs.CD_Object,
+                                ConstantDescs.INIT_NAME,
+                                ConstantDescs.MTD_void)
                             .invokedynamic(dyndesc)
                             .return_()));
 
