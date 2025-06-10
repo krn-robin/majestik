@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 import com.keronic.majestik.constant.ConstantDescs;
 
 /**

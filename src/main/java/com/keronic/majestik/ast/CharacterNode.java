@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 import com.keronic.majestik.constant.ConstantDescs;
 
 public class CharacterNode extends Node {

@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 abstract class BinaryOperatorNode extends Node {
   /** The left-hand side (target) of the operator */
   final Node lhs;
