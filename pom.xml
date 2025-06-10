@@ -63,11 +63,10 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.14.0</version>
           <configuration>
+            <release>24</release>
             <compilerArgs>
               <arg>--enable-preview</arg>
               <arg>-Xlint:all,-preview</arg>
-              <arg>--add-exports</arg>
-              <arg>java.base/jdk.internal.classfile.components=ALL-UNNAMED</arg>
             </compilerArgs>
           </configuration>
         </plugin>
@@ -186,6 +185,9 @@
             <phase>clean</phase>
             <configuration>
               <file>${project.basedir}/libs/magik-squid-${dependency.magik-tools.version}.jar</file>
+              <groupId>nl.ramsolutions</groupId>
+              <artifactId>magik-squid</artifactId>
+              <version>${dependency.magik-tools.version}</version>
               <packaging>jar</packaging>
             </configuration>
           </execution>

@@ -5,6 +5,7 @@ import module java.base;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.keronic.majestik.constant.ConstantDescs;
@@ -209,10 +210,10 @@ class MajestikClassLoaderTest {
     assertNotNull(arrayListClass, "Loaded class should not be null");
     assertEquals(standardClassName, arrayListClass.getName(), "Class name should be the same as requested");
 
-    // Verify that the class was loaded by the system classloader (parent) and not MajestikClassLoader
-    // MajestikClassLoader's constructor sets getSystemClassLoader() as parent.
-    assertEquals(ClassLoader.getSystemClassLoader(), arrayListClass.getClassLoader(),
-        "Class should be loaded by the system classloader (parent)");
+    // Verify that the class was loaded by the bootstrap classloader (null) and not MajestikClassLoader.
+    // Core Java classes like java.util.ArrayList are loaded by the bootstrap loader.
+    assertNull(arrayListClass.getClassLoader(),
+        "Core Java classes should be loaded by the bootstrap classloader (null)");
 
     // Test loading another standard Java class to be sure
     String stringClassName = "java.lang.String";
