@@ -1,0 +1,63 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/usr/share/maven/lib/guava.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m-------------------< [0;36mcom.keronic.majestik:majestik[0;1m >--------------------[m
+[[1;34mINFO[m] [1mBuilding majestik 0.0.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.13:prepare-agent[m [1m(default)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] argLine set to -javaagent:/home/swebot/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/app/target/jacoco.exec
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mmaven-dependency-plugin:3.8.1:copy-dependencies[m [1m(copy-dependencies)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] nl.ramsolutions:magik-squid:jar:0.10.1 already exists in destination.
+[[1;34mINFO[m] org.sonarsource.sslr:sslr-core:jar:1.24.0.633 already exists in destination.
+[[1;34mINFO[m] com.google.code.findbugs:jsr305:jar:1.3.9 already exists in destination.
+[[1;34mINFO[m] org.ow2.asm:asm:jar:9.0 already exists in destination.
+[[1;34mINFO[m] com.google.code.gson:gson:jar:2.10.1 already exists in destination.
+[[1;34mINFO[m] org.slf4j:slf4j-api:jar:2.0.12 already exists in destination.
+[[1;34mINFO[m] org.slf4j:slf4j-jdk14:jar:2.0.12 already exists in destination.
+[[1;34mINFO[m] com.github.spotbugs:spotbugs-annotations:jar:4.8.3 already exists in destination.
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /app/src/main/resources
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.0:compile[m [1m(default-compile)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/test/resources to target/test-classes
+[[1;34mINFO[m]
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.0:testCompile[m [1m(default-testCompile)[m @ [36mmajestik[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 29 source files with javac [debug target 24] to target/test-classes
+[[1;34mINFO[m] /app/src/test/java/com/keronic/MajestikClassLoaderTest.java: Some input files use preview features of Java SE 24.
+[[1;34mINFO[m] /app/src/test/java/com/keronic/MajestikClassLoaderTest.java: Recompile with -Xlint:preview for details.
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] COMPILATION ERROR :
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;31mERROR[m] /app/src/test/java/com/keronic/MajestikClassLoaderTest.java:[91,13] cannot find symbol
+  symbol:   method withAttributes(java.lang.classfile.attribute.ConstantValueAttribute)
+  location: interface java.lang.classfile.FieldBuilder
+[[1;34mINFO[m] 1 error
+[[1;34mINFO[m] -------------------------------------------------------------
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;31mBUILD FAILURE[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  2.741 s
+[[1;34mINFO[m] Finished at: 2025-06-10T08:20:13Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-compiler-plugin:3.14.0:testCompile[m [1m(default-testCompile)[m on project [36mmajestik[m: [1;31mCompilation failure[m
+[[1;31mERROR[m] [1;31m/app/src/test/java/com/keronic/MajestikClassLoaderTest.java:[91,13] cannot find symbol[m
+[[1;31mERROR[m] [1;31m  symbol:   method withAttributes(java.lang.classfile.attribute.ConstantValueAttribute)[m
+[[1;31mERROR[m] [1;31m  location: interface java.lang.classfile.FieldBuilder[m
+[[1;31mERROR[m] [1;31m[m
+[[1;31mERROR[m] -> [1m[Help 1][m
+[[1;31mERROR[m]
+[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
+[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
+[[1;31mERROR[m]
+[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
+[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

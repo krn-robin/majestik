@@ -88,7 +88,7 @@ class MajestikClassLoaderTest {
         // String Constant Field: public static final String GREETING = "Original package: com.gesmallworld.magik";
         clb.withField("GREETING", java.lang.constant.ConstantDescs.CD_String, fb -> fb
             .withFlags(AccessFlag.PUBLIC, AccessFlag.STATIC, AccessFlag.FINAL)
-            .withAttributes(ConstantValueAttribute.of( // Corrected to withAttributes
+            .with(ConstantValueAttribute.of(
                 clb.constantPool().stringEntry("Original package: com.gesmallworld.magik"))
             ));
 
