@@ -1,5 +1,7 @@
 package com.keronic.majestik.ast;
 
+import module java.base;
+
 /**
  * Represents a compound node in the Abstract Syntax Tree that can contain multiple child nodes.
  * This node type is used to group related nodes together, such as statements in a block or elements

@@ -1,9 +1,6 @@
 package com.keronic;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Comparator;
+import module java.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -11,15 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.keronic.majestik.constant.ConstantDescs;
-import java.lang.ClassLoader;
-import java.lang.classfile.AccessFlag;
-import java.lang.classfile.ClassFile;
-import java.lang.classfile.attribute.ConstantValueAttribute;
-import java.lang.constant.ClassDesc;
-import java.lang.constant.MethodTypeDesc;
-import java.lang.constant.DynamicCallSiteDesc; // Corrected import
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

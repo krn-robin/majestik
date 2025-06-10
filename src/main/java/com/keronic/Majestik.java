@@ -6,6 +6,7 @@ import static java.lang.constant.ConstantDescs.CD_Object;
 import static java.lang.constant.ConstantDescs.CLASS_INIT_NAME;
 import static java.lang.constant.ConstantDescs.INIT_NAME;
 import static java.lang.constant.ConstantDescs.MTD_void;
+import module java.base;
 
 import com.keronic.majestik.MajestikRuntimeException;
 import com.keronic.majestik.ast.CompilationContext;
