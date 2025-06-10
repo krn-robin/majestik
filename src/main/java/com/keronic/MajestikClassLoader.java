@@ -1,6 +1,5 @@
 package com.keronic;
 
-import module java.base;
 import java.lang.classfile.Annotation;
 
 /** */

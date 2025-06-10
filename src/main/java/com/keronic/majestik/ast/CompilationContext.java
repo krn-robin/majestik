@@ -1,6 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
 import java.util.NoSuchElementException;
 
 public class CompilationContext {

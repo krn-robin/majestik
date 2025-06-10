@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 /**
  * Base class for all Abstract Syntax Tree (AST) nodes in the Majestik language. This class is part
  * of the Magik-squid based implementation, replacing the previous ANTLR4 based parser.

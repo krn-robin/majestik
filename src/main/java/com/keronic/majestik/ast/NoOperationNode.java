@@ -1,7 +1,5 @@
 package com.keronic.majestik.ast;
 
-import module java.base;
-
 /**
  * Represents a no-operation node in the abstract syntax tree (AST) of the Majestik language. This
  * node serves as a placeholder or signifies an intentional absence of operation. When compiled, it

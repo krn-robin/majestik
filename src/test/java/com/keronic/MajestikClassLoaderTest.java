@@ -1,7 +1,5 @@
 package com.keronic;
 
-import module java.base;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,8 +17,7 @@ import java.lang.classfile.ClassFile;
 import java.lang.classfile.attribute.ConstantValueAttribute;
 import java.lang.constant.ClassDesc;
 import java.lang.constant.MethodTypeDesc;
-import java.lang.invoke.TypeDescriptor;
-import java.lang.invoke.constant.DynamicCallSiteDesc;
+import java.lang.constant.DynamicCallSiteDesc; // Corrected import
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.AfterEach;
@@ -101,9 +98,9 @@ class MajestikClassLoaderTest {
             .return_());
 
         // String Constant Field: public static final String GREETING = "Original package: com.gesmallworld.magik";
-        clb.withField("GREETING", java.lang.constant.ConstantDescs.CD_String,
-            ClassFile.ACC_PUBLIC | ClassFile.ACC_STATIC | ClassFile.ACC_FINAL,
-            fb -> fb.withAttribute(ConstantValueAttribute.of(
+        clb.withField("GREETING", java.lang.constant.ConstantDescs.CD_String, fb -> fb
+            .withFlags(AccessFlag.PUBLIC, AccessFlag.STATIC, AccessFlag.FINAL)
+            .withAttribute(ConstantValueAttribute.of(
                 clb.constantPool().stringEntry("Original package: com.gesmallworld.magik"))
             ));
 
