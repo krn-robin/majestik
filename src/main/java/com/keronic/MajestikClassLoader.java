@@ -19,7 +19,9 @@ public class MajestikClassLoader extends ClassLoader {
 
   @Override
   protected Class<?> findClass(String name) throws ClassNotFoundException {
-    if (name.startsWith("magik.") || name.startsWith("majestik.") || name.startsWith("com.gesmallworld.magik.")) {
+    if (name.startsWith("magik.")
+        || name.startsWith("majestik.")
+        || name.startsWith("com.gesmallworld.magik.")) {
       try {
         ClassLoadingResult result = this.loadClassData(name);
         // Since loadClassData is expected to return byte[], and now it won't,
@@ -78,10 +80,15 @@ public class MajestikClassLoader extends ClassLoader {
     if (className.startsWith("magik.")) {
       String simpleName = className.substring("magik.".length());
       // Path should be MAGIK_CLASS_LOADER_ROOT_PATH.resolve("T.class") for magik.T
-      fullPath = MAGIK_CLASS_LOADER_ROOT_PATH.resolve(simpleName.replace('.', File.separatorChar) + ".class");
+      fullPath =
+          MAGIK_CLASS_LOADER_ROOT_PATH.resolve(
+              simpleName.replace('.', File.separatorChar) + ".class");
     } else if (className.startsWith("com.gesmallworld.magik.")) {
-      // Path should be MAGIK_CLASS_LOADER_ROOT_PATH.resolve("com/gesmallworld/magik/OriginalTestClass.class")
-      fullPath = MAGIK_CLASS_LOADER_ROOT_PATH.resolve(className.replace('.', File.separatorChar) + ".class");
+      // Path should be
+      // MAGIK_CLASS_LOADER_ROOT_PATH.resolve("com/gesmallworld/magik/OriginalTestClass.class")
+      fullPath =
+          MAGIK_CLASS_LOADER_ROOT_PATH.resolve(
+              className.replace('.', File.separatorChar) + ".class");
     } else {
       // For other majestik classes or if direct pathing is intended for non-gesmallworld remapped
       // This branch might need refinement based on actual use cases beyond test.
@@ -93,7 +100,8 @@ public class MajestikClassLoader extends ClassLoader {
     if (Files.exists(fullPath)) {
       classBytes = Files.readAllBytes(fullPath);
     } else {
-      // Fallback to classpath resource loading for other cases (e.g. remapped standard libraries if any)
+      // Fallback to classpath resource loading for other cases (e.g. remapped standard libraries if
+      // any)
       // or if the file isn't found in the specific test directory structure.
       // For the test cases, files are expected to be under MAGIK_CLASS_LOADER_ROOT_PATH
       InputStream is = getResourceAsStream(resourceName);
@@ -165,14 +173,7 @@ public class MajestikClassLoader extends ClassLoader {
                         classBuilder.with(ins);
                       }
                     } else if (ce instanceof SignatureAttribute sigAttr) {
-                      Utf8Entry originalSignatureEntry = sigAttr.signature();
-                      Utf8Entry remappedSignatureEntry =
-                          mapSignatureString(originalSignatureEntry, classBuilder.constantPool());
-                      if (originalSignatureEntry != remappedSignatureEntry) {
-                        classBuilder.with(SignatureAttribute.of(remappedSignatureEntry));
-                      } else {
-                        classBuilder.with(sigAttr);
-                      }
+                      classBuilder.with(sigAttr);
                     } else if (ce instanceof InnerClassesAttribute ica) {
                       List<InnerClassInfo> remappedInnerClasses =
                           ica.classes().stream()
@@ -480,13 +481,7 @@ public class MajestikClassLoader extends ClassLoader {
       switch (fieldElement) {
         case SignatureAttribute sigAttr:
           {
-            Utf8Entry originalSignatureEntry = sigAttr.signature();
-            Utf8Entry remappedSignatureEntry = mapSignatureString(originalSignatureEntry, fieldCp);
-            if (originalSignatureEntry != remappedSignatureEntry) {
-              fieldBuilder.with(SignatureAttribute.of(remappedSignatureEntry));
-            } else {
-              fieldBuilder.with(sigAttr);
-            }
+            fieldBuilder.with(sigAttr);
             break;
           }
         case RuntimeVisibleAnnotationsAttribute rva:
@@ -512,18 +507,21 @@ public class MajestikClassLoader extends ClassLoader {
         case ConstantValueAttribute cva:
           {
             java.lang.classfile.constantpool.ConstantValueEntry constantEntry = cva.constant();
-            if (constantEntry instanceof java.lang.classfile.constantpool.StringEntry originalStringEntry) {
+            if (constantEntry
+                instanceof java.lang.classfile.constantpool.StringEntry originalStringEntry) {
               String originalString = originalStringEntry.stringValue();
               String tempRemappedString =
                   originalString.replace("com.gesmallworld.magik", "com.keronic.majestik");
               if (!originalString.equals(tempRemappedString)) {
-                fieldBuilder.with(ConstantValueAttribute.of(fieldCp.stringEntry(tempRemappedString)));
+                fieldBuilder.with(
+                    ConstantValueAttribute.of(fieldCp.stringEntry(tempRemappedString)));
               } else {
                 // Try slash form only if dot form didn't match for some edge cases in strings
                 tempRemappedString =
                     originalString.replace("com/gesmallworld/magik", "com/keronic/majestik");
                 if (!originalString.equals(tempRemappedString)) {
-                  fieldBuilder.with(ConstantValueAttribute.of(fieldCp.stringEntry(tempRemappedString)));
+                  fieldBuilder.with(
+                      ConstantValueAttribute.of(fieldCp.stringEntry(tempRemappedString)));
                 } else {
                   fieldBuilder.with(fieldElement); // No change, add original
                 }
@@ -548,13 +546,7 @@ public class MajestikClassLoader extends ClassLoader {
           break;
         case SignatureAttribute sigAttr:
           {
-            Utf8Entry originalSignatureEntry = sigAttr.signature();
-            Utf8Entry remappedSignatureEntry = mapSignatureString(originalSignatureEntry, methodCp);
-            if (originalSignatureEntry != remappedSignatureEntry) {
-              methodBuilder.with(SignatureAttribute.of(remappedSignatureEntry));
-            } else {
-              methodBuilder.with(sigAttr);
-            }
+            methodBuilder.with(sigAttr);
             break;
           }
         case ExceptionsAttribute ea:
@@ -755,9 +747,8 @@ public class MajestikClassLoader extends ClassLoader {
           for (int i = 0; i < remappedValues.size(); i++) {
             if (remappedValues.get(i)
                 != arr.values()
-                    .get(
-                        i)) { // Reference check, assumes mapAnnotationValue returns original if no
-                              // change
+                    .get(i)) { // Reference check, assumes mapAnnotationValue returns original if no
+              // change
               changed = true;
               break;
             }
@@ -823,29 +814,6 @@ public class MajestikClassLoader extends ClassLoader {
       return Annotation.of(remappedAnnotationType, remappedElements);
     } else {
       return ann; // Return original if nothing changed
-    }
-  }
-
-  private Utf8Entry mapSignatureString(Utf8Entry signatureUtf8Entry, ConstantPoolBuilder cp) {
-    if (signatureUtf8Entry == null) {
-      return null;
-    }
-    String originalSignature = signatureUtf8Entry.stringValue();
-    String remappedSignature = originalSignature;
-
-    // Order matters: specific (with L) before general
-    remappedSignature =
-        remappedSignature.replace("Lcom/gesmallworld/magik/", "Lcom/keronic/majestik/");
-    remappedSignature =
-        remappedSignature.replace("com/gesmallworld/magik/", "com/keronic/majestik/");
-
-    // Less common in signatures, but for safety:
-    remappedSignature = remappedSignature.replace("com.gesmallworld.magik", "com.keronic.majestik");
-
-    if (!originalSignature.equals(remappedSignature)) {
-      return cp.utf8Entry(remappedSignature);
-    } else {
-      return signatureUtf8Entry;
     }
   }
 }
