@@ -7,7 +7,7 @@
   <name>majestik</name>
   <url>http://www.keronic.com</url>
   <properties>
-    <dependency.junit.version>5.13.2</dependency.junit.version>
+    <dependency.junit.version>5.13.3</dependency.junit.version>
     <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
     <maven.compiler.source>24</maven.compiler.source>
     <maven.compiler.target>24</maven.compiler.target>
