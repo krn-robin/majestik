@@ -8,7 +8,7 @@
   <url>http://www.keronic.com</url>
   <properties>
     <dependency.junit.version>6.0.1</dependency.junit.version>
-    <dependency.magik-tools.version>0.10.1</dependency.magik-tools.version>
+    <dependency.magik-tools.version>0.11.0</dependency.magik-tools.version>
     <maven.compiler.source>24</maven.compiler.source>
     <maven.compiler.target>24</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -133,7 +133,7 @@
               <skipCache>false</skipCache>
               <readTimeOut>30000</readTimeOut>
               <uri>https://github.com/StevenLooman/magik-tools/releases/download/${dependency.magik-tools.version}/magik-squid-${dependency.magik-tools.version}.jar</uri>
-              <sha256>4b74d3f5204fc652a4ebb8fe2522b1cd25fecc56e063dbdfcf1e8df98f2f8986</sha256>
+              <sha256>8c514ca4d377e851e6f0f9a6758c55418ab93bc18090c31cb3b24e0e6a2d04b4</sha256>
               <outputDirectory>${project.basedir}/libs</outputDirectory>
             </configuration>
           </execution>
@@ -149,7 +149,7 @@
               <readTimeOut>30000</readTimeOut>
               <uri>https://raw.githubusercontent.com/StevenLooman/magik-tools/${dependency.magik-tools.version}/pom.xml</uri>
               <outputDirectory>${project.basedir}/libs</outputDirectory>
-              <sha256>b19d2799034bea4f2e2040932dff645ad20ba3a76705d72804e7ddf140e81fa5</sha256>
+              <sha256>0ca633bf880fd31c321f3dd8766dbb715ddbd0f1d6f4a3d11490fb445e7abc5f</sha256>
               <outputFileName>magik-tools-${dependency.magik-tools.version}.pom</outputFileName>
             </configuration>
           </execution>
