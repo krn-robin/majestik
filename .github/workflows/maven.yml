@@ -39,7 +39,7 @@ jobs:
       run: src/test/magik/test.sh
     - name: Analyze with SonarCloud
       if: env.SONAR_TOKEN != ''
-      run: mvn --batch-mode sonar:sonar
+      run: mvn -X --batch-mode sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
